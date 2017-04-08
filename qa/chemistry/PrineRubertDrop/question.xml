@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<question>
+
+    <ask>Prince Rupert's Drop is a phenomenon where molten glass dropped into cold water forms a solid so strong that it will not crack on the initial impact of a bullet. What mechanism gives the crystal its durability?</ask>
+
+    <choice id="0">
+        <option>The surface of the molten silica cools and locks before the inside, and when the inside cools, tension is created.</option>
+        <explain>correct</explain>
+    </choice>
+
+    <choice id="1"> 
+        <option>The heat shock converts silicon to carbon, turning the molten glass into diamond. </option>
+        <explain>Silicon cannot be converted to carbon in a chemical reaction!</explain>
+    </choice>
+
+    <choice id="2">
+        <option>On impact, the forces compresses the lattice structure, strengthening the glass.</option>
+        <explain>There are no mechanisms that forces the crystals to bond in such a way. Regardless, bonds between SiO2 molecules, which makes up glass, is not strong enough to ever withstand a gunshot.</explain>
+    </choice>
+
+    <choice id="3"> 
+        <option>The molecular geometry of the crystals is configued in such a way that the atoms can absorb the impact.</option>
+        <explain>Energy from a physical impact will destabilize bonds between SiO2 molecules. /explain>
+    </choice>
+
+</question>
