@@ -3,14 +3,23 @@
 
   "name": "Systole",
   "description": "This extension shows a Google Image search result for the current page",
-  "version": "1.0",
+  "version": "0.1",
+  "author": "Jennings Zhang",
 
-  "browser_action": {
-    "default_icon": "bad-squid.png",
-    "default_popup": "popup.html"
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
   },
+
+  "page_action": {
+    "default_icon": "bad-squid.png",
+    "default_title": "Systole"
+    //"default_popup": "popup.html"        
+   },
+
   "permissions": [
-    "activeTab",
-    "https://ajax.googleapis.com/"
+
+    "declarativeContent"
+    //Use the chrome.webRequest API to observe and analyze traffic and to intercept, block, or modify requests in-flight. 
   ]
 }
