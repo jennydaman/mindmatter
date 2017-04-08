@@ -7,17 +7,17 @@
   "author" : "Jennings Zhang",
 
   "background" : {
-    "scripts" : ["background.js"],
+    "scripts" : ["js/background.js"],
     "persistent" : false
   },
 
   "page_action" : {
-    "default_icon" : "bad-squid.png",
+    "default_icon" : "icons/bad-squid.png",
     "default_title" : "Systole",
-    "default_popup" : "QPrompt.html"        
+    "default_popup" : "qa/QPrompt.html"        
    },
 
-   "icons" : {"48": "bad-squid48.png"},
+   "icons" : {"48": "icons/bad-squid48.png"},
 
   "permissions": [
 

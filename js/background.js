@@ -1,4 +1,8 @@
-
+/*
+ * Update the blacklist
+ * TODO: score, repeat
+ * 
+ */
 var blacklistRegex;
 var blacklist_array = [];
 
@@ -27,7 +31,7 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
   //add last one
   blacklistRegex += '(' + blacklist_array[blacklist_array.length - 1] + ')/';
 
-  console.log("blacklistRegex update: " + blacklistRegex);
+  //console.log("blacklistRegex update: " + blacklistRegex);
 });
 
 
