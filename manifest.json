@@ -1,25 +1,28 @@
 {
-  "manifest_version": 2,
+  "manifest_version" : 2,
 
-  "name": "Systole",
-  "description": "This extension shows a Google Image search result for the current page",
-  "version": "0.1",
-  "author": "Jennings Zhang",
+  "name" : "Systole",
+  "description" : "This extension shows a Google Image search result for the current page",
+  "version" : "0.1",
+  "author" : "Jennings Zhang",
 
-  "background": {
-    "scripts": ["background.js"],
-    "persistent": false
+  "background" : {
+    "scripts" : ["background.js"],
+    "persistent" : false
   },
 
-  "page_action": {
-    "default_icon": "bad-squid.png",
-    "default_title": "Systole"
-    //"default_popup": "popup.html"        
+  "page_action" : {
+    "default_icon" : "bad-squid.png",
+    "default_title" : "Systole",
+    "default_popup" : "QPrompt.html"        
    },
+
+   "icons" : {"48": "bad-squid48.png"},
 
   "permissions": [
 
-    "declarativeContent"
+    "declarativeContent",
+    "storage"
     //Use the chrome.webRequest API to observe and analyze traffic and to intercept, block, or modify requests in-flight. 
   ]
 }
