@@ -1,0 +1,26 @@
+{
+
+    "question": "Which of the following is not a consequence of climate change?",
+    "choices": [
+        {
+            "id": 0,
+            "option": "Oil spills",
+            "explain": true
+        },
+        {
+            "id": 1,
+            "option": "Ocean acidification",
+            "explain": "CO2 + H2O --> H2CO3"
+        },
+        {
+            "id": 2,
+            "option": "Polar bear cannibalism",
+            "explain": "Less sea ice shortens the hunting seasons for polar bears."
+        },
+        {
+            "id": 3,
+            "option": "Snowstorms",
+            "explain": "Reduced Arctic sea ice causes atmospheric circulation patterns favorable for unpredictable weather."
+        }
+    ]
+}
