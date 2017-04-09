@@ -1,0 +1,27 @@
+{
+    "allSubjects": [
+        {
+            "subject": "biology",
+            "topic" : [
+                "Climate.json",
+                "Food.json"
+            ]
+        },
+        {
+            "subject": "chemistry",
+            "topic" : [
+                "PrinceRubertDrop.json"
+            ]
+        },
+        {
+            "subject": "physics",
+            "topic" : [
+                "WavesandParticles.json",
+                "Teleport.json"
+            ]
+        }
+    ],
+
+
+    "numSubjects" : 3
+}

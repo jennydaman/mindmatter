@@ -15,12 +15,12 @@
         {
             "id": 2,
             "option": "On impact, the forces compresses the lattice structure, strengthening the glass.",
-            "correct": "Energy from a physical impact will destabilize bonds between SiO2 molecules."
+            "explain": "Energy from a physical impact will destabilize bonds between SiO2 molecules."
         },
         {
             "id": 3,
             "option": "The molecular geometry of the crystals is configued in such a way that the atoms can absorb the impact.",
-            "correct": "There are no mechanisms that forces the crystals to bond in such a way. Regardless, bonds between SiO2 molecules, which makes up glass, is not strong enough to ever withstand the mechanical stress."
+            "explain": "There are no mechanisms that forces the crystals to bond in such a way. Regardless, bonds between SiO2 molecules, which makes up glass, is not strong enough to ever withstand the mechanical stress."
         }
     ]
 }
