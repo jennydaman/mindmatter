@@ -2,4 +2,8 @@
 //automatically pop up
 
 document.write("<h1>Systole - random education</h1>")
-document.write("Attempting to access " + window.location.host)
+document.writeln("Attempting to access " + window.location.host)
+
+getQuestion()
+
+document.write("ok then")

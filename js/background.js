@@ -11,6 +11,9 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
 
   for (key in changes) {
 
+    if (key != "blacklist")
+      return;
+
     var storageChange = changes[key];
 
     if (storageChange.newValue == null) { //remove the host from blacklistRegex

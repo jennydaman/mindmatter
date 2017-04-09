@@ -19,7 +19,7 @@ done
 
 
 question=${allQuestions[-1]}
-if [[ $question != *"LSR"* ]]; then
+if [[ $question != *"LS"* ]]; then
     echo "    \"$question\"" #exclude the comma on last question
 fi 
 
