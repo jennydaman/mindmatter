@@ -1,68 +1,83 @@
 /*
- * Update the blacklist
- * TODO: score, repeat
- * 
- */
+* Update the blacklist
+* TODO: score, repeat
+* 
+*/
 var blacklistRegex;
 var blacklist_array = [];
 
-//this will first update blacklistarray, then it will regenerate the blacklistRegex.
-chrome.storage.onChanged.addListener(function (changes, namespace) {
+/**
+ * This function will either add or remove a site from the regex, depending
+ * on whether the blacklist_array already contains or does not contain the site. 
+ * @param {string} site 
+ */
+function updateBlacklist(site) {
 
-  for (key in changes) {
-
-    if (key != "blacklist")
-      return;
-
-    var storageChange = changes[key];
-
-    if (storageChange.newValue == null) { //remove the host from blacklistRegex
-      blacklist_array.splice(blacklist_array.indexOf(storageChange.newValue), 1);
-    }
-    else { //add the host to blacklistRegex
-      blacklist_array.push(storageChange.newValue);
-    }
-
+  var index = blacklist_array.indexOf(site);
+  if (index == -1)
+    blacklist_array.push(site);
+  else {
+    blacklist_array.splice(index, 1);
+    blacklistRegex = '/a^/'; //this will not match anything
+    return;
   }
+
   //blacklist_array has been updated, now update blacklistRegex
   blacklistRegex = '/';
-
+  
   for (index = 0; index < blacklist_array.length - 1; index++) {
     blacklistRegex += '(' + blacklist_array[index] + ')|';
   }
-
+  
   //add last one
   blacklistRegex += '(' + blacklist_array[blacklist_array.length - 1] + ')/';
-
   //console.log("blacklistRegex update: " + blacklistRegex);
-});
+}
 
-
-
-// When the extension is installed or upgraded ...
-chrome.runtime.onInstalled.addListener(function () {
-
-  //initializes some sites in the blacklist
-  chrome.storage.sync.set({ 'blacklist': "www.facebook.com" })
-  chrome.storage.sync.set({ 'blacklist': "www.youtube.com" })
-  chrome.storage.sync.set({ 'blacklist': "www.reddit.com" })
-  //TODO don't overwrite on updates!!!!
-
-  // Replace all rules ...
+/**
+ * activate declarativeContent.showPageAction() when visiting a blacklisted site. 
+ */
+chrome.runtime.onPageChanged.addListener(function() {
   chrome.declarativeContent.onPageChanged.removeRules(undefined, function () {
-    // With a new rule ...
-    chrome.declarativeContent.onPageChanged.addRules([
-      {
-
-        conditions: [
-          new chrome.declarativeContent.PageStateMatcher({
-            pageUrl: { urlMatches: blacklistRegex },
-          })
-        ],
-        // And shows the extension's page action.
-        actions: [new chrome.declarativeContent.ShowPageAction()]
-      }
-    ]);
+    chrome.declarativeContent.onPageChanged.addRules([{
+      //if URL matches regex
+      conditions: [new chrome.declarativeContent.PageStateMatcher({pageUrl: { urlMatches: blacklistRegex }})],
+      //shows the extension's page action.
+      actions: [new chrome.declarativeContent.ShowPageAction()]
+    }]);
   });
 });
 
+/**
+ * loads stored blacklist into memory. 
+ * TODO asynchronous XMLHTTPRequest to update questions from remote host. 
+ */
+chrome.runtime.onStartup.addListener(function() {
+  chrome.storage.sync.get('blacklist_save', function(items) {
+    blacklist_array = items.blacklist_save;
+  })
+});
+
+/**
+ * saves the current blacklist from memory to local storage. 
+ */
+chrome.runtime.onSuspend.addListener(function() {
+  
+    chrome.storage.sync.set({ 'blacklist_save': blacklist_array })
+});
+
+/** 
+ * initializes some sites in the blacklist when the extension is first installed. 
+ */
+chrome.runtime.onInstalled.addListener(function() {
+
+  updateBlacklist("facebook.com");
+  updateBlacklist("youtube.com");
+  updateBlacklist("reddit.com");
+  updateBlacklist("tumblr.com");
+});
+
+/*//this will first update blacklistarray, then it will regenerate the blacklistRegex.
+chrome.storage.onChanged.addListener(function(changes, namespace) {
+
+});*/

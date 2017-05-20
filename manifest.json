@@ -2,8 +2,8 @@
   "manifest_version" : 2,
 
   "name" : "Systole",
-  "description" : "This extension shows a Google Image search result for the current page",
-  "version" : "0.1",
+  "description" : "This extension prompts the user with an educational question when attempting to visit potentially distracting sites.",
+  "version" : "0.2",
   "author" : "Jennings Zhang",
 
   "background" : {
@@ -14,7 +14,7 @@
   "page_action" : {
     "default_icon" : "icons/bad-squid.png",
     "default_title" : "Systole",
-    "default_popup" : "qa/QPrompt.html"        
+    "default_popup" : "qa/popup.html"        
    },
 
    "icons" : {"48": "icons/bad-squid48.png"},
