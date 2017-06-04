@@ -6,6 +6,15 @@ var blacklistRegex;
 var blacklist_array = [];
 
 /**
+ * Handles a request to get blacklist_array.
+ */
+chrome.runtime.onMessage.addListener(
+	function (request, sender, sendResponse) {
+		if (request == "blacklist please")
+			sendResponse(blacklist_array.toString());
+	})
+
+/**
  * This function will either add or remove a site from the regex, depending
  * on whether the blacklist_array already contains or does not contain the site.
  * @param {string} site
@@ -34,22 +43,7 @@ function updateBlacklist(site) {
 }
 
 /**
- * activate declarativeContent.showPageAction() when visiting a blacklisted site.
- */
-chrome.runtime.onPageChanged.addListener(function () {
-	chrome.declarativeContent.onPageChanged.removeRules(undefined, function () {
-		chrome.declarativeContent.onPageChanged.addRules([{
-			//if URL matches regex
-			conditions: [new chrome.declarativeContent.PageStateMatcher({ pageUrl: { urlMatches: blacklistRegex } })],
-			//shows the extension's page action.
-			actions: [new chrome.declarativeContent.ShowPageAction()]
-		}]);
-	});
-});
-
-/**
  * loads stored blacklist into memory.
- *
  */
 chrome.runtime.onStartup.addListener(function () {
 
@@ -78,23 +72,20 @@ chrome.runtime.onInstalled.addListener(function () {
 	updateBlacklist("reddit.com");
 	updateBlacklist("tumblr.com");
 
-	retrieveQuestionsFromLocal();
-
-
+	retrieveQuestionsAtStart();
 });
 
-function retrieveQuestionsFromLocal() {
 
-	var xhr = new XMLHttpRequest();
-
-	xhr.open("GET", chrome.extension.getURL("local_qa/subjects_list.csv"), false);
-	xhr.onreadystatechange = function () {
-		if (xhr.readyState == 4) {
-			//xhr.responseText;ls -1d */  Subject,$(stat -c %Y)
-		}
-	}
-	xhr.send();
-	return JSON.parse(fileContents);
+/**
+ * QUESTION STORAGE STANDARD
+ * 
+ * The key 'subjects' will point to a list containing the keys to question sets. 
+ * The question set keys will point to another list of question objects. 
+ * Question objects have a key called 'qpath' that points to the URL of the question info.
+ * 
+ * This function will register some questions to start off with. 
+ */
+function retrieveQuestionsAtStart() {
 }
 
 /*//this will first update blacklistarray, then it will regenerate the blacklistRegex.

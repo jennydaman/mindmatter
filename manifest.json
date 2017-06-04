@@ -2,19 +2,19 @@
   "manifest_version" : 2,
 
   "name" : "Systole",
-  "description" : "This extension prompts the user with an educational question when attempting to visit potentially distracting sites.",
+  "description" : "This extension prompts the user with a multiple choice question when visiting potentially distracting sites.",
   "version" : "0.2",
   "author" : "Jennings Zhang",
 
   "background" : {
-    "scripts" : ["js/background.js"],
+    "scripts" : ["background.js"],
     "persistent" : false
   },
 
   "page_action" : {
     "default_icon" : "icons/bad-squid.png",
     "default_title" : "Systole",
-    "default_popup" : "qa/popup.html"        
+    "default_popup" : "popup.html"        
    },
 
    "icons" : {"48": "icons/bad-squid48.png"},
@@ -23,6 +23,5 @@
 
     "declarativeContent",
     "storage"
-    //Use the chrome.webRequest API to observe and analyze traffic and to intercept, block, or modify requests in-flight. 
   ]
 }

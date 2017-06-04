@@ -1,0 +1,13 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+gensl.py	../start_qa/gensl.py	1;"	kind:file	line:1
+json	../start_qa/gensl.py	/^import json$/;"	kind:namespace	line:4
+os	../start_qa/gensl.py	/^import os$/;"	kind:namespace	line:3
+qdir	../start_qa/gensl.py	/^        qdir = sdir + "\/" + questionFile$/;"	kind:variable	line:22
+sdir	../start_qa/gensl.py	/^    sdir = "\/" + subjectDict['subject']$/;"	kind:variable	line:14
+subjectStructure	../start_qa/gensl.py	/^subjectStructure = [{"subject": subjectName, "questions": []}$/;"	kind:variable	line:8
+titleFName	../start_qa/gensl.py	/^    titleFName = "." + sdir + "\/metatitle"$/;"	kind:variable	line:16
