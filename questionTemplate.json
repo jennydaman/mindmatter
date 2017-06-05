@@ -1,0 +1,26 @@
+{
+    "question": "This is an AMAZING question in JSON?",
+    "image": "http://question.url/foo.jpg",
+    "choices": [
+        {
+            "id": 0,
+            "option": "This is the correct answer.",
+            "explain": "Because its ID is 0."
+        },
+        {
+            "id": 1,
+            "option": "This sentence is a lie",
+            "explain": "It's a paradox!"
+        },
+        {
+            "id": 2,
+            "option": "This is not correct",
+            "explain": "ID != 0"
+        },
+        {
+            "id": 3,
+            "option": "HI",
+            "explain": "BYE"
+        }
+    ]
+}

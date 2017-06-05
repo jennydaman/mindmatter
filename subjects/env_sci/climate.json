@@ -1,0 +1,27 @@
+{
+
+    "question": "Which of the following is not a consequence of climate change?",
+    "image": "http://www.takepart.com/sites/default/files/climatechangeflashcard_0.jpg",
+    "choices": [
+        {
+            "id": 0,
+            "option": "Oil spills",
+            "explain": "This was a trick question :) Good job reading carefully."
+        },
+        {
+            "id": 1,
+            "option": "Ocean acidification",
+            "explain": "CO2 + H2O --> H2CO3. Ocean acidification causes coral bleaching."
+        },
+        {
+            "id": 2,
+            "option": "Polar bear cannibalism",
+            "explain": "Less sea ice shortens the hunting seasons for polar bears. Desperate males often go for cubs. https://youtu.be/Rfo233Q6aOg"
+        },
+        {
+            "id": 3,
+            "option": "Snowstorms",
+            "explain": "Reduced Arctic sea ice causes atmospheric circulation patterns favorable for unpredictable weather. https://www.ncdc.noaa.gov/news/climate-change-and-extreme-snow-us"
+        }
+    ]
+}
