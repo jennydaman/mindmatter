@@ -31,6 +31,6 @@ for subjectDict in subjectStructure:
             continue
         qdir = sdir + "/" + questionFile
         subjectDict['questions'].append(
-            {"qpath": baseurl + qdir, "timeSE": os.path.getmtime(subjectsDir + qdir)})
+            {"qpath": baseurl + "/subjects" + qdir, "timeSE": os.path.getmtime(subjectsDir + qdir)})
 
 print(json.dumps(subjectStructure, sort_keys=True, indent=4))
