@@ -17,20 +17,20 @@ baseurl: "/systole"
 title: Jennings Zhang
 
 # Short description of your site
-description: Not a waste of time.
+description: A chrome extension by Jennings Zhang.
 
 # --- Navigation bar options --- #
 
 # List of links in the navigation bar
 navbar-links:
-  About Me: "https://jennydaman.github.io/aboutme/"
+  Github Repo: "https://github.com/jennydaman/systole"
   Resources:
     - Beautiful Jekyll: "http://deanattali.com/beautiful-jekyll/"
     - GitHub Pages: "https://pages.github.com/"
 
 # Image to show in the navigation bar - image must be a square (width = height)
 # Remove this parameter if you don't want an image in the navbar
-avatar: "/img/bad-squid.png"
+avatar: "/img/bad-squid-w.png"
 
 # If you want to have an image logo in the top-left corner instead of the title text,
 # then specify the following parameter
