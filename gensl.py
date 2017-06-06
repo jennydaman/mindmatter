@@ -4,7 +4,7 @@ import os
 import json
 import sys
 
-baseurl = "http://jennydaman.github.io/systole"
+baseurl = "https://jennydaman.github.io/mindmatter"
 if len(sys.argv) > 1:
     baseurl = sys.argv[1]
 

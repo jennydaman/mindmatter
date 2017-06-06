@@ -8,8 +8,8 @@
 #baseurl: ""
 
 # If you are building a GitHub project page then use these settings:
-url: "http://jennydaman.github.io/systole"
-baseurl: "/systole"
+url: "https://jennydaman.github.io/mindmatter"
+baseurl: "/mindmatter"
 
 # Of course don't forget to change the username and projectname to YOUR username and project
 
@@ -17,20 +17,20 @@ baseurl: "/systole"
 title: Jennings Zhang
 
 # Short description of your site
-description: A chrome extension by Jennings Zhang.
+description: A chrome extension, not a waste of time.
 
 # --- Navigation bar options --- #
 
 # List of links in the navigation bar
 navbar-links:
-  Github Repo: "https://github.com/jennydaman/systole"
+  Github Repo: "https://github.com/jennydaman/mindmatter"
   Resources:
     - Beautiful Jekyll: "http://deanattali.com/beautiful-jekyll/"
     - GitHub Pages: "https://pages.github.com/"
 
 # Image to show in the navigation bar - image must be a square (width = height)
 # Remove this parameter if you don't want an image in the navbar
-avatar: "/img/bad-squid-w.png"
+avatar: "/img/brain-in-pot_center.png"
 
 # If you want to have an image logo in the top-left corner instead of the title text,
 # then specify the following parameter
@@ -42,18 +42,17 @@ avatar: "/img/bad-squid-w.png"
 # Important: you must keep the "name" parameter, everything else you can remove
 author:
   name: Jennings Zhang
-  email: "jzhg2000@gmail.com"
-  facebook: lejennydaman  # eg. daattali
-  github: jennydaman/systole
+  email: "systole64@gmail.com"
+
 
 # Select which links to show in the footer
 footer-links-active:
   rss: false
-  facebook: true
+  facebook: false
   email: true
   twitter: false
   google-plus: false
-  github: true
+  github: false
   reddit: false
   linkedin: false
   xing: false
@@ -66,10 +65,10 @@ footer-links-active:
 
 # Select which share links to show in posts
 share-links-active:
-  twitter: false
-  facebook: false
-  google: false
-  linkedin: false
+  twitter: true
+  facebook: true
+  google: true
+  linkedin: true
 
 # How to display the link to the website in the footer
 # Remove this if you don't want a link in the footer
