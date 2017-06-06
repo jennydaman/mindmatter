@@ -1,0 +1,31 @@
+{
+    "question": "This is an AMAZING question in JSON?",
+    "moreInfo": "This is a longer explaination to the question.",
+    "image": {
+        "sourceURL": "http://question.url/foo.jpg",
+        "author": "A great artist",
+        "link": "http://artistprofile.com/wearegoodpeoplebecausewecite"
+    },
+    "hint": "your first choice was wrong. This message might be helpful.",
+    "hintURL": "a resource to help you out!",
+    "choices": [
+        {
+            "correct": true,
+            "option": "This is the correct answer.",
+            "explain": "Because choices[0].correct == true."
+        },
+        {
+            "option": "This sentence is a lie",
+            "explain": "It's a paradox!",
+            "readMore": "https://en.wikipedia.org/wiki/Paradox"
+        },
+        {
+            "option": "This is not correct",
+            "explain": "'correct' in choices[2] --> false"
+        },
+        {
+            "option": "Javascript dictionaries are nifty.",
+            "explain": "JSON is preferrable over XML."
+        }
+    ]
+}

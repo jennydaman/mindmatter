@@ -1,27 +1,30 @@
 {
-
     "question": "Which of the following is not a consequence of climate change?",
-    "image": "http://www.takepart.com/sites/default/files/climatechangeflashcard_0.jpg",
+    "image": {
+        "sourceURL": "https://www.nasa.gov/sites/default/files/meltpondshansen.jpg",
+        "author": "NASA - Vital Signs of the Planet",
+        "link": "https://climate.nasa.gov/evidence/"
+    },
     "choices": [
         {
-            "id": 0,
+            "correct": true,
             "option": "Oil spills",
-            "explain": "This was a trick question :) Good job reading carefully."
+            "explain": "This was a trick question :) Good job reading carefully. Oil spills causes climate change, not the other way around."
         },
         {
-            "id": 1,
             "option": "Ocean acidification",
-            "explain": "CO2 + H2O --> H2CO3. Ocean acidification causes coral bleaching."
+            "explain": "CO2 + H2O --> H2CO3. Ocean acidification causes coral bleaching.",
+            "readMore": "http://oceanservice.noaa.gov/facts/coral_bleach.html"
         },
         {
-            "id": 2,
             "option": "Polar bear cannibalism",
-            "explain": "Less sea ice shortens the hunting seasons for polar bears. Desperate males often go for cubs. https://youtu.be/Rfo233Q6aOg"
+            "explain": "Less sea ice shortens the hunting seasons for polar bears. Desperate males often go for cubs.",
+            "readMore": "https://youtu.be/Rfo233Q6aOg"
         },
         {
-            "id": 3,
             "option": "Snowstorms",
-            "explain": "Reduced Arctic sea ice causes atmospheric circulation patterns favorable for unpredictable weather. https://www.ncdc.noaa.gov/news/climate-change-and-extreme-snow-us"
+            "explain": "Reduced Arctic sea ice causes atmospheric circulation patterns favorable for unpredictable weather.",
+            "readMore": "https://www.ncdc.noaa.gov/news/climate-change-and-extreme-snow-us"
         }
     ]
 }

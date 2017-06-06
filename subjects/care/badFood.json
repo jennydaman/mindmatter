@@ -1,25 +1,25 @@
 {
-
     "question": "Which of these should be avoided in the average human's diet?",
-    "image": "http://img.aws.livestrongcdn.com/ls-article-image-673/cpi.studiod.com/www_livestrong_com/photos.demandstudios.com/getty/article/197/234/501030911_XS.jpg"
+    "image": {
+        "sourceURL": "http://img.aws.livestrongcdn.com/ls-article-image-673/cpi.studiod.com/www_livestrong_com/photos.demandstudios.com/getty/article/197/234/501030911_XS.jpg",
+        "author": "LIVESTRONG",
+        "link": "http://www.livestrong.com/article/309908-the-perfect-human-diet/"
+    },
     "choices": [
         {
-            "id": 0,
+            "correct": true,
             "option": "More than 800 IU of vitamin D.",
             "explain": "Too much vitamins is bad for you! Vitamin D is fat soluble, meaning that your body struggles to get rid of excess. Too much vitamin D can cause hypercalcemia."
         },
         {
-            "id": 1,
             "option": "Deoxyribonucleic acid.",
             "explain": "DNA is genetic material. It is in every natural food. Almost every (not RBCs) of your 100 trillion body cells contains ~2 meters of DNA each! According to a 2015 Study by the Oklahoma State University, 80% of Americans support the mandatory labeling of DNA-containing foods..."
         },
         {
-            "id": 2,
             "option": "Carbohydrates.",
             "explain": "Carbs are an important energy source. Carb-free diets is an easy way to lose weight, but that is because without carbs, your body cannot retain the same volume of water. You wouldn't be losing fat, just your health. A carb free diet causes headaches, gastrointestinal issues, bad breath, and fatigue."
         },
         {
-            "id": 3,
             "option": "Monosodium glutamate (MSG).",
             "explain": "Glutamate is harmless (and gives food a savory taste). The sodium makes it easier to be used in food. It's the dose that makes the poison; in moderation, MSG is nothing more than a flavor enhancement."
         }

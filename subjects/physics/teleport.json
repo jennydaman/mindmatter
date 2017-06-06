@@ -1,27 +1,29 @@
 {
-
     "question": "Which have these scientific feats have been accomplished?",
-    "image": "http://strangenotions.com/wp-content/uploads/Quantum.jpg",
+    "image": {
+        "sourceURL": "https://wi-images.condecdn.net/image/mRXekAmwy6N/crop/405"
+    },
     "choices": [
         {
-            "id": 0,
+            "correct": true,
             "option": "Quantum teleportation.",
-            "explain": "https://www.nature.com/nature/journal/v518/n7540/full/nature14246.html"
+            "explain": "Quantum teleporation might not be what you would hope it is, but nevertheless this is a huge breakthrough.",
+            "readMore": "https://www.nature.com/nature/journal/v518/n7540/full/nature14246.html"
         },
         {
-            "id": 1,
             "option": "Telepathy.",
-            "explain": "No... but we do have encrypted messages. HTTPS is close enough..."
+            "explain": "No... but we do have encrypted messages. HTTPS is close enough... sorta.",
+            "readMore": "https://en.wikipedia.org/wiki/HTTPS"
         },
         {
-            "id": 2,
             "option": "Cloning of a human adult.",
-            "explain": "There are many people protesting experiments on this subject because of ethical issues. Geneticists in China are trying to make this happen, however."
+            "explain": "There are many people protesting experiments on this subject because of ethical issues.",
+            "readMore": "http://www.businessinsider.com/can-you-clone-a-human-2016-7"
         },
         {
-            "id": 3,
             "option": "Decryption with quantum computing.",
-            "explain": "Quantum computing is unreliable today, but as technology advances, the power of quantum computing may render all of RSA encryption obsolete. (that's a pretty bad thing)"
+            "explain": "Quantum computing is unreliable today, but as technology advances, the power of quantum computing may render all of RSA encryption obsolete. (that's a pretty bad thing)",
+            "readMore": "https://www.washingtonpost.com/world/national-security/nsa-seeks-to-build-quantum-computer-that-could-crack-most-types-of-encryption/2014/01/02/8fff297e-7195-11e3-8def-a33011492df2_story.html?utm_term=.6063d72d9296"
         }
     ]
 }
