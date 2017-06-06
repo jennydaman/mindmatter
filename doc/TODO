@@ -1,0 +1,28 @@
+Use the chrome.webRequest API to observe and analyze traffic and to intercept, block, or modify requests in-flight. 
+
+https://developer.chrome.com/extensions/declarativeContent
+
+
+https://developer.chrome.com/extensions/pageAction
+
+
+
+force evaluation with [myVar]
+
+
+
+/**
+ * activate declarativeContent.showPageAction() when visiting a blacklisted site.
+ */
+chrome.runtime.onPageChanged.addListener(function () {
+	chrome.declarativeContent.onPageChanged.removeRules(undefined, function () {
+		chrome.declarativeContent.onPageChanged.addRules([{
+			//if URL matches regex
+			conditions: [new chrome.declarativeContent.PageStateMatcher({ pageUrl: { urlMatches: blacklistRegex } })],
+			//shows the extension's page action.
+			actions: [new chrome.declarativeContent.ShowPageAction()]
+		}]);
+	});
+});
+
+add permissions to allow cross site XMLHTTPRequest to retrieve images. 
