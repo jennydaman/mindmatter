@@ -24,3 +24,5 @@ chrome.runtime.onPageChanged.addListener(function () {
 		}]);
 	});
 });
+
+
