@@ -5,6 +5,7 @@ import json
 import sys
 
 baseurl = "https://jennydaman.github.io/mindmatter"
+
 if len(sys.argv) > 1:
     baseurl = sys.argv[1]
 
@@ -20,7 +21,7 @@ for subjectDict in subjectStructure:
 
     sdir = "/" + subjectDict['subjectStorageKey']
 
-    titleFName = "." + sdir + "/metatitle"
+    titleFName = "." + sdir + "/title"
     if os.path.isfile(titleFName):
         subjectDict['subjectName'] = open(
             titleFName, 'r').read(32).replace("\n", "")
