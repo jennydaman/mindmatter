@@ -5,14 +5,6 @@
 var blacklistRegex;
 var blacklist_array = [];
 
-/**
- * Handles a request to get blacklist_array.
- */
-chrome.runtime.onMessage.addListener(
-	function (request, sender, sendResponse) {
-		if (request == "blacklist please")
-			sendResponse(blacklist_array.toString());
-	})
 
 /**
  * This function will either add or remove a site from the regex, depending
@@ -72,24 +64,34 @@ chrome.runtime.onInstalled.addListener(function () {
 	updateBlacklist("reddit.com");
 	updateBlacklist("tumblr.com");
 
-	retrieveQuestionsAtStart();
+	//TODO get some starter questions
 });
 
 
 /**
- * QUESTION STORAGE STANDARD
- * 
- * The key 'subjects' will point to a list containing the keys to question sets. 
- * The question set keys will point to another list of question objects. 
- * Question objects have a key called 'qpath' that points to the URL of the question info.
- * 
- * This function will register some questions to start off with. 
- */
-function retrieveQuestionsAtStart() {
+* Handles a request to get variables from the background script. 
+* 
+* <code>please variable</code> will return the requested variable. 
+* Avaliable variables: 
+* {list} blacklist_array
+*  
+*/
+chrome.runtime.onMessage.addListener(
+
+	function (request, sender, sendResponse) {
+		if (request == "please blacklist_array")
+			sendResponse(blacklist_array);
+	});
+
+function resetStorage() {
+
+	chrome.storage.sync.get(null, function (items) {
+
+		var allKeys = [];
+		for (var key in items)
+			allKeys.push(key);
+
+		chrome.storage.sync.remove(allKeys, console.log("All keys removed"));
+	})
 }
-
-/*//this will first update blacklistarray, then it will regenerate the blacklistRegex.
-chrome.storage.onChanged.addListener(function(changes, namespace) {
-
-});*/
 

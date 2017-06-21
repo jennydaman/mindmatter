@@ -26,6 +26,6 @@
   "permissions": [
     "declarativeContent",
     "storage",
-    "https://jennydaman.github.io/mindmatter/"
+    "https://jennydaman.github.io/mindmatter/*"
   ]
 }
