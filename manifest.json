@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "name": "Mind Matters",
+  "name": "Mind Matter",
   "description": "An educational chrome extension, not a waste of time. Prompts the user with a multiple-choice question popup before visiting a distracting site.",
   "version": "0.2",
   "author": "Jennings Zhang",
@@ -10,16 +10,17 @@
     ],
     "persistent": false
   },
-  "page_action": {
+  "browser_action": {
     "default_icon": "icons/brain-in-pot.png",
     "default_title": "Mind Matter",
     "default_popup": "popup.html"
   },
+  "options_page": "options.html",
   "icons": {
     "16": "icons/brain-in-pot16.png",
     "24": "icons/brain-in-pot24.png",
     "32": "icons/brain-in-pot32.png",
-    "48": "icons/brain-in-pot42.png",
+    "48": "icons/brain-in-pot48.png",
     "96": "icons/brain-in-pot96.png",
     "256": "icons/brain-in-pot256.png"
   },
