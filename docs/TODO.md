@@ -20,6 +20,16 @@ chrome.runtime.onPageChanged.addListener(function () {
 });
 ```
 
+http://jqueryui.com/themeroller/
+```HTML
+	<!-- ui-dialog -->
+	<div class="ui-widget-overlay ui-front"></div>
+	<div style="position: absolute; width: 320px; left: 50px; top: 30px; padding: 1.2em" class="ui-widget ui-front ui-widget-content ui-corner-all ui-widget-shadow">
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+	</div>
+```
+
+http://developit.github.io/preact-todomvc/
 
 
 # Future features
@@ -30,5 +40,23 @@ Score
 
 Avoid repetition 
 
+predownload question sets option for offline use 
+
+Build the UI using jQuery UI, maybe switch to React in the future?
 # Notes
 force evaluation with [myVar]
+Reorganize directories after I figure out react...
+build, lib, src/js, test, 
+
+# Manifest 
+
+options version 2 
+offline enabled 
+shared modules 
+homepage url 
+requirements 
+
+# Languages 
+SASS
+react.js
+jquery.js 

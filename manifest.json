@@ -11,18 +11,15 @@
     "persistent": false
   },
   "browser_action": {
-    "default_icon": "icons/brain-in-pot.png",
+    "default_icon": "icons/brain-in-pot16.png",
     "default_title": "Mind Matter",
     "default_popup": "popup.html"
   },
   "options_page": "options.html",
   "icons": {
     "16": "icons/brain-in-pot16.png",
-    "24": "icons/brain-in-pot24.png",
     "32": "icons/brain-in-pot32.png",
-    "48": "icons/brain-in-pot48.png",
-    "96": "icons/brain-in-pot96.png",
-    "256": "icons/brain-in-pot256.png"
+    "128": "icons/brain-in-pot128.png"
   },
   "permissions": [
     "declarativeContent",
