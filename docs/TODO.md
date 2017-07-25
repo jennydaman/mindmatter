@@ -21,7 +21,7 @@ chrome.runtime.onPageChanged.addListener(function () {
 ```
 
 http://jqueryui.com/themeroller/
-```HTML
+```html
 	<!-- ui-dialog -->
 	<div class="ui-widget-overlay ui-front"></div>
 	<div style="position: absolute; width: 320px; left: 50px; top: 30px; padding: 1.2em" class="ui-widget ui-front ui-widget-content ui-corner-all ui-widget-shadow">
@@ -30,6 +30,9 @@ http://jqueryui.com/themeroller/
 ```
 
 http://developit.github.io/preact-todomvc/
+
+TODOMVC list
+https://www.w3schools.com/howto/howto_js_todolist.asp
 
 
 # Future features
@@ -43,6 +46,9 @@ Avoid repetition
 predownload question sets option for offline use 
 
 Build the UI using jQuery UI, maybe switch to React in the future?
+
+* [SASS](http://sass-lang.com/)
+
 # Notes
 force evaluation with [myVar]
 Reorganize directories after I figure out react...

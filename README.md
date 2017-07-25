@@ -9,7 +9,7 @@ What started as a (unsuccessful) [Bitcamp 2017](https://devpost.com/software/sys
 
 Mind Matter is a Chrome extension that can help you learn new things and stay productive. When attempting to access a "distracting" site, such as Facebook or Reddit, *Mind Matter* will block the site, preventing access until a multiple choice question is answered correctly. 
 
-###### Rationale
+## Rationale
 
 Psychologist Daniel Kahneman describes two systems of thinking. According to [Wikipedia](https://en.wikipedia.org/wiki/Thinking_Fast_and_Slow), "'System 1' is fast, instinctive, and emotional; 'System 2' is slower, more deliberative, and more logical." Unfortunately, us citizens of the internet do too much mind-numbing System 1 thinking while we pass time consuming memes. The goal of Mind Matter is to deter the user from frequently browsing time-wsting sites, and instead to focus on what matters in life. The questions provided intend to stimulate System 2 thinking. A user should perform a little thinking or research in order to respond to the question.
 
@@ -23,5 +23,5 @@ If you need to get to r/iamverysmart that bad, temporarily disable Mind Matter (
 
 
 Technologies (that are probably) used:
-* [SASS](http://sass-lang.com/)
 * [Preact](https://preactjs.com/)
+* [webpack](https://webpack.js.org/)
