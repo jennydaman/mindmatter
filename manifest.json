@@ -6,16 +6,16 @@
   "author": "Jennings Zhang",
   "background": {
     "scripts": [
-      "background.js"
+      "src/js/background.js"
     ],
     "persistent": false
   },
   "browser_action": {
     "default_icon": "icons/brain-in-pot16.png",
     "default_title": "Mind Matter",
-    "default_popup": "popup.html"
+    "default_popup": "src/dist/popup.html"
   },
-  "options_page": "options.html",
+  "options_page": "src/dist/options.html",
   "icons": {
     "16": "icons/brain-in-pot16.png",
     "32": "icons/brain-in-pot32.png",

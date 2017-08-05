@@ -47,7 +47,6 @@ predownload question sets option for offline use
 
 Build the UI using jQuery UI, maybe switch to React in the future?
 
-* [SASS](http://sass-lang.com/)
 
 # Notes
 force evaluation with [myVar]
@@ -62,7 +61,3 @@ shared modules
 homepage url 
 requirements 
 
-# Languages 
-SASS
-react.js
-jquery.js 
