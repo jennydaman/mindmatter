@@ -2,52 +2,40 @@
 <html>
 
 <head>
-    <script type="text/javascript" src="../js/optionsFunctions.js"></script>
+    <meta charset="utf-8">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#A9A9A9">
+    <link rel="shortcut icon" href="favicon.ico">
 
-    <title>Mind Matter Settings</title>
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/header.css">
+    <script type="text/javascript" src="../lib/jquery-3.2.1.slim.min.js"></script>
+    <script type="text/javascript" src="../js/options.js"></script>
+
+    <title>Mind Matter</title>
+
+    <style type="text/css" media="all">
+        div.bump {
+            padding: 70px 20px;
+            min-height: 100%;
+            width: 100%;
+        }
+    </style>
 </head>
 
 <body>
-
-    <header role="banner">
-        <h1>Mind Matter</h1>
-        <p>Extension Settings page</p>
+    <header class="header">
+        <img src="/icons/word-logo.png" alt="Mind Matter"/> 
+        <h1>Heading</h1>
+        
+        <nav>
+            <a class="" href="options/blacklist" id="blacklist_ln" >Blacklist</a>
+            <a class="" href="/questions-database">Questions&nbsp;Database</a>
+            <a class="" href="/information">Information</a>
+        </nav>
     </header>
 
-    <!--TODO: make pretty 
-        make the blacklist a single column list that's pretty!
-        when mousing over an element, an X will appear to the right of the cell.
-        Clicking on the X will replace the cell with a "Delete <URL>?" message on
-        a red background. The last cell can be typed in. Pressing enter will add it
-        as a blacklisted site.
-
-            USE REACT.JS!!!!
-
-        -->
-    <table width="300px" border=1>
-        <!--also make the table borders a soft grey -->
-        <th bgcolor="#aaa">
-            <h3>Blacklisted Sites</h3>
-        </th>
-        <tr>
-            <td>example.site.com</td>
-        </tr>
-    </table>
-
-    <form name="addURL" onsubmit="return functionExample()">
-        <input type="url" name="url_field" placeholder="Specify a new URL to blacklist..." size="34" />
-        <input type="button" name="submit" disabled="disabled" />
-    </form>
-
-    <footer>
-        <h2>Information and Credits</h2>
-        <p>Lisenced under the WTFPL. Idea and extension development by Jennings Zhang. "Brain In Pot" icon artwork by Sally
-            Zhao. <br /> The idea started as a project for <em>Bitcamp 2017</em>. Check it out on <a href="https://github.com/jennydaman/mindmatter"
-                target="_blank">Github</a>.<br /> Mind Matter uses the <code>chrome.storage.sync</code> API, meaning that your
-            settings will be synced with your Google account.</p>
-    </footer>
-
-    <script type="text/javascript" src="optionsInflator.js"></script>
+    <div class="bump" id="app">Welcome to the Mind Matter chrome extension options page.</div>
 
 
 </body>
