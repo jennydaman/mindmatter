@@ -3,8 +3,8 @@
 	left: 0;
 	top: 0;
 	width: 100%;
-	min-width: 925px;
-	height: 56px;
+	min-width: 765px;
+	height: 40px;
 	padding: 0;
 	background: #A9A9A9;
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
@@ -22,8 +22,8 @@
 	text-align: center;
 	margin: 0;
     padding-left: 17px;
-	font-size: 30px;
-	line-height: 56px;
+	font-size: 24px;
+	line-height: 40px;
 	font-weight: bold;
 	color: #FFF;
 	border-left: thick solid rgba(0,0,0,0.2);
@@ -36,10 +36,10 @@
 }
 
 .header nav a {
-    font-size: 22px;
+    font-size: 18px;
 	display: inline-block;
-	height: 56px;
-	line-height: 56px;
+	height: 40px;
+	line-height: 40px;
 	padding: 0 15px;
 	min-width: 50px;
 	text-align: center;
@@ -57,3 +57,10 @@
 .header nav a.active {
 	background: rgba(0,0,0,0.4);
 }
+
+.home {
+	padding: 40px 20px;
+	min-height: 100%;
+	width: 100%;
+}
+

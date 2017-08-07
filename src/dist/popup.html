@@ -1,22 +1,23 @@
 <html>
 
 <head>
-
+    <link rel="stylesheet" href="../styles/index.css">
     <title>Mind Matters</title>
-
 </head>
 
 <body>
     <style type="text/css" media="all">
         body {
             min-width: 360px;
+            padding: 6px;
         }
     </style>
 
     <header role="banner">
-        <h1>Mind Matter</h1>
-        <p>Popup</p>
+        <img src="/icons/word-logo.png" alt="Mind Matter" height="40px" align="right" />
     </header>
+
+    <h2>Popup</h2>
 
     <p>Progress is slow...</p>
 
@@ -24,16 +25,17 @@
         <marked>no implementation :(</marked>
     </p>
 
+    <p><b>Cooldown: </b>:
+        <marked>no implementation :(</marked>
+    </p>
 
-    <a href="./options.html" target="_blank">Options page (opens in a new tab)</a>
+    <button id="go-to-options">Go to options</button>
     <!--TODO make pretty - change to a button?-->
 
     <hr />
 
     <div id="dirty-blacklist"></div>
-    <script type="text/javascript" src="../js/popupInflator.js"></script>
-
-
+    <script type="text/javascript" src="../js/popup.js"></script>
 </body>
 
 </html>

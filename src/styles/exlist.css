@@ -5,14 +5,13 @@ li button.destroy {
 
 	display: none;
 	position: absolute;
-	top: 4px;
+	top: 6px;
 	right: 10px;
-	width: 40px;
-	height: 40px;
+	width: 36px;
+	height: 36px;
 	margin: auto 0;
 	font-size: 30px;
 	color: #cc9a9a;
-	margin-bottom: 11px;
 	transition: color 0.2s ease-out;
 }
 
@@ -27,6 +26,8 @@ li button.destroy:after {
 li:hover button.destroy {
 	display: block;
 }
+
+
 
 .listapp input::-webkit-input-placeholder {
 	font-style: italic;
