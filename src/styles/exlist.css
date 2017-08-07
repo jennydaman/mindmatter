@@ -1,0 +1,75 @@
+
+li button.destroy {
+	background: none;
+	border: none;
+
+	display: none;
+	position: absolute;
+	top: 4px;
+	right: 10px;
+	width: 40px;
+	height: 40px;
+	margin: auto 0;
+	font-size: 30px;
+	color: #cc9a9a;
+	margin-bottom: 11px;
+	transition: color 0.2s ease-out;
+}
+
+li button.destroy:hover {
+	color: #af5b5e;
+}
+
+li button.destroy:after {
+	content: '×';
+}
+
+li:hover button.destroy {
+	display: block;
+}
+
+.listapp input::-webkit-input-placeholder {
+	font-style: italic;
+	font-weight: 300;
+	color: #e6e6e6;
+}
+
+.listapp input::input-placeholder {
+	font-style: italic;
+	font-weight: 300;
+	color: #e6e6e6;
+}
+
+.listapp input[type="text"] {
+
+	font-size: inherit;
+    font-family: inherit;
+    font-weight: inherit;
+	width: 420px;
+	padding: 15px;
+	padding-left: 30px;
+	border: none;
+	background: rgba(0, 0, 0, 0.003);
+	box-shadow: inset 0 -2px 1px rgba(0,0,0,0.03);
+	cursor: auto;
+	user-select: text;
+	-webkit-appearance: textfield;
+}
+
+/* Style the "Add" button */
+.addBtn {
+	position: absolute;
+	right: 0;
+    padding: 15px;
+	min-width: 180px;
+    color: #FFF;
+    background: #555;
+    float: left;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.addBtn:hover {
+    background-color: 	#FF0000;
+}

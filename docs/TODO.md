@@ -61,3 +61,7 @@ shared modules
 homepage url 
 requirements 
 
+# SAD!
+
+https://stackoverflow.com/questions/2862590/how-to-replace-master-branch-in-git-entirely-from-another-branch
+

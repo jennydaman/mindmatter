@@ -3,6 +3,7 @@
 	left: 0;
 	top: 0;
 	width: 100%;
+	min-width: 925px;
 	height: 56px;
 	padding: 0;
 	background: #A9A9A9;
@@ -21,11 +22,10 @@
 	text-align: center;
 	margin: 0;
     padding-left: 17px;
-	font-size: 24px;
+	font-size: 30px;
 	line-height: 56px;
-	font-weight: 400;
+	font-weight: bold;
 	color: #FFF;
-
 	border-left: thick solid rgba(0,0,0,0.2);
 	white-space: nowrap;
 }
@@ -36,6 +36,7 @@
 }
 
 .header nav a {
+    font-size: 22px;
 	display: inline-block;
 	height: 56px;
 	line-height: 56px;
@@ -43,7 +44,6 @@
 	min-width: 50px;
 	text-align: center;
 	background: rgba(255,255,255,0);
-	font-weight: bold;
 	text-decoration: none;
 	color: #FFF;
 	will-change: background-color;

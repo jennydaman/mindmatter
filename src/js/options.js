@@ -4,6 +4,9 @@ $(document).ready(function () {
         $('.header a').removeClass('active'); 
         $(this).addClass('active');
 
+        $('#heading').html($(this).text());
+
+        $('#app').load($(this).attr('id').slice(0, -3).concat(".html"));
         //alert($(this).attr('id'));
         e.preventDefault();
     });
