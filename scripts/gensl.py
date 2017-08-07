@@ -6,10 +6,9 @@ import sys
 
 baseurl = "https://jennydaman.github.io/mindmatter"
 
+subjectsDir = "subjects/"
 if len(sys.argv) > 1:
-    baseurl = sys.argv[1]
-
-subjectsDir = "./subjects/"
+    subjectsDir = sys.argv[1]
 
 """Creates an array of dictionaries.
 Dictionaries have a subject name and an array of questions."""
@@ -21,7 +20,8 @@ for subjectDict in subjectStructure:
 
     sdir = "/" + subjectDict['subjectStorageKey']
 
-    titleFName = "." + sdir + "/title"
+    titleFName = subjectsDir + sdir + "/title"
+
     if os.path.isfile(titleFName):
         subjectDict['subjectName'] = open(
             titleFName, 'r').read(32).replace("\n", "")
