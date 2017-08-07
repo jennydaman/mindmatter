@@ -41,7 +41,7 @@ li:hover button.destroy {
 	color: #e6e6e6;
 }
 
-.listapp input[type="text"] {
+.listapp input[type="url"] {
 
 	font-size: inherit;
     font-family: inherit;
@@ -64,7 +64,8 @@ li:hover button.destroy {
     padding: 15px;
 	min-width: 180px;
     color: #FFF;
-    background: #555;
+	background: #555;
+	font-weight: bold;
     float: left;
     text-align: center;
     cursor: pointer;

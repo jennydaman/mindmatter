@@ -37,7 +37,7 @@ chrome.runtime.onStartup.addListener(function () {
 //THIS IS TEMPORARY 
 chrome.runtime.onInstalled.addListener(function () {
 
-	chrome.storage.sync.set({"blacklist_array": ["youtube.com", "facebook.com"]});
+	chrome.storage.sync.set({"blacklist_array": ["youtube.com", "facebook.com", "reddit.com", "buzzfeed.com"]});
 });
 //chrome.runtime.onSuspend.addListener(function () {});
 
