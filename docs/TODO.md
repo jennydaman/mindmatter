@@ -29,8 +29,6 @@ http://jqueryui.com/themeroller/
 	</div>
 ```
 
-http://developit.github.io/preact-todomvc/
-
 TODOMVC list
 https://www.w3schools.com/howto/howto_js_todolist.asp
 
@@ -45,23 +43,12 @@ Avoid repetition
 
 predownload question sets option for offline use 
 
-Build the UI using jQuery UI, maybe switch to React in the future?
-
+chrome options version 2: make everything smaller so that it fits into new options page
 
 # Notes
 force evaluation with [myVar]
 Reorganize directories after I figure out react...
 build, lib, src/js, test, 
 
-# Manifest 
 
-options version 2 
-offline enabled 
-shared modules 
-homepage url 
-requirements 
-
-# SAD!
-
-https://stackoverflow.com/questions/2862590/how-to-replace-master-branch-in-git-entirely-from-another-branch
 
