@@ -72,6 +72,6 @@ li:hover button.destroy {
     transition: 0.3s;
 }
 
-.addBtn:hover {
+.addBtn:hover, addBtn.errMsg {
     background-color: 	#FF0000;
 }

@@ -20,11 +20,13 @@ function regenRegex(array) {
 
 	for (let index = 0; index < array.length - 1; index++) {
 
+
 		const specialChars = "$*+?.():=!,[]";
 		//insert backslashes in front of special regexp characters
 		for (let i = 0; i < array[index].length; i++) {
 			if (specialChars.includes(array[index].charAt(i)))
-				array[index] = array[index].substring(0, i) + '\\' + array[index].substring(i);
+				array[index] = array[index].substring(0, i) + '\\' + array[index].substring(i++);
+			//i++ prevents infinite loop
 		}
 
 		blacklistRegex += '(' + array[index] + ')|';
@@ -57,7 +59,7 @@ chrome.runtime.onInstalled.addListener(function () {
 	chrome.runtime.openOptionsPage(function () {
 		alert("Thanks for installing Mind Matter! Please check out this options page."
 			+ "\nYou should add some URLs to the blacklist. Some sites have already been added for you."
-			+ "Also, don't forget to select some interesting subjects from the questions database.");
+			+ "\nAlso, don't forget to select some interesting subjects from the questions database.");
 	});
 
 });

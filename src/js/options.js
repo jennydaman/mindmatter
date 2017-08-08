@@ -22,7 +22,7 @@ const inflators = {
             }
         });
     },
-    "questions.html": function () { }
+    "database.html": function () { }
 }
 
 var blacklist_array;
@@ -121,9 +121,9 @@ function buttonWarning(warning) {
 
     let orig = $(".addBtn").text();
     $(".addBtn").html(warning);
-    $(".addBtn").css("background-color", "#FF0000"); //red
+    $(".addBtn").addClass("errMsg"); 
     setTimeout(function () {
         $(".addBtn").html(orig);
-        $(".addBtn").css("background-color", "#555");
+        $(".addBtn").removeClass("errMsg");
     }, 3000);
 }

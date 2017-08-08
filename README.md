@@ -1,6 +1,7 @@
 # Mind Matter
+
 ### An educational chrome extension, not a waste of time. 
-![logo](icons/word-logo.png)
+![logo](assets/word-logo.png)
 
 *Previously known as jennydaman/systole.* 
 *Just kidding, nobody knew about it...*
@@ -21,3 +22,14 @@ Well, odds are you don't have time for the site you want to visit...
 
 If you need to get to r/iamverysmart that bad, temporarily disable Mind Matter (but pls don't uninstall (jk go ahead not like I made money off this)).
 
+## Installation of development version
+
+Although this project is not quite ready for publication, it is installable as an **unpacked extension**.
+
+1. `git clone https://github.com/jennydaman/mindmatter.git` or [Download ZIP](https://github.com/jennydaman/mindmatter/archive/master.zip) and extract it.
+2. Go to [chrome://extensions](chrome://extensions).
+3. Enable "Developer mode"
+4. Click "Load unpacked extension..." and select the mindmatter folder.
+![Google Chrome extensions page](docs/img/chrome-extensions-page.png)
+5. Brace for dissapointment. 
+![Mind Matter Blacklist options page screenshot](docs/img/blacklist-screenshot.png)
