@@ -51,5 +51,15 @@ chrome.storage.onChanged.addListener(function (changes, areaName) {
 
 //automatically set up some blacklisted sites.
 chrome.runtime.onInstalled.addListener(function () {
+
 	chrome.storage.sync.set({ "blacklist_array": ["youtube.com", "facebook.com", "reddit.com", "buzzfeed.com"] });
+
+	chrome.runtime.openOptionsPage(function () {
+		alert("Thanks for installing Mind Matter! Please check out this options page."
+			+ "\nYou should add some URLs to the blacklist. Some sites have already been added for you."
+			+ "Also, don't forget to select some interesting subjects from the questions database.");
+	});
+
 });
+
+//chrome.tabs.onUpdated.addListener(function callback) https://developer.chrome.com/extensions/tabs#event-onUpdated

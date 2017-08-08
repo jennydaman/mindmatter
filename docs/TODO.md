@@ -1,8 +1,7 @@
 # Functionality
-Use the chrome.webRequest API to observe and analyze traffic and to intercept, block, or modify requests in-flight. 
-https://developer.chrome.com/extensions/declarativeContent
-https://developer.chrome.com/extensions/pageAction
 
+Javascript injection: 
+https://developer.chrome.com/extensions/tabs
 
 ```javascript
 /**
@@ -21,17 +20,6 @@ chrome.runtime.onPageChanged.addListener(function () {
 ```
 
 http://jqueryui.com/themeroller/
-```html
-	<!-- ui-dialog -->
-	<div class="ui-widget-overlay ui-front"></div>
-	<div style="position: absolute; width: 320px; left: 50px; top: 30px; padding: 1.2em" class="ui-widget ui-front ui-widget-content ui-corner-all ui-widget-shadow">
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-	</div>
-```
-
-TODOMVC list
-https://www.w3schools.com/howto/howto_js_todolist.asp
-
 
 # Future features
 
@@ -43,12 +31,10 @@ Avoid repetition
 
 predownload question sets option for offline use 
 
-chrome options version 2: make everything smaller so that it fits into new options page
+allow user to disable the functionality - toggle in popup and options 
 
 # Notes
 force evaluation with [myVar]
-Reorganize directories after I figure out react...
-build, lib, src/js, test, 
 
 
 

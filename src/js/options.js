@@ -95,7 +95,16 @@ function checkBLInput() {
     for (let i = 0; i < smallSite.length; i++) {
         //bad URL 
         if (!validChars.includes(smallSite.charAt(i))) {
-            buttonWarning("Invalid URL!");
+
+            //easter eggs, nothing here kiddo
+            if (smallSite == "kill myself")
+                buttonWarning("suicide hotline (24h): 1-800-273-8255");
+            else if (smallSite == "jennings zhang")
+                buttonWarning("bm &#x1f622;"); //sad emoji
+            else if (smallSite.includes("pepe"))
+                buttonWarning("REEEEEEE");
+            else
+                buttonWarning("Invalid URL!");
             return false;
         }
     }
@@ -111,10 +120,10 @@ function checkBLInput() {
 function buttonWarning(warning) {
 
     let orig = $(".addBtn").text();
-    $(".addBtn").text(warning);
+    $(".addBtn").html(warning);
     $(".addBtn").css("background-color", "#FF0000"); //red
     setTimeout(function () {
-        $(".addBtn").text(orig);
+        $(".addBtn").html(orig);
         $(".addBtn").css("background-color", "#555");
-    }, 2000);
+    }, 3000);
 }
