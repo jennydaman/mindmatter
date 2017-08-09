@@ -16,9 +16,9 @@
     "default_title": "Mind Matter",
     "default_popup": "src/dist/popup.html"
   },
-  "options_page": "src/dist/options.html",
+  "options_page": "src/dist/options",
   "options_ui": {
-    "page": "src/dist/options.html",
+    "page": "src/dist/options/index.html",
     "chrome_style": false
   },
   "icons": {
