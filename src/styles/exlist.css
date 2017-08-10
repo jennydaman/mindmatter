@@ -16,7 +16,7 @@ li button.destroy {
 }
 
 li button.destroy:hover {
-	color: #af5b5e;
+	color: #af0000;
 }
 
 li button.destroy:after {

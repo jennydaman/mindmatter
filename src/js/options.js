@@ -60,13 +60,20 @@ $(document).ready(function () {
  */
 function addRowToBlacklist(site) {
 
-    $('#blacklist').append(
-        $('<li>').append(
-            $('<label>').text(site), $('<button>').attr({
-                class: "destroy",
-                id: [site]
-            })
-        ));
+    var row = $('<li>').append(
+        $('<label>').text(site), $('<button>').attr({
+            class: "destroy",
+        })
+    )
+
+    row.click(function (e) {
+
+        blacklist_array.splice(blacklist_array.indexOf(site), 1);
+        chrome.storage.sync.set({ "blacklist_array": blacklist_array });
+        row.remove();
+    });
+
+    $('#blacklist').append(row);
 }
 
 /**
@@ -121,7 +128,7 @@ function buttonWarning(warning) {
 
     let orig = $(".addBtn").text();
     $(".addBtn").html(warning);
-    $(".addBtn").addClass("errMsg"); 
+    $(".addBtn").addClass("errMsg");
     setTimeout(function () {
         $(".addBtn").html(orig);
         $(".addBtn").removeClass("errMsg");

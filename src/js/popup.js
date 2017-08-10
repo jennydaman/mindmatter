@@ -1,5 +1,11 @@
 chrome.storage.sync.get("blacklist_array", function (items) {
-    document.getElementById("dirty-blacklist").innerHTML = "<b>Blacklisted Sites:</b> <code>[" + items.blacklist_array.toString() + "]</code>";
+
+    if (!items.blacklist_array[0]) 
+        items.blacklist_array[0] = "none";
+    let str = '['.concat(items.blacklist_array[0]);
+    for (let i = 1; i < items.blacklist_array.length; i++)
+        str += ", " + items.blacklist_array[i];
+    document.getElementById("dirty-blacklist").innerHTML = str + ']';
 });
 
 document.querySelector('#go-to-options').addEventListener("click", function () {

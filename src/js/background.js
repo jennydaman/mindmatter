@@ -55,6 +55,8 @@ chrome.storage.onChanged.addListener(function (changes, areaName) {
 chrome.runtime.onInstalled.addListener(function () {
 
 	chrome.storage.sync.set({ "blacklist_array": ["youtube.com", "facebook.com", "reddit.com", "buzzfeed.com"] });
+    chrome.storage.local.set({ pause: true });
+
 
 	chrome.runtime.openOptionsPage(function () {
 		alert("Thanks for installing Mind Matter! Please check out this options page."

@@ -23,15 +23,7 @@ http://jqueryui.com/themeroller/
 
 # Future features
 
-prompt user with option to download starter questions and add URLs to blacklist on install.
-
-Score
-
 Avoid repetition 
-
-predownload question sets option for offline use 
-
-allow user to disable the functionality - toggle in popup and options 
 
 # Notes
 force evaluation with [myVar]
