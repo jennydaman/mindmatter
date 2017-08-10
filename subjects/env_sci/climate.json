@@ -1,5 +1,6 @@
 {
-    "question": "Which of the following is not a consequence of climate change?",
+    "question": "Which of the following is <strong>not</strong> a consequence of climate change?",
+    "type": "choice",
     "image": {
         "sourceURL": "meltpondshansen.jpg",
         "author": "NASA - Vital Signs of the Planet",
@@ -8,8 +9,9 @@
     "choices": [
         {
             "correct": true,
-            "option": "Oil spills",
-            "explain": "This was a trick question :) Good job reading carefully. Oil spills causes climate change, not the other way around."
+            "option": "Deforestation in the Amazon",
+            "explain": "About 150 acres of the Amazon rainforest are lost per minute, not because of climate change, but actually it's just burned down by humans.",
+            "readMore": "https://en.wikipedia.org/wiki/Deforestation_of_the_Amazon_rainforest"
         },
         {
             "option": "Ocean acidification",
@@ -25,6 +27,11 @@
             "option": "Snowstorms",
             "explain": "Reduced Arctic sea ice causes atmospheric circulation patterns favorable for unpredictable weather.",
             "readMore": "https://www.ncdc.noaa.gov/news/climate-change-and-extreme-snow-us"
-        }
+        },
+        {
+            "option": "Rising cost of health care",
+            "explain": "Climate change generates a multi-billion dollar burden on our health care sector.",
+            "readMore": "https://www.nrdc.org/sites/default/files/accountingcosts.pdf"
+        },
     ]
 }

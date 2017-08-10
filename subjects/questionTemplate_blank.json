@@ -1,0 +1,13 @@
+{
+    "question": "This is an AMAZING fill-in-the-blank question in JSON?",
+    "moreInfo": "This is a longer explaination to the question.",
+    "type": "blank",
+    "image": {
+        "sourceURL": "http://question.url/foo.jpg",
+        "author": "A great artist",
+        "link": "http://artistprofile.com/wearegoodpeoplebecausewecite"
+    },
+    "hint": "your first choice was wrong. This message might be helpful.",
+    "hintURL": "a resource to help you out!",
+    "answer": "The response will have the whitespace trimmed, is not case-sensitive, and must contain this string to be correct."
+}

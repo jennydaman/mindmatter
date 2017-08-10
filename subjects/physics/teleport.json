@@ -1,5 +1,6 @@
 {
     "question": "Which have these scientific feats have been accomplished?",
+    "type": "choice",
     "image": {
         "sourceURL": "cyber.jpg"
     },

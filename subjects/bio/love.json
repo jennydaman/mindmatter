@@ -1,5 +1,6 @@
 {
     "question": "Love comes from...",
+    "type": "choice",
     "image": {
         "sourceURL": "heart-npots.png",
         "author": "FabiLuv on deviantart",

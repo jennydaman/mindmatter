@@ -1,6 +1,7 @@
 {
-    "question": "This is an AMAZING question in JSON?",
+    "question": "This is an AMAZING multiple-choice question in JSON?",
     "moreInfo": "This is a longer explaination to the question.",
+    "type": "choice",
     "image": {
         "sourceURL": "http://question.url/foo.jpg",
         "author": "A great artist",
