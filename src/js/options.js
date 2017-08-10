@@ -97,8 +97,8 @@ function checkBLInput() {
         if (!validChars.includes(smallSite.charAt(i))) {
 
             //easter eggs, nothing here kiddo
-            if (smallSite == "kill myself")
-                buttonWarning("suicide hotline (24h): 1-800-273-8255");
+            if (smallSite == "free speech")
+                buttonWarning("The Internet is not your safe space!");
             else if (smallSite == "jennings zhang")
                 buttonWarning("bm &#x1f622;"); //sad emoji
             else if (smallSite.includes("pepe"))
