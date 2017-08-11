@@ -3,6 +3,8 @@
 import os
 import json
 import sys
+from calendar import timegm
+from time import gmtime
 
 baseurl = "https://jennydaman.github.io/mindmatter"
 
@@ -14,7 +16,8 @@ if len(sys.argv) > 1:
 Dictionaries have a subject name and an array of questions."""
 subjectStructure = {
     'subjects': [{'subjectStorageKey': subjectName, 'subjectName': subjectName, "questions": []} for subjectName in next(os.walk(subjectsDir))[1]],
-    'totalQuestions': 0
+    'totalQuestions': 0,
+    'updateTime': timegm(gmtime())
 }
 
 for subjectDict in subjectStructure['subjects']:
