@@ -38,4 +38,10 @@ for subjectDict in subjectStructure['subjects']:
         subjectDict['questions'].append({"qpath": baseurl + "/subjects" + qdir, "timeSE": os.path.getmtime(subjectsDir + qdir)})
         subjectStructure['totalQuestions'] += 1
 
+
+for subject in subjectStructure["subjects"]:
+    subject["enabled"] = False
+    for question in subject["questions"]:
+        question["chance"] = subjectStructure['totalQuestions']
+
 print(json.dumps(subjectStructure, sort_keys=True, indent=4))
