@@ -7,6 +7,7 @@
   "author": "Jennings Zhang",
   "background": {
     "scripts": [
+      "src/js/database.js",
       "src/js/background.js"
     ],
     "persistent": false
@@ -27,10 +28,10 @@
     "128": "assets/brain-in-pot128.png"
   },
   "permissions": [
-    "declarativeContent",
     "storage",
     "https://jennydaman.github.io/mindmatter/*",
     "tabs",
-    "<all_urls>"
+    "<all_urls>",
+    "notifications"
   ]
 }

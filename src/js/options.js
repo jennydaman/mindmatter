@@ -22,7 +22,7 @@ const inflators = {
             }
         });
     },
-    "database.html": function () { }
+    "subjects.html": function () { }
 }
 
 var blacklist_array;
@@ -50,7 +50,7 @@ $(document).ready(function () {
         blacklist_array = items.blacklist_array;
         subjects = items.subjects;
 
-        $("#blacklist_ln").trigger("click"); //go to blacklist by default 
+        $("#subjects_ln").trigger("click"); //go to blacklist by default 
     });
 });
 
