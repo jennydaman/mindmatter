@@ -50,7 +50,7 @@ $(document).ready(function () {
         blacklist_array = items.blacklist_array;
         subjects = items.subjects;
 
-        $("#subjects_ln").trigger("click"); //go to blacklist by default 
+        $("#settings_ln").trigger("click"); //go to blacklist by default 
     });
 });
 

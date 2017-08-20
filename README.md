@@ -12,15 +12,15 @@ Mind Matter is a Chrome extension that can help you learn new things and stay pr
 
 ## Rationale
 
-Psychologist Daniel Kahneman describes two systems of thinking. According to [Wikipedia](https://en.wikipedia.org/wiki/Thinking_Fast_and_Slow), "'System 1' is fast, instinctive, and emotional; 'System 2' is slower, more deliberative, and more logical." Unfortunately, us citizens of the internet do too much mind-numbing System 1 thinking while we pass time consuming memes. The goal of Mind Matter is to deter the user from frequently browsing time-wsting sites, and instead to focus on what matters in life. The questions provided intend to stimulate System 2 thinking. A user should perform a little thinking or research in order to respond to the question.
+Psychologist Daniel Kahneman describes two systems of thinking. According to [Wikipedia](https://en.wikipedia.org/wiki/Thinking_Fast_and_Slow), "'System 1' is fast, instinctive, and emotional; 'System 2' is slower, more deliberative, and more logical." It is believed that system 2 thinking is the kind that builds synapses and reinforces learning. Unfortunately, us citizens of the internet do too much mind-numbing System 1 thinking while we pass time consuming memes. The goal of Mind Matter is to deter the user from frequently browsing time-wsting sites, and instead to focus on what matters in life. The questions provided intend to stimulate System 2 thinking. A user should perform a little thinking or research in order to respond to the question.
 
-*AIN'T NOBODY GOT TIME FOR THAT*
+*But I don't have time for your dumb trivia.*
 
-Well, odds are you don't have time for the site you want to visit...
+One objective of this 
 
-*IF I DON'T SEE A MEME IN THE NEXT SECOND I'M GOING TO GET AN CEREBROVASCULAR ACCIDENT*
+*But I need to access this site right now! This is work-related!*
 
-If you need to get to r/iamverysmart that bad, temporarily disable Mind Matter (but pls don't uninstall (jk go ahead not like I made money off this)).
+In this case, you may temporarily disable the extension's functionality in the popup or settings. 
 
 ## Installation of development version
 

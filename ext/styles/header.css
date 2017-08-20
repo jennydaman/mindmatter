@@ -3,7 +3,6 @@
 	left: 0;
 	top: 0;
 	width: 100%;
-	min-width: 765px;
 	height: 40px;
 	padding: 0;
 	background: #A9A9A9;
@@ -24,7 +23,7 @@
 	text-align: center;
 	margin: 0;
     padding-left: 17px;
-	font-size: 24px;
+	font-size: 20px;
 	line-height: 40px;
 	font-weight: bold;
 	color: #FFF;
