@@ -2,7 +2,7 @@
 var blacklistRegex = '/a^/';
 
 /**
- * 
+ * this is just a helper
  * @param {string[]} array 
  */
 function regenRegex(array) {

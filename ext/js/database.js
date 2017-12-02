@@ -12,10 +12,10 @@ function refreshDB() {
     xhr.onreadystatechange = function () {
         if (xhr.readyState == xhr.DONE) {
 
-            let db = JSON.parse(xhr.responseText);
+            let updated_database = JSON.parse(xhr.responseText);
 
             //do nothing if nothing's new
-            if (old.database.updateTime == db.updateTime)
+            if (old.database.updateTime == updated_database.updateTime)
                 return;
 
             chrome.storage.sync.get("database", function (old) {
@@ -27,7 +27,7 @@ function refreshDB() {
 
                         qmap.set(question.qpath, {
                             "timeSE": question.timeSE,
-                            "chance": question.chance == old.database.totalQuestions ? db.totalQuestions : question.chance
+                            "chance": question.chance == old.database.totalQuestions ? updated_database.totalQuestions : question.chance
                             //if question.chance was max, then update it with the db.totalQuestions value
                         });
                     });
@@ -35,32 +35,38 @@ function refreshDB() {
 
                 var newSubject = false;
 
-                db.subjects.forEach(function (subject) {
+                //loop through every subject
+                allSubjects_loop:
+                updated_database.subjects.forEach(function (updatedSubject) {
 
-                    subject["enabled"] = false; //new subjects default to disabled 
+                    updatedSubject["enabled"] = false; //new subjects default to disabled 
+
+                    // try to find the updated subject in the old database
+
                     for (let i = 0; i < old.database.subjects.length; i++) {
-
-                        //found old subject data 
-                        if (old.database.subjects[i].subjectStorageKey == subject.subjectStorageKey) {
+                        if (old.database.subjects[i].subjectStorageKey == updatedSubject.subjectStorageKey) {
 
                             //enable subject if it was enabled before
-                            subject["enabled"] = old.database.subjects[i].enabled;
+                            updatedSubject["enabled"] = old.database.subjects[i].enabled;
 
                             //update every question
-                            subject.forEach(function (question) {
+                            updatedSubject.forEach(function (question) {
 
                                 let oldData = qmap.get(question.qpath);
-
-                                //if question was updated, chance is refreshed
-                                question["chance"] = oldData.timeSE == question.timeSE ? oldData.chance : db.totalQuestions;
+                                //if question is new/updated, then refresh chance
+                                question["chance"] = oldData.timeSE == question.timeSE ? oldData.chance : updated_database.totalQuestions;
+                                break allSubjects_loop;
                             });
-                            return;
                         }
-                    } //at end of for loop, means this subject is new
+                    } //if loop finishes without breaking, that means this subject is new
                     newSubject = true;
-                    subject.forEach(function (question) {
-                        question["chance"] = db.totalQuestions;
+                    updatedSubject.forEach(function (question) {
+                        question["chance"] = updated_database.totalQuestions;
                     });
+                });
+                chrome.storage.sync.set({
+                    "database": updated_database,
+                    //setup: true
                 });
             });
         }
