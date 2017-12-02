@@ -9,7 +9,7 @@ const inflators = {
         });
 
         $('form#cooldown-radio input[name="coold"]').click(function () {
-            chrome.storage.sync.set({"cooldown_duration": [$(this).val()]});
+            chrome.storage.sync.set({ "cooldown_duration": [$(this).val()] });
         });
     },
     "blacklist.html": function () {
@@ -32,12 +32,12 @@ const inflators = {
             }
         });
     },
-    "subjects.html": function () { 
-        
+    "subjects.html": function () {
+
         chrome.storage.sync.get("database", function (items) {
             $('#subjects').append(JSON.stringify(items.database));
         });
-        
+
     }
 }
 
