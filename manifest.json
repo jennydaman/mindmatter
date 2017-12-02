@@ -8,7 +8,8 @@
   "background": {
     "scripts": [
       "ext/js/database.js",
-      "ext/js/background.js"
+      "ext/js/background.js",
+      "ext/js/checkURL.js"
     ],
     "persistent": false
   },
