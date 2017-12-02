@@ -77,3 +77,12 @@ chrome.runtime.onInstalled.addListener(function () {
 });
 
 chrome.tabs.onUpdated.addListener(checkURL);
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+
+	if (request.pause != undefined) {
+		if (request.pause)
+			chrome.tabs.onUpdated.addListener(checkURL);
+		else
+			chrome.tabs.onUpdated.removeListener(checkURL);
+	}
+});
