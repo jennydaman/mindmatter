@@ -1,3 +1,5 @@
+//This script is invoked when the user visits a blacklisted site.
+
 alert("You are on a blacklisted site.");
 
 

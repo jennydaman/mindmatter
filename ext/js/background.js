@@ -75,3 +75,5 @@ chrome.runtime.onInstalled.addListener(function () {
 		});
 	});
 });
+
+chrome.tabs.onUpdated.addListener(checkURL);
