@@ -15,6 +15,6 @@ document.querySelector('#go-to-options').addEventListener("click", function () {
         chrome.runtime.openOptionsPage();
     } else {
         // Reasonable fallback.
-        window.open(chrome.runtime.getURL('/src/dist/options.html'));
+        console.log("please help me...");
     }
 });
