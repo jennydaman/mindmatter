@@ -2,6 +2,16 @@
 //these functions are called when the corresponding key page is loaded.
 const inflators = {
 
+    "settings.html": function () {
+
+        chrome.storage.sync.get("cooldown_duration", function (items) {
+            $('form#cooldown-radio input[name="coold"][value="' + items.cooldown_duration + '"]').prop('checked', true);
+        });
+
+        $('form#cooldown-radio input[name="coold"]').click(function () {
+            chrome.storage.sync.set({"cooldown_duration": [$(this).val()]});
+        });
+    },
     "blacklist.html": function () {
 
         blacklist_array.forEach(function (site) {
