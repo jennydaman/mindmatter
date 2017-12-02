@@ -1,35 +1,3 @@
-/**
- * this is just a helper
- * @param {string[]} array 
- */
-function regenRegex(array) {
-
-	var blacklistRegex = '/a^/';
-
-	if (array.length == 0) {
-		blacklistRegex = '/a^/';
-		return blacklistRegex;
-	}
-
-	blacklistRegex = '/';
-
-	for (let index = 0; index < array.length - 1; index++) {
-
-		const specialChars = "$*+?.():=!,[]";
-		//insert backslashes in front of special regexp characters
-		for (let i = 0; i < array[index].length; i++) {
-			if (specialChars.includes(array[index].charAt(i)))
-				array[index] = array[index].substring(0, i) + '\\' + array[index].substring(i++);
-			//i++ prevents infinite loop
-		}
-
-		blacklistRegex += '(' + array[index] + ')|';
-	}
-
-	//add last one
-	return blacklistRegex + '(' + array[array.length - 1] + ')/';
-}
-
 chrome.runtime.onStartup.addListener(function () {
 
 	refreshDB();
