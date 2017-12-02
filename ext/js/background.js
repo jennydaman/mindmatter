@@ -36,8 +36,11 @@ function regenRegex(array) {
 
 //regenerate the regex on startup 
 chrome.runtime.onStartup.addListener(function () {
-	chrome.storage.sync.get("blacklist_array", function (items) {
-		regenRegex(items.blacklist_array);
+
+	refreshDB();
+	var refresher = setInterval(refreshDB, 6.048e8); //update every week
+	chrome.runtime.onSuspend.addListener(function () {
+		clearInterval(refresher);
 	});
 });
 
@@ -74,20 +77,6 @@ chrome.runtime.onInstalled.addListener(function () {
 				+ "\nSelect a few subjects that interest you. Then, head over to the blacklist "
 				+ "tab and add some of your own URLs.");
 		});
-	});
-});
-
-chrome.notifications.onButtonClicked.addListener(function (notID, buttonIndex) {
-
-	if (notID == "new-subject")
-		chrome.runtime.openOptionsPage();
-});
-
-chrome.runtime.onStartup.addListener(function () {
-	refreshDB();
-	var refresher = setInterval(refreshDB, 6.048e8); //update every week
-	chrome.runtime.onSuspend.addListener(function () {
-		clearInterval(refresher);
 	});
 });
 

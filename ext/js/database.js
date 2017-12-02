@@ -61,18 +61,7 @@ function refreshDB() {
                     subject.forEach(function (question) {
                         question["chance"] = db.totalQuestions;
                     });
-
                 });
-
-                if (newSubject)
-                    chrome.notifications.create("new-subject", {
-                        type: "basic",
-                        title: "New subject avaliable",
-                        message: "There's a new subject avaliable for Mind Matter. You may enable it in the options page.",
-                        iconUrl: chrome.runtime.getURL("/assets/brain-in-pot_alpha.png"),
-                        buttons: [{ title: "Go to options" }]
-                    });
-
             });
         }
 
