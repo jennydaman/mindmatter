@@ -1,10 +1,32 @@
-//This script is invoked when the user visits a blacklisted site.
+//This content script is injected into every page.
+chrome.storage.local.get(["cooldown_date", "pause"], function (items) {
 
-alert("You are on a blacklisted site.");
+    if (items.cooldown_date || items.pause)
+        return;
 
+    chrome.storage.sync.get("blacklist_array", function (items) {
 
-chrome.storage.sync.get("blacklist_duration", function(items) {
-
-    chrome.tabs.onUpdated.removeListener(checkURL);
-    setTimeout(checkURL, items.blacklist_duration);
+        for (let i = 0; i < items.blacklist_array.length; i++) { //TODO better way of checking
+            if (location.href.includes(items.blacklist_array[i])) {
+                showQuestion();
+                return;
+            }
+        }
+    });
 });
+
+function showQuestion() {
+    alert("i want to die");
+
+    chrome.storage.sync.get("cooldown_duration", function (items) {
+        chrome.storage.local.set({ "cooldown_date": [new Date()] }, function () {
+            setTimeout(coolDone, items.cooldown_duration);
+        });
+    });
+
+}
+
+function coolDone() {
+    chrome.storage.local.remove("cooldown_date");
+    alert("Cooldown over");
+}

@@ -26,7 +26,7 @@ chrome.runtime.onInstalled.addListener(function () {
 			"cooldown_duration": "300000"
 			//setup: true
 		});
-		chrome.storage.local.set({ pause: true });
+		chrome.storage.local.set({ pause: false });
 
 		var xhr = new XMLHttpRequest();
 		xhr.open("GET", "https://jennydaman.github.io/mindmatter/subjectsDB.json", true);
@@ -42,15 +42,4 @@ chrome.runtime.onInstalled.addListener(function () {
 				+ "tab and add some of your own URLs.");
 		});
 	});
-});
-
-chrome.tabs.onUpdated.addListener(checkURL);
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-
-	if (request.pause != undefined) {
-		if (request.pause)
-			chrome.tabs.onUpdated.addListener(checkURL);
-		else
-			chrome.tabs.onUpdated.removeListener(checkURL);
-	}
 });

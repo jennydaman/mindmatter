@@ -23,7 +23,7 @@
         <div class="onoffswitch">
             <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="pause-toggle">
             <label class="onoffswitch-label" for="pause-toggle">
-                <span class="onoffswitch-inner"></span>
+                <span class="onoffswitch-inner" id="offswitch-label"></span>
                 <span class="onoffswitch-switch"></span>
             </label>
         </div>
@@ -48,13 +48,17 @@
     <!--TODO make pretty - change to a button?-->
 
     <hr />
+    <p>
+        <b>Blacklisted Sites:</b>
+        <code id="dirty-blacklist"></code>
+    </p>
+    <p>
+        <b>Cooldown setting:</b>
+        <code id="dirty-coold"></code>
+    </p>
+    <p id="extra">
 
-    <b>Blacklisted Sites:</b>
-    <code><div id="dirty-blacklist"></div></code>
-
-    <b>Cooldown setting:</b>
-    <code><div id="dirty-coold"></div></code>
-
+    </p>
     <script type="text/javascript" src="../js/popup.js"></script>
 </body>
 

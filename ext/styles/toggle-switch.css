@@ -1,7 +1,7 @@
 
 /*https://proto.io/freebies/onoff/*/
 .onoffswitch {
-    position: relative; width: 105px;
+    position: relative; width: 118px;
     -webkit-user-select:none;
     padding-left: 5px;
     padding-top: 3px;
@@ -33,11 +33,14 @@
     background-color: #CCCCCC; color: #666666;
     text-align: right;
 }
+.onCooldown:after {
+    content: "cooldown";
+}
 .onoffswitch-switch {
     display: block; width: 30px; margin: 3px;
     background: #FFFFFF;
     position: absolute; top: 3px; bottom: 0;
-    right: 65px;
+    right: 78px;
     border: 2px solid #E3E3E3; border-radius: 30px;
     transition: all 0.1s ease-out 0s; 
 }
