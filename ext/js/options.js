@@ -32,7 +32,13 @@ const inflators = {
             }
         });
     },
-    "subjects.html": function () { }
+    "subjects.html": function () { 
+        
+        chrome.storage.sync.get("database", function (items) {
+            $('#subjects').append(JSON.stringify(items.database));
+        });
+        
+    }
 }
 
 var blacklist_array;
@@ -41,7 +47,7 @@ var subjects;
 
 $(document).ready(function () {
 
-    $('.header a').click(function (e) { //when link from header is clicked...
+    $('.header a').click(function (e) { //when any link from header is clicked...
 
         $('.header a').removeClass('active'); //deselect all links
         $(this).addClass('active'); //make selected link have darker background
