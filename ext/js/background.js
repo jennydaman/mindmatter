@@ -1,11 +1,10 @@
-
-var blacklistRegex = '/a^/';
-
 /**
  * this is just a helper
  * @param {string[]} array 
  */
 function regenRegex(array) {
+
+	var blacklistRegex = '/a^/';
 
 	if (array.length == 0) {
 		blacklistRegex = '/a^/';
@@ -16,7 +15,6 @@ function regenRegex(array) {
 
 	for (let index = 0; index < array.length - 1; index++) {
 
-
 		const specialChars = "$*+?.():=!,[]";
 		//insert backslashes in front of special regexp characters
 		for (let i = 0; i < array[index].length; i++) {
@@ -26,15 +24,12 @@ function regenRegex(array) {
 		}
 
 		blacklistRegex += '(' + array[index] + ')|';
-
-		return blacklistRegex;
 	}
 
 	//add last one
-	blacklistRegex += '(' + array[array.length - 1] + ')/';
+	return blacklistRegex + '(' + array[array.length - 1] + ')/';
 }
 
-//regenerate the regex on startup 
 chrome.runtime.onStartup.addListener(function () {
 
 	refreshDB();
@@ -47,7 +42,7 @@ chrome.runtime.onStartup.addListener(function () {
 //regenerate the regex when blacklist updates 
 chrome.storage.onChanged.addListener(function (changes, areaName) {
 	if (changes["blacklist_array"])
-		regenRegex(changes["blacklist_array"].newValue);
+		chrome.storage.sync.set({ "blacklistRegex": [regenRegex(changes["blacklist_array"].newValue)] });
 });
 
 //automatically set up some blacklisted sites.
