@@ -80,4 +80,15 @@ chrome.runtime.onInstalled.addListener(function () {
 	});
 });
 
-//chrome.tabs.onUpdated.addListener(function callback) https://developer.chrome.com/extensions/tabs#event-onUpdated
+// alerts the user if they are visiting a blacklisted site
+chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+
+	chrome.storage.sync.get("blacklist_array", function (items) {
+		
+		for (let i = 0; i < items.blacklist_array.length; i++) 
+			if (changeInfo.url.includes(items.blacklist_array[i])) 
+				alert("You are visiting the blacklisted site: " + changeInfo.url);
+	
+	});
+	
+}); 
