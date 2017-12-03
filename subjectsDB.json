@@ -4,74 +4,15 @@
             "enabled": false,
             "questions": [
                 {
-                    "chance": 6,
-                    "qpath": "https://jennydaman.github.io/mindmatter/subjects/bio/love.json",
-                    "timeSE": 1502385258.6274276
-                },
-                {
-                    "chance": 6,
-                    "qpath": "https://jennydaman.github.io/mindmatter/subjects/bio/myasthenia.json",
-                    "timeSE": 1502386541.6554773
-                }
-            ],
-            "subjectName": "Biology",
-            "subjectStorageKey": "bio"
-        },
-        {
-            "enabled": false,
-            "questions": [
-                {
-                    "chance": 6,
-                    "qpath": "https://jennydaman.github.io/mindmatter/subjects/env_sci/climate.json",
-                    "timeSE": 1502385565.8396366
-                }
-            ],
-            "subjectName": "Environmental Science",
-            "subjectStorageKey": "env_sci"
-        },
-        {
-            "enabled": false,
-            "questions": [
-                {
-                    "chance": 6,
+                    "chance": 1,
                     "qpath": "https://jennydaman.github.io/mindmatter/subjects/comsci/kali.json",
-                    "timeSE": 1502386524.8690543
+                    "timeSE": 1512259627.2431831
                 }
             ],
             "subjectName": "Computer Science and Information",
             "subjectStorageKey": "comsci"
-        },
-        {
-            "enabled": false,
-            "questions": [
-                {
-                    "chance": 6,
-                    "qpath": "https://jennydaman.github.io/mindmatter/subjects/physics/teleport.json",
-                    "timeSE": 1502385576.6494796
-                }
-            ],
-            "subjectName": "physics",
-            "subjectStorageKey": "physics"
-        },
-        {
-            "enabled": false,
-            "questions": [
-                {
-                    "chance": 6,
-                    "qpath": "https://jennydaman.github.io/mindmatter/subjects/care/badFood.json",
-                    "timeSE": 1502385506.3704994
-                }
-            ],
-            "subjectName": "Nutrition and Wellbeing",
-            "subjectStorageKey": "care"
-        },
-        {
-            "enabled": false,
-            "questions": [],
-            "subjectName": "Math(S)",
-            "subjectStorageKey": "math"
         }
     ],
-    "totalQuestions": 6,
-    "updateTime": 1502504170
+    "totalQuestions": 1,
+    "updateTime": 1512259684
 }

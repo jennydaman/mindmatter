@@ -1,6 +1,5 @@
 {
-    "question": "Name the most common Linux distribution used for penetration testing.",
+    "question": "Which Linux distribution is Ubuntu based on?",
     "type": "blank",
-    "hint": "It is based on Debian.",
-    "answer": "kali"
+    "answer": "Debian"
 }
