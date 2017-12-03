@@ -1,28 +1,20 @@
-# Mind Matter
+<img align="left" height="40em" src="/assets/brain-in-pot_alpha.png">
 
-### An educational chrome extension, not a waste of time. 
-![logo](assets/word-logo.png)
+# Mind Matter - an Educational Chrome Extension
 
-*Previously known as jennydaman/systole.* 
+*(and not a waste of time)*
+
+[![GitHub manifest version](https://img.shields.io/github/manifest-json/v/jennydaman/mindmatter.svg)](https://github.com/jennydaman/mindmatter/blob/master/manifest.json)
+
+[![license](https://img.shields.io/github/license/jennydaman/mindmatter.svg)](https://github.com/jennydaman/mindmatter/blob/master/LICENSE.txt)
+
+*Previously known as jennydaman/systole.*
 *Just kidding, nobody knew about it...*
 
-What started as a (unsuccessful) [Bitcamp 2017](https://devpost.com/software/systole) project is now a full (and still unsuccessful :persevere:) Chrome extension!
+Mind Matter blocks blacklisted sites, granting access only if a trivia question is answered correctly. It deters excessive use of distrating websites while helping users to reinforce their knowledge.
 
-Mind Matter is a Chrome extension that can help you learn new things and stay productive. When attempting to access a "distracting" site, such as Facebook or Reddit, *Mind Matter* will block the site, preventing access until a multiple choice question is answered correctly. 
 
-## Rationale
-
-Psychologist Daniel Kahneman describes two systems of thinking. According to [Wikipedia](https://en.wikipedia.org/wiki/Thinking_Fast_and_Slow), "'System 1' is fast, instinctive, and emotional; 'System 2' is slower, more deliberative, and more logical." It is believed that system 2 thinking is the kind that builds synapses and reinforces learning. Unfortunately, us citizens of the internet do too much mind-numbing System 1 thinking while we pass time consuming memes. The goal of Mind Matter is to deter the user from frequently browsing time-wsting sites, and instead to focus on what matters in life. The questions provided intend to stimulate System 2 thinking. A user should perform a little thinking or research in order to respond to the question.
-
-*But I don't have time for your dumb trivia.*
-
-One objective of this 
-
-*But I need to access this site right now! This is work-related!*
-
-In this case, you may temporarily disable the extension's functionality in the popup or settings. 
-
-## Installation of development version
+## Installation
 
 Although this project is not quite ready for publication, it is installable as an **unpacked extension**.
 
@@ -33,3 +25,18 @@ Although this project is not quite ready for publication, it is installable as a
 ![Google Chrome extensions page](docs/img/chrome-extensions-page.png)
 5. Brace for dissapointment. 
 ![Mind Matter Blacklist options page screenshot](docs/img/blacklist-screenshot.png)
+
+### Rationale
+
+The psychologist Daniel Kahneman describes two systems of thinking. According to [Wikipedia](https://en.wikipedia.org/wiki/Thinking_Fast_and_Slow), "'System 1' is fast, instinctive, and emotional; 'System 2' is slower, more deliberative, and more logical."
+
+Surfing the Internet tends to be unproductive. The objective of *Mind Matter* is to disrupt cognitive ease and force users to perform system 2 thinking.
+
+
+#### Acknowledgements
+
+Thanks to Sally Zhao (Blair class of 2019) for the "brain in pot" logo.
+
+Mr. Daniel Kim @dankimchi did a few things.
+
+*systole* was originally my [Bitcamp 2017](https://devpost.com/software/systole) idea. Without any experience with front-end web development, it was wholly unsuccessful. Misha let me submit *Mind Matter* to [BlairHacks_0](http://hacks.mbhs.edu/) [(Local Hack Day 2017)](https://localhackday.mlh.io/).
