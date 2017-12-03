@@ -2,8 +2,9 @@
   "manifest_version": 2,
   "name": "Mind Matter",
   "description": "An educational chrome extension, not a waste of time. Prompts you with a trivia question popup before visiting a distracting site.",
-  "version": "0.4",
-  "minimum_chrome_version": "42",
+  "version": "0.4.2",
+  "version_name": "0.4.2 alpha",
+  "minimum_chrome_version": "51",
   "author": "Jennings Zhang",
   "background": {
     "scripts": [
