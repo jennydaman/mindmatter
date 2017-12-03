@@ -33,6 +33,7 @@ chrome.runtime.onInstalled.addListener(function () {
 		xhr.send();
 
 		chrome.runtime.openOptionsPage(function () {
+
 			chrome.notifications.create({
 				type: "basic",
 				iconUrl: "/assets/brain-in-pot128.png",

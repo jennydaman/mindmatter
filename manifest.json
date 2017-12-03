@@ -37,8 +37,7 @@
   },
   "permissions": [
     "storage",
-    "https://jennydaman.github.io/mindmatter/*",
-    "<all_urls>",
-    "notifications"
-  ]
+    "<all_urls>"
+  ],
+  "optional_permissions": ["notifications"]
 }

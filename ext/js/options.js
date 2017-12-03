@@ -14,6 +14,22 @@ const inflators = {
                 "cooldown_english": $('label[for="' + $(this).attr('id') + '"').text().toLowerCase()
             });
         });
+
+        let notificationsCheckbox = $("#notification-checkbox");
+        chrome.permissions.contains({ permissions: ['notifications'] }, function (result) {
+            notificationsCheckbox.prop("checked", result);
+        });
+        notificationsCheckbox.change(function () {
+            if (this.checked) {
+                chrome.permissions.request({ permissions: ['notifications'] }, function (granted) {
+                    this.checked = granted;
+                });
+            }
+            else 
+                chrome.permissions.remove({permissions: ['notifications']});
+        });
+
+
     },
     "blacklist.html": function () {
 
