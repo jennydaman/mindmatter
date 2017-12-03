@@ -4,15 +4,37 @@
             "enabled": false,
             "questions": [
                 {
-                    "chance": 1,
+                    "chance": 4,
+                    "qpath": "https://jennydaman.github.io/mindmatter/subjects/history/magnacarta.json",
+                    "timeSE": 1512261186.0598333
+                },
+                {
+                    "chance": 4,
+                    "qpath": "https://jennydaman.github.io/mindmatter/subjects/history/berlin wall.json",
+                    "timeSE": 1512261186.0598333
+                }
+            ],
+            "subjectName": "history",
+            "subjectStorageKey": "history"
+        },
+        {
+            "enabled": false,
+            "questions": [
+                {
+                    "chance": 4,
                     "qpath": "https://jennydaman.github.io/mindmatter/subjects/comsci/kali.json",
-                    "timeSE": 1512259627.2431831
+                    "timeSE": 1512261186.0598333
+                },
+                {
+                    "chance": 4,
+                    "qpath": "https://jennydaman.github.io/mindmatter/subjects/comsci/algoanal.json",
+                    "timeSE": 1512261186.0598333
                 }
             ],
             "subjectName": "Computer Science and Information",
             "subjectStorageKey": "comsci"
         }
     ],
-    "totalQuestions": 1,
-    "updateTime": 1512259684
+    "totalQuestions": 4,
+    "updateTime": 1512263963
 }
