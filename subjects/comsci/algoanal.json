@@ -1,0 +1,4 @@
+{
+    "question": "What is the algorithmic complexity of Merge Sort?",
+    "answer": "O(nlogn)"
+}
