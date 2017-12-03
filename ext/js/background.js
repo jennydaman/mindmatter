@@ -7,12 +7,6 @@ chrome.runtime.onStartup.addListener(function () {
 	});
 });
 
-//regenerate the regex when blacklist updates 
-chrome.storage.onChanged.addListener(function (changes, areaName) {
-	if (changes["blacklist_array"])
-		chrome.storage.sync.set({ "blacklistRegex": [regenRegex(changes["blacklist_array"].newValue)] });
-});
-
 //automatically set up some blacklisted sites.
 chrome.runtime.onInstalled.addListener(function () {
 

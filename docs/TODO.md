@@ -1,5 +1,13 @@
 # Functionality
 
+
+## rename 
+
+- database --> questions_list
+- cooldown_date --> cooldown_lock
+
+
+
 Javascript injection: 
 https://developer.chrome.com/extensions/tabs
 
