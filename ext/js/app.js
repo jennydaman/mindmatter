@@ -17,7 +17,6 @@ chrome.storage.local.get(["cooldown_date", "pause"], function (items) {
 
 function showQuestion() {
 
-    alert("Mind Matter");
     //TODO: catch 404 errors by refreshing database
     chrome.storage.sync.get("database", function (items) {
 
@@ -64,4 +63,5 @@ function showQuestion() {
 function coolDone() {
     chrome.storage.local.remove("cooldown_date");
     alert("Cooldown over");
+    //TODO replace this with desktop notifications
 }
