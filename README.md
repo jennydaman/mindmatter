@@ -1,11 +1,8 @@
-<img align="left" height="40em" src="/assets/brain-in-pot_alpha.png">
-
-# Mind Matter - an Educational Chrome Extension
+<h1><img height="40em" style="padding-right: 5px;" src="/assets/brain-in-pot_alpha.png">Mind Matter - an Educational Chrome Extension</h1>
 
 *(and not a waste of time)*
 
 [![GitHub manifest version](https://img.shields.io/github/manifest-json/v/jennydaman/mindmatter.svg)](https://github.com/jennydaman/mindmatter/blob/master/manifest.json)
-
 [![license](https://img.shields.io/github/license/jennydaman/mindmatter.svg)](https://github.com/jennydaman/mindmatter/blob/master/LICENSE.txt)
 
 *Previously known as jennydaman/systole.*
