@@ -1,28 +1,20 @@
-chrome.runtime.onStartup.addListener(function () {
-
-	refreshDB();
-	var refresher = setInterval(refreshDB, 6.048e8); //update every week
-	chrome.runtime.onSuspend.addListener(function () {
-		clearInterval(refresher);
-	});
-});
-
-//automatically set up some blacklisted sites.
+//set up on install
 chrome.runtime.onInstalled.addListener(function () {
+
+	chrome.storage.local.clear();
+	chrome.storage.local.set({ pause: false });	
 
 	chrome.storage.sync.get("setup", function (items) {
 
 		if (items.setup)
-			return; //extension already initialized 
+			return; //extension already initialized
 
 		chrome.storage.sync.set({
 			"blacklist_array": ["youtube.com", "facebook.com", "reddit.com", "buzzfeed.com"],
 			"cooldown_duration": "300000",
 			"cooldown_english": "5 minutes"
-			//setup: true
+			//setup: true this will prevent initial set up from running.
 		});
-		chrome.storage.local.set({ pause: false });
-		chrome.storage.local.remove("cooldown_date");
 
 		var xhr = new XMLHttpRequest();
 		xhr.open("GET", "https://jennydaman.github.io/mindmatter/subjectsDB.json", true);
