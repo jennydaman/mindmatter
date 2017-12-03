@@ -31,7 +31,6 @@ function showQuestion() {
 
         let qpath = allQuestions[Math.random() * allQuestions.length | 0].qpath;
         var xhr = new XMLHttpRequest();
-        alert("bouta get " + qpath);
         xhr.open("GET", qpath, true);
         xhr.onreadystatechange = function () {
             if (xhr.readyState == xhr.DONE) {
@@ -39,12 +38,15 @@ function showQuestion() {
                 let user_response = "";
 
                 retrieved = JSON.parse(xhr.response);
+                retrieved.answer = retrieved.answer.toLowerCase();
 
-                while (!user_response.includes(retrieved.answer)) {
+                while (!user_response.toLowerCase().includes(retrieved.answer)) {
                     if (user_response != "")
                         alert("Wrong, please try again.");
                     user_response = prompt("MindMatter"
                         + "\n" + retrieved.question);
+                    if (user_response == null)
+                        user_response = "";
                 }
                 alert("Correct!");
             }
