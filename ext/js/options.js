@@ -9,7 +9,10 @@ const inflators = {
         });
 
         $('form#cooldown-radio input[name="coold"]').click(function () {
-            chrome.storage.sync.set({ "cooldown_duration": [$(this).val()] });
+            chrome.storage.sync.set({
+                "cooldown_duration": [$(this).val()],
+                "cooldown_english": $('label[for="' + $(this).attr('id') + '"').text().toLowerCase()
+            });
         });
     },
     "blacklist.html": function () {

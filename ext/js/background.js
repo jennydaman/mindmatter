@@ -17,10 +17,12 @@ chrome.runtime.onInstalled.addListener(function () {
 
 		chrome.storage.sync.set({
 			"blacklist_array": ["youtube.com", "facebook.com", "reddit.com", "buzzfeed.com"],
-			"cooldown_duration": "300000"
+			"cooldown_duration": "300000",
+			"cooldown_english": "5 minutes"
 			//setup: true
 		});
 		chrome.storage.local.set({ pause: false });
+		chrome.storage.local.remove("cooldown_date");
 
 		var xhr = new XMLHttpRequest();
 		xhr.open("GET", "https://jennydaman.github.io/mindmatter/subjectsDB.json", true);
@@ -31,9 +33,31 @@ chrome.runtime.onInstalled.addListener(function () {
 		xhr.send();
 
 		chrome.runtime.openOptionsPage(function () {
-			alert("Thanks for installing Mind Matter! Please check out this options page."
-				+ "\nSelect a few subjects that interest you. Then, head over to the blacklist "
-				+ "tab and add some of your own URLs.");
+			chrome.notifications.create({
+				type: "basic",
+				iconUrl: "/assets/brain-in-pot128.png",
+				title: "Mind Matter: First Install",
+				message: "Thanks for installing Mind Matter! Here are the settings. Be sure to review the blacklist."
+			});
 		});
 	});
+});
+
+//set the cooldown timer
+chrome.storage.onChanged.addListener(function (changes, namespace) {
+	if (changes.cooldown_date && changes.cooldown_date.newValue) {
+
+		chrome.storage.sync.get("cooldown_english", function (items) {
+			chrome.notifications.create({
+				type: "basic",
+				iconUrl: "/assets/brain-in-pot128.png",
+				title: "Mind Matter: Cooldown",
+				message: "You are correct! I'll leave you alone for " + items.cooldown_english + "."
+			});
+		});
+
+		chrome.storage.sync.get("cooldown_duration", function (items) {
+			setTimeout(coolDone, items.cooldown_duration);
+		});
+	}
 });

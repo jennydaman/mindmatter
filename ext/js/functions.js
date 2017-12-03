@@ -73,3 +73,18 @@ function refreshDB() {
         xhr.send();
     };
 }
+
+/**
+ * Should be called when the cooldown is finished.
+ * See background.js
+ */
+function coolDone() {
+    chrome.storage.local.remove("cooldown_date");
+    chrome.notifications.create({
+        type: "basic",
+        iconUrl: "/assets/brain-in-pot128.png",
+        title: "Mind Matter: Ready",
+        message: "This extension has come off cooldown. It will be activated by the next blacklisted site."
+    });
+    chrome.runtime.sendMessage({ cooldown: "done" });
+}

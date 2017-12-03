@@ -37,8 +37,7 @@ function showQuestion() {
                 let user_response = "";
 
                 retrieved = JSON.parse(xhr.response);
-                retrieved.answer = retrieved.answer.toLowerCase();
-
+                //TODO match user responses using regular expressions
                 while (!user_response.toLowerCase().includes(retrieved.answer)) {
                     if (user_response != "")
                         alert("Wrong, please try again.");
@@ -47,21 +46,14 @@ function showQuestion() {
                     if (user_response == null)
                         user_response = "";
                 }
-                alert("Correct!");
+
+                chrome.storage.local.set({ "cooldown_date": [new Date()] });
+                /*
+                 * background.js will listen for changes to storage. 
+                 * When cooldown_duration is changed, a timeout will be set to remove the lock.
+                 */
             }
         }
         xhr.send();
     });
-
-    chrome.storage.sync.get("cooldown_duration", function (items) {
-        chrome.storage.local.set({ "cooldown_date": [new Date()] }, function () {
-            setTimeout(coolDone, items.cooldown_duration);
-        });
-    });
-}
-
-function coolDone() {
-    chrome.storage.local.remove("cooldown_date");
-    alert("Cooldown over");
-    //TODO replace this with desktop notifications
 }

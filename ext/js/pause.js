@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     box.addEventListener('change', function () {
 
-        //if toggle while on cooldown, active is set. Remove cooldown.
+        //if toggle while on cooldown, active is set; Cooldown manually canceled.
         if (box.checked) {
             chrome.storage.local.remove("cooldown_date");
             document.getElementById("offswitch-label").className = "onoffswitch-inner"; //reset content
@@ -27,5 +27,11 @@ document.addEventListener('DOMContentLoaded', function () {
     chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         if (request.pause != undefined)
             box.checked = request.pause;
+        if (request.cooldown == "done") { //cooldown timer ran out automatically
+            document.getElementById("offswitch-label").className = "onoffswitch-inner";
+            chrome.storage.local.get("pause", function(items) {
+                box.checked = !items.pause;
+            });
+        }
     })
 });

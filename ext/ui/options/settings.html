@@ -2,10 +2,24 @@
 
 This is the settings page.
 
-<form id="cooldown-radio">
-    <input type="radio" name="coold" value="10000" checked>10 seconds<br>
-    <input type="radio" name="coold" value="300000" checked>5 minutes<br>
-    <input type="radio" name="coold" value="900000" checked>15 minutes<br>
-    <input type="radio" name="coold" value="3600000" checked>One hour<br>
-    <input type="radio" name="coold" value="86400000" checked>One day<br>
-</form>
+
+<fieldset>
+    <legend><h4 style="margin: 6px;">Cooldown timer</h4></legend>
+    <form id="cooldown-radio">
+        <input type="radio" name="coold" value="10000" id="cd-10s">
+        <label for="cd-10s">10 seconds</label>
+        <br>
+        <input type="radio" name="coold" value="300000" id="cd-5min">
+        <label for="cd-5min">5 minutes</label>
+        <br>
+        <input type="radio" name="coold" value="900000" id="cd-15min">
+        <label for="cd-15min">15 minutes</label>
+        <br>
+        <input type="radio" name="coold" value="3600000" id="cd-1hr">
+        <label for="cd-1hr">1 hour</label>
+        <br>
+        <input type="radio" name="coold" value="86400000" id="cd-iday">
+        <label for="cd-1day">One day</label>
+        <br>
+    </form>
+</fieldset>
