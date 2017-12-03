@@ -1,4 +1,4 @@
-chrome.storage.sync.get(["blacklist_array", "cooldown_duration"], function (items) {
+chrome.storage.sync.get(["blacklist_array", "cooldown_duration", "cooldown_english"], function (items) {
 
     if (!items.blacklist_array[0])
         items.blacklist_array[0] = "none";
@@ -6,14 +6,15 @@ chrome.storage.sync.get(["blacklist_array", "cooldown_duration"], function (item
     for (let i = 1; i < items.blacklist_array.length; i++)
         str += ", " + items.blacklist_array[i];
     document.getElementById("dirty-blacklist").innerText = str + ']';
-    document.getElementById("dirty-coold").innerText = items.cooldown_duration;
+    document.getElementById("dirty-coold").innerText = items.cooldown_duration
+        + "  (" + items.cooldown_english + ")";
 
 });
 
-chrome.storage.local.get(["cooldown_date", "pause"], function (items) {
-
-    document.getElementById("extra").innerText = "cooldown_date" + items.cooldown_date
-        + "\npause: " + items.pause;
+chrome.storage.local.get(["cooldown_date", "pause"], function (litems) {
+    document.getElementById("extra").innerHTML += "<br />" 
+        + "cooldown_date" + litems.cooldown_date
+        + "<br \>pause: " + litems.pause;
 });
 
 document.querySelector('#go-to-options').addEventListener("click", function () {
