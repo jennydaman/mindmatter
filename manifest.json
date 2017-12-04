@@ -33,6 +33,7 @@
   "icons": {
     "16": "assets/brain-in-pot16.png",
     "32": "assets/brain-in-pot32.png",
+    "64": "assets/brain-in-pot64.png",
     "128": "assets/brain-in-pot128.png"
   },
   "permissions": [

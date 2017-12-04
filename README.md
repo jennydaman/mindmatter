@@ -1,4 +1,4 @@
-<h1><img height="40em" style="padding-right: 5px;" src="/assets/brain-in-pot_alpha.png">Mind Matter - an Educational Chrome Extension</h1>
+<h1><img height="40em" style="padding-right: 5px;" src="/assets/brain-in-pot64.png">Mind Matter - an Educational Chrome Extension</h1>
 
 *(and not a waste of time)*
 
