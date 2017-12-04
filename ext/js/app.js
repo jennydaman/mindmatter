@@ -39,17 +39,16 @@ function showQuestion() {
 
                     if (!Array.isArray(retrieved.answer))
                         retrieved.answer = [retrieved.answer];
-                    retrieved.answer.forEach(possibleAnswer => {
-                        possibleAnswer = possibleAnswer.toLowerCase();
+                    retrieved.answer.forEach((possibleAnswer, index, allAnswers)=> {
+                        allAnswers[index] = possibleAnswer.toLowerCase();
                     });
 
                     function checkBlankAns(allAnswers, user_response = "") {
-
-                        user_response = user_response.toLowerCase();
-                        allAnswers.forEach(possibleAnswer => {
+                        user_response = user_response.toLowerCase().trim();
+                        for (let possibleAnswer of allAnswers) {
                             if (user_response == possibleAnswer)
                                 return true;
-                        });
+                        }
                         return false;
                     }
 
@@ -66,8 +65,8 @@ function showQuestion() {
                 }
                 else {
                     alert("MindMatter"
-                    + "\n" + retrieved.question
-                    + '\nRetrieved question is not "fill in the blank"');
+                        + "\n" + retrieved.question
+                        + '\nRetrieved question is not "fill in the blank"');
                 }
 
                 chrome.storage.local.set({ "cooldown_date": [new Date()] });
