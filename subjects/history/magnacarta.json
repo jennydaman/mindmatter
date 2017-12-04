@@ -1,4 +1,4 @@
 {
     "question": "Where was the Magna Carta signed?",
-    "answer": "England"
+    "answer": ["England", "Britain"]
 }
