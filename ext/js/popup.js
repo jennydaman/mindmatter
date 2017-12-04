@@ -11,9 +11,9 @@ chrome.storage.sync.get(['blacklist_array', 'cooldown_duration', 'cooldown_engli
 
 });
 
-chrome.storage.local.get(['cooldown_date', 'pause'], function (litems) {
+chrome.storage.local.get(['cooldown_lock', 'pause'], function (litems) {
     document.getElementById('extra').innerHTML += `${'<br />' 
-        + 'cooldown_date'}${  litems.cooldown_date
+        + 'cooldown_lock'}${  litems.cooldown_lock
     }<br />pause: ${  litems.pause}`;
 });
 

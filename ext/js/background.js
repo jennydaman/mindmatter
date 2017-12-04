@@ -38,7 +38,7 @@ chrome.runtime.onInstalled.addListener(function () {
 
 //set the cooldown timer
 chrome.storage.onChanged.addListener(function (changes) {
-    if (changes.cooldown_date && changes.cooldown_date.newValue) {
+    if (changes.cooldown_lock && changes.cooldown_lock.newValue) {
 
         chrome.storage.sync.get('cooldown_english', function (items) {
             chrome.notifications.create({
@@ -57,7 +57,7 @@ chrome.storage.onChanged.addListener(function (changes) {
 
 //called when cooldown is over.
 function coolDone() {
-    chrome.storage.local.remove('cooldown_date');
+    chrome.storage.local.remove('cooldown_lock');
     chrome.notifications.create({
         type: 'basic',
         iconUrl: '/assets/brain-in-pot128.png',

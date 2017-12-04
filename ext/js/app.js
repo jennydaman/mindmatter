@@ -1,7 +1,7 @@
 //This content script is injected into every page.
-chrome.storage.local.get(['cooldown_date', 'pause'], function (items) {
+chrome.storage.local.get(['cooldown_lock', 'pause'], function (items) {
 
-    if (items.cooldown_date || items.pause)
+    if (items.cooldown_lock || items.pause)
         return;
 
     chrome.storage.sync.get('blacklist_array', function (items) {
@@ -69,7 +69,7 @@ function showQuestion() {
                     }\nRetrieved question is not "fill in the blank"`);
                 }
 
-                chrome.storage.local.set({ cooldown_date: [new Date()] });
+                chrome.storage.local.set({ cooldown_lock: [new Date()] });
                 /*
                  * background.js will listen for changes to storage. 
                  * When cooldown_duration is changed, a timeout will be set to remove the lock.

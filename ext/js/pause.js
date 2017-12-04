@@ -3,8 +3,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var box = document.getElementById('pause-toggle');
 
     //load preexisting setings from memory
-    chrome.storage.local.get(['pause', 'cooldown_date'], function (items) {
-        if (items.cooldown_date) {
+    chrome.storage.local.get(['pause', 'cooldown_lock'], function (items) {
+        if (items.cooldown_lock) {
             box.checked = false;
             document.getElementById('offswitch-label').className += ' onCooldown'; //change content
         }
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         //if toggle while on cooldown, active is set; Cooldown manually canceled.
         if (box.checked) {
-            chrome.storage.local.remove('cooldown_date');
+            chrome.storage.local.remove('cooldown_lock');
             document.getElementById('offswitch-label').className = 'onoffswitch-inner'; //reset content
         }
 
