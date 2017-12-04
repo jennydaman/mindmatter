@@ -8,7 +8,6 @@
   "author": "Jennings Zhang",
   "background": {
     "scripts": [
-      "ext/js/functions.js",
       "ext/js/background.js"
     ],
     "persistent": false

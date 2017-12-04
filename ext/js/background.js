@@ -1,56 +1,68 @@
 //set up on install
 chrome.runtime.onInstalled.addListener(function () {
 
-	chrome.storage.local.clear();
-	chrome.storage.local.set({ pause: false });	
+    chrome.storage.local.clear();
+    chrome.storage.local.set({ pause: false });	
 
-	chrome.storage.sync.get("setup", function (items) {
+    chrome.storage.sync.get('setup', function (items) {
 
-		if (items.setup)
-			return; //extension already initialized
+        if (items.setup)
+            return; //extension already initialized
 
-		chrome.storage.sync.set({
-			"blacklist_array": ["youtube.com", "facebook.com", "reddit.com", "buzzfeed.com"],
-			"cooldown_duration": "300000",
-			"cooldown_english": "5 minutes"
-			//setup: true this will prevent initial set up from running.
-		});
+        chrome.storage.sync.set({
+            'blacklist_array': ['youtube.com', 'facebook.com', 'reddit.com', 'buzzfeed.com'],
+            'cooldown_duration': '300000',
+            'cooldown_english': '5 minutes'
+            //setup: true this will prevent initial set up from running.
+        });
 
-		var xhr = new XMLHttpRequest();
-		xhr.open("GET", "https://jennydaman.github.io/mindmatter/subjectsDB.json", true);
-		xhr.onreadystatechange = function () {
-			if (xhr.readyState == xhr.DONE)
-				chrome.storage.sync.set({ database: JSON.parse(xhr.responseText) });
-		}
-		xhr.send();
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'https://jennydaman.github.io/mindmatter/subjectsDB.json', true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == xhr.DONE)
+                chrome.storage.sync.set({ database: JSON.parse(xhr.responseText) });
+        };
+        xhr.send();
 
-		chrome.runtime.openOptionsPage(function () {
+        chrome.runtime.openOptionsPage(function () {
 
-			chrome.notifications.create({
-				type: "basic",
-				iconUrl: "/assets/brain-in-pot128.png",
-				title: "Mind Matter: First Install",
-				message: "Thanks for installing Mind Matter! Here are the settings. Be sure to review the blacklist."
-			});
-		});
-	});
+            chrome.notifications.create({
+                type: 'basic',
+                iconUrl: '/assets/brain-in-pot128.png',
+                title: 'Mind Matter: First Install',
+                message: 'Thanks for installing Mind Matter! Here are the settings. Be sure to review the blacklist.'
+            });
+        });
+    });
 });
 
 //set the cooldown timer
-chrome.storage.onChanged.addListener(function (changes, namespace) {
-	if (changes.cooldown_date && changes.cooldown_date.newValue) {
+chrome.storage.onChanged.addListener(function (changes) {
+    if (changes.cooldown_date && changes.cooldown_date.newValue) {
 
-		chrome.storage.sync.get("cooldown_english", function (items) {
-			chrome.notifications.create({
-				type: "basic",
-				iconUrl: "/assets/brain-in-pot128.png",
-				title: "Mind Matter: Cooldown",
-				message: "You are correct! I'll leave you alone for " + items.cooldown_english + "."
-			});
-		});
+        chrome.storage.sync.get('cooldown_english', function (items) {
+            chrome.notifications.create({
+                type: 'basic',
+                iconUrl: '/assets/brain-in-pot128.png',
+                title: 'Mind Matter: Cooldown',
+                message: 'You are correct! I\'ll leave you alone for ' + items.cooldown_english + '.'
+            });
+        });
 
-		chrome.storage.sync.get("cooldown_duration", function (items) {
-			setTimeout(coolDone, items.cooldown_duration);
-		});
-	}
+        chrome.storage.sync.get('cooldown_duration', function (items) {
+            setTimeout(coolDone, items.cooldown_duration);
+        });
+    }
 });
+
+//called when cooldown is over.
+function coolDone() {
+    chrome.storage.local.remove('cooldown_date');
+    chrome.notifications.create({
+        type: 'basic',
+        iconUrl: '/assets/brain-in-pot128.png',
+        title: 'Mind Matter: Ready',
+        message: 'This extension has come off cooldown. It will be activated by the next blacklisted site.'
+    });
+    chrome.runtime.sendMessage({ cooldown: 'done' });
+}

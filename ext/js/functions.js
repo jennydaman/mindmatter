@@ -36,9 +36,9 @@ function refreshDB() {
                 var newSubject = false;
 
                 //loop through every subject
+                //TODO unsyntactic break and immutable objects, this doesnt work and needs a complete rewrite
                 allSubjects_loop:
                 updated_database.subjects.forEach(function (updatedSubject) {
-
                     updatedSubject["enabled"] = false; //new subjects default to disabled 
 
                     // try to find the updated subject in the old database
@@ -72,19 +72,4 @@ function refreshDB() {
         }
         xhr.send();
     };
-}
-
-/**
- * Should be called when the cooldown is finished.
- * See background.js
- */
-function coolDone() {
-    chrome.storage.local.remove("cooldown_date");
-    chrome.notifications.create({
-        type: "basic",
-        iconUrl: "/assets/brain-in-pot128.png",
-        title: "Mind Matter: Ready",
-        message: "This extension has come off cooldown. It will be activated by the next blacklisted site."
-    });
-    chrome.runtime.sendMessage({ cooldown: "done" });
 }

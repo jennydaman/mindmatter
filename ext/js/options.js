@@ -1,23 +1,25 @@
+var blacklist_array;
+var subjects;
 
 //these functions are called when the corresponding key page is loaded.
 const inflators = {
 
-    "settings.html": function () {
+    'settings.html': function () {
 
-        chrome.storage.sync.get("cooldown_duration", function (items) {
+        chrome.storage.sync.get('cooldown_duration', function (items) {
             $('form#cooldown-radio input[name="coold"][value="' + items.cooldown_duration + '"]').prop('checked', true);
         });
 
         $('form#cooldown-radio input[name="coold"]').click(function () {
             chrome.storage.sync.set({
-                "cooldown_duration": [$(this).val()],
-                "cooldown_english": $('label[for="' + $(this).attr('id') + '"').text().toLowerCase()
+                'cooldown_duration': [$(this).val()],
+                'cooldown_english': $('label[for="' + $(this).attr('id') + '"').text().toLowerCase()
             });
         });
 
-        let notificationsCheckbox = $("#notification-checkbox");
+        let notificationsCheckbox = $('#notification-checkbox');
         chrome.permissions.contains({ permissions: ['notifications'] }, function (result) {
-            notificationsCheckbox.prop("checked", result);
+            notificationsCheckbox.prop('checked', result);
         });
         notificationsCheckbox.change(function () {
             if (this.checked) {
@@ -31,7 +33,7 @@ const inflators = {
 
 
     },
-    "blacklist.html": function () {
+    'blacklist.html': function () {
 
         blacklist_array.forEach(function (site) {
             addRowToBlacklist(site);
@@ -44,28 +46,24 @@ const inflators = {
         $('#bl_input').keyup(function (e) {
             if (e.which === 13) {
                 //Disable textbox to prevent multiple submit
-                $(this).attr("disabled", "disabled");
+                $(this).attr('disabled', 'disabled');
                 checkBLInput();
                 //Enable the textbox again if needed.
-                $(this).removeAttr("disabled");
+                $(this).removeAttr('disabled');
             }
         });
     },
-    "subjects.html": function () {
+    'subjects.html': function () {
 
-        chrome.storage.sync.get("database", function (items) {
+        chrome.storage.sync.get('database', function (items) {
             $('#subjects-block').append(JSON.stringify(items.database)
-            .replace(/{"enabled"/gi, '<br /><br />{"enabled"')
-            .replace(/{"chance"/gi, '<br />{"chance"')
-            .replace(/],/gi, '],<br />'));
+                .replace(/{"enabled"/gi, '<br /><br />{"enabled"')
+                .replace(/{"chance"/gi, '<br />{"chance"')
+                .replace(/],/gi, '],<br />'));
         });
 
     }
-}
-
-var blacklist_array;
-var subjects;
-
+};
 
 $(document).ready(function () {
 
@@ -84,11 +82,11 @@ $(document).ready(function () {
     });
 
     //first, load data from storage
-    chrome.storage.sync.get(["blacklist_array", "subjects"], function (items) {
+    chrome.storage.sync.get(['blacklist_array', 'subjects'], function (items) {
         blacklist_array = items.blacklist_array;
         subjects = items.subjects;
 
-        $("#settings_ln").trigger("click"); //go to blacklist by default 
+        $('#settings_ln').trigger('click'); //go to blacklist by default 
     });
 });
 
@@ -100,14 +98,13 @@ function addRowToBlacklist(site) {
 
     var row = $('<li>').append(
         $('<label>').text(site), $('<button>').attr({
-            class: "destroy",
+            class: 'destroy',
         })
-    )
+    );
 
     row.click(function (e) {
-
         blacklist_array.splice(blacklist_array.indexOf(site), 1);
-        chrome.storage.sync.set({ "blacklist_array": blacklist_array });
+        chrome.storage.sync.set({ 'blacklist_array': blacklist_array });
         row.remove();
     });
 
@@ -125,50 +122,50 @@ function checkBLInput() {
     let site = $('#bl_input').val().trim();
 
     if (site.length == 0) {
-        buttonWarning("Text field empty!");
+        buttonWarning('Text field empty!');
         return false;
     }
 
     if (blacklist_array.indexOf(site) != -1) {
-        buttonWarning("Already Registered!");
+        buttonWarning('Already Registered!');
         return false;
     }
 
     let smallSite = site.toLowerCase();
-    const validChars = "abcdefghijklmnopqrstuvwxyz0123456789-._~:/?#[]@!$&'()*+,;=`."
+    const validChars = 'abcdefghijklmnopqrstuvwxyz0123456789-._~:/?#[]@!$&\'()*+,;=`.';
 
     for (let i = 0; i < smallSite.length; i++) {
         //bad URL 
         if (!validChars.includes(smallSite.charAt(i))) {
 
             //easter eggs, nothing here kiddo
-            if (smallSite == "free speech")
-                buttonWarning("The Internet is not your safe space!");
-            else if (smallSite == "jennings zhang")
-                buttonWarning("bm &#x1f622;"); //sad emoji
-            else if (smallSite.includes("pepe"))
-                buttonWarning("REEEEEEE");
+            if (smallSite == 'free speech')
+                buttonWarning('The Internet is not your safe space!');
+            else if (smallSite == 'jennings zhang')
+                buttonWarning('bm &#x1f622;'); //sad emoji
+            else if (smallSite.includes('pepe'))
+                buttonWarning('REEEEEEE');
             else
-                buttonWarning("Invalid URL!");
+                buttonWarning('Invalid URL!');
             return false;
         }
     }
 
     blacklist_array.push(site);
-    chrome.storage.sync.set({ "blacklist_array": blacklist_array });
+    chrome.storage.sync.set({ 'blacklist_array': blacklist_array });
     addRowToBlacklist(site);
-    $('#bl_input').val(""); //clear input field
+    $('#bl_input').val(''); //clear input field
     return true;
 }
 
 //changes the text of the "Add to blacklist" button temporarily for 2 seconds.
 function buttonWarning(warning) {
 
-    let orig = $(".addBtn").text();
-    $(".addBtn").html(warning);
-    $(".addBtn").addClass("errMsg");
+    let orig = $('.addBtn').text();
+    $('.addBtn').html(warning);
+    $('.addBtn').addClass('errMsg');
     setTimeout(function () {
-        $(".addBtn").html(orig);
-        $(".addBtn").removeClass("errMsg");
+        $('.addBtn').html(orig);
+        $('.addBtn').removeClass('errMsg');
     }, 3000);
 }
