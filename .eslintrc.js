@@ -22,7 +22,13 @@ module.exports = {
             "warn",
             "always"
         ],
-        "no-inner-declarations": "off"
+        "no-inner-declarations": "off",
+        "prefer-template": "error",
+        "no-unused-vars": "warn",
+        "quote-props": [
+            "warn",
+            "as-needed"
+        ]
     },
     "globals": {
         "chrome": false

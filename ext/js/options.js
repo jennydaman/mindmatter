@@ -7,13 +7,13 @@ const inflators = {
     'settings.html': function () {
 
         chrome.storage.sync.get('cooldown_duration', function (items) {
-            $('form#cooldown-radio input[name="coold"][value="' + items.cooldown_duration + '"]').prop('checked', true);
+            $(`form#cooldown-radio input[name="coold"][value="${  items.cooldown_duration  }"]`).prop('checked', true);
         });
 
         $('form#cooldown-radio input[name="coold"]').click(function () {
             chrome.storage.sync.set({
-                'cooldown_duration': [$(this).val()],
-                'cooldown_english': $('label[for="' + $(this).attr('id') + '"').text().toLowerCase()
+                cooldown_duration: [$(this).val()],
+                cooldown_english: $(`label[for="${  $(this).attr('id')  }"`).text().toLowerCase()
             });
         });
 
@@ -104,7 +104,7 @@ function addRowToBlacklist(site) {
 
     row.click(function (e) {
         blacklist_array.splice(blacklist_array.indexOf(site), 1);
-        chrome.storage.sync.set({ 'blacklist_array': blacklist_array });
+        chrome.storage.sync.set({ blacklist_array: blacklist_array });
         row.remove();
     });
 
@@ -152,7 +152,7 @@ function checkBLInput() {
     }
 
     blacklist_array.push(site);
-    chrome.storage.sync.set({ 'blacklist_array': blacklist_array });
+    chrome.storage.sync.set({ blacklist_array: blacklist_array });
     addRowToBlacklist(site);
     $('#bl_input').val(''); //clear input field
     return true;

@@ -10,9 +10,9 @@ chrome.runtime.onInstalled.addListener(function () {
             return; //extension already initialized
 
         chrome.storage.sync.set({
-            'blacklist_array': ['youtube.com', 'facebook.com', 'reddit.com', 'buzzfeed.com'],
-            'cooldown_duration': '300000',
-            'cooldown_english': '5 minutes'
+            blacklist_array: ['youtube.com', 'facebook.com', 'reddit.com', 'buzzfeed.com'],
+            cooldown_duration: '300000',
+            cooldown_english: '5 minutes'
             //setup: true this will prevent initial set up from running.
         });
 
@@ -45,7 +45,7 @@ chrome.storage.onChanged.addListener(function (changes) {
                 type: 'basic',
                 iconUrl: '/assets/brain-in-pot128.png',
                 title: 'Mind Matter: Cooldown',
-                message: 'You are correct! I\'ll leave you alone for ' + items.cooldown_english + '.'
+                message: `You are correct! I'll leave you alone for ${  items.cooldown_english  }.`
             });
         });
 
