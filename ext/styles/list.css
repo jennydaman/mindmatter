@@ -1,9 +1,9 @@
 
 .listapp {
+	margin: auto;
 	max-width: 600px;
 	min-width: 400px;
 	background: #fff;
-	margin: 10px 0 40px 0;
 	position: relative;
 	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),
 	0 25px 50px 0 rgba(0, 0, 0, 0.1),
@@ -12,7 +12,8 @@
 
 .scrollingContainer {
 	overflow-y: scroll;
-    height: 200px;
+	min-height: 200px;
+	max-height: 360px;
 }
 
 .list {

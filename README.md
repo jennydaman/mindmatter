@@ -19,9 +19,9 @@ Although this project is not quite ready for publication, it is installable as a
 2. Go to [chrome://extensions](chrome://extensions).
 3. Enable "Developer mode"
 4. Click "Load unpacked extension..." and select the mindmatter folder.
-![Google Chrome extensions page](docs/img/chrome-extensions-page.png)
+![Google Chrome extensions page](docs/screenshots/ext-page.png)
 5. Brace for dissapointment. 
-![Mind Matter Blacklist options page screenshot](docs/img/blacklist-screenshot.png)
+![Mind Matter Blacklist options page screenshot](docs/screenshots/blacklist.png)
 
 ### Rationale
 
