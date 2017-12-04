@@ -33,19 +33,41 @@ function showQuestion() {
         xhr.open("GET", qpath, true);
         xhr.onreadystatechange = function () {
             if (xhr.readyState == xhr.DONE) {
-
-                let user_response = "";
-
                 let retrieved = JSON.parse(xhr.response);
-                retrieved.answer = retrieved.answer.toLowerCase();
-                //TODO match user responses using regular expressions
-                while (!user_response.toLowerCase().includes(retrieved.answer)) {
-                    if (user_response != "")
-                        alert("Wrong, please try again.");
-                    user_response = prompt("MindMatter"
-                        + "\n" + retrieved.question);
-                    if (user_response == null)
-                        user_response = "";
+
+                if (retrieved.type == "blank") {
+
+                    if (!Array.isArray(retrieved.answer))
+                        retrieved.answer = [retrieved.answer];
+                    retrieved.answer.forEach(possibleAnswer => {
+                        possibleAnswer = possibleAnswer.toLowerCase();
+                    });
+
+                    function checkBlankAns(allAnswers, user_response = "") {
+
+                        user_response = user_response.toLowerCase();
+                        allAnswers.forEach(possibleAnswer => {
+                            if (user_response == possibleAnswer)
+                                return true;
+                        });
+                        return false;
+                    }
+
+                    let user_response = "";
+
+                    while (!checkBlankAns(retrieved.answer, user_response)) {
+                        if (user_response != "")
+                            alert("Wrong, please try again.");
+                        user_response = prompt("MindMatter"
+                            + "\n" + retrieved.question);
+                        if (user_response == null)
+                            user_response = "";
+                    }
+                }
+                else {
+                    alert("MindMatter"
+                    + "\n" + retrieved.question
+                    + '\nRetrieved question is not "fill in the blank"');
                 }
 
                 chrome.storage.local.set({ "cooldown_date": [new Date()] });
