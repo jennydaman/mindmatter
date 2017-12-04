@@ -36,7 +36,8 @@ function showQuestion() {
 
                 let user_response = "";
 
-                retrieved = JSON.parse(xhr.response);
+                let retrieved = JSON.parse(xhr.response);
+                retrieved.answer = retrieved.answer.toLowerCase();
                 //TODO match user responses using regular expressions
                 while (!user_response.toLowerCase().includes(retrieved.answer)) {
                     if (user_response != "")
