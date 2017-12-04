@@ -18,11 +18,11 @@ chrome.storage.local.get(['cooldown_lock', 'pause'], function (items) {
 function showQuestion() {
 
     //TODO: catch 404 errors by refreshing database
-    chrome.storage.sync.get('database', function (items) {
+    chrome.storage.sync.get('question_index', function (items) {
 
         //add all questions to one big array
         let allQuestions = [];
-        items.database.subjects.forEach(subjectInfo => {
+        items.question_index.subjects.forEach(subjectInfo => {
             subjectInfo.questions.forEach(question => {
                 allQuestions.push(question);
             });

@@ -20,7 +20,7 @@ chrome.runtime.onInstalled.addListener(function () {
         xhr.open('GET', 'https://jennydaman.github.io/mindmatter/subjectsDB.json', true);
         xhr.onreadystatechange = function () {
             if (xhr.readyState == xhr.DONE)
-                chrome.storage.sync.set({ database: JSON.parse(xhr.responseText) });
+                chrome.storage.sync.set({ question_index: JSON.parse(xhr.responseText) });
         };
         xhr.send();
 

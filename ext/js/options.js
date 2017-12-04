@@ -55,8 +55,8 @@ const inflators = {
     },
     'subjects.html': function () {
 
-        chrome.storage.sync.get('database', function (items) {
-            $('#subjects-block').append(JSON.stringify(items.database)
+        chrome.storage.sync.get('question_index', function (items) {
+            $('#subjects-block').append(JSON.stringify(items.question_index)
                 .replace(/{"enabled"/gi, '<br /><br />{"enabled"')
                 .replace(/{"chance"/gi, '<br />{"chance"')
                 .replace(/],/gi, '],<br />'));
