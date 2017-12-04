@@ -11,3 +11,5 @@ When new questions are added, the `subjectsDB.json` file should be manually rege
 ```bash
 scripts/gensl.py > subjectsDB.json
 ```
+
+The questions and subjectsDB format was poorly thought out. They might change in the future.

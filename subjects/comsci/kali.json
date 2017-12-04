@@ -1,4 +1,5 @@
 {
     "question": "Which Linux distribution is Ubuntu based on?",
+    "type": "blank",    
     "answer": "Debian"
 }
