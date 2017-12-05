@@ -2,7 +2,7 @@
 chrome.runtime.onInstalled.addListener(function () {
 
     chrome.storage.local.clear();
-    chrome.storage.local.set({ pause: false });	
+    chrome.storage.local.set({ pause: false });
 
     chrome.storage.sync.get('setup', function (items) {
 
@@ -26,11 +26,21 @@ chrome.runtime.onInstalled.addListener(function () {
 
         chrome.runtime.openOptionsPage(function () {
 
-            chrome.notifications.create({
-                type: 'basic',
-                iconUrl: '/assets/brain-in-pot128.png',
-                title: 'Mind Matter: First Install',
-                message: 'Thanks for installing Mind Matter! Here are the settings. Be sure to review the blacklist.'
+            chrome.permissions.contains({
+                permissions: ['notifications']
+            }, function (result) {
+
+                let message = "Thanks for installing Mind Matter! Here are the settings. Be sure to review the blacklist.";
+                if (result) {
+                    chrome.notifications.create({
+                        type: 'basic',
+                        iconUrl: '/assets/brain-in-pot128.png',
+                        title: 'Mind Matter: First Install',
+                        message: message
+                    });
+                }
+                else
+                    alert(message);
             });
         });
     });
@@ -40,16 +50,19 @@ chrome.runtime.onInstalled.addListener(function () {
 chrome.storage.onChanged.addListener(function (changes) {
     if (changes.cooldown_lock && changes.cooldown_lock.newValue) {
 
-        chrome.storage.sync.get('cooldown_english', function (items) {
-            chrome.notifications.create({
-                type: 'basic',
-                iconUrl: '/assets/brain-in-pot128.png',
-                title: 'Mind Matter: Cooldown',
-                message: `You are correct! I'll leave you alone for ${  items.cooldown_english  }.`
-            });
-        });
+        chrome.storage.sync.get(['cooldown_english', 'cooldown_duration'], function (items) {
 
-        chrome.storage.sync.get('cooldown_duration', function (items) {
+            chrome.permissions.contains({ permissions: ['notifications'] }, function (result) {
+                if (result) {
+                    chrome.notifications.create({
+                        type: 'basic',
+                        iconUrl: '/assets/brain-in-pot128.png',
+                        title: 'Mind Matter: Cooldown',
+                        message: `You are correct! I'll leave you alone for ${items.cooldown_english}.`
+                    });
+                }
+            });
+
             setTimeout(coolDone, items.cooldown_duration);
         });
     }
