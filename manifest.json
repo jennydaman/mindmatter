@@ -15,7 +15,7 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["ext/lib/jquery-3.2.1.min.js", "ext/js/app.js"],
+      "js": ["ext/js/app.js"],
       "run_at": "document_start",
       "all_frames": false
     }

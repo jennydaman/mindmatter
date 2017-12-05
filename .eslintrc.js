@@ -23,7 +23,7 @@ module.exports = {
             "always"
         ],
         "no-inner-declarations": "off",
-        "prefer-template": "error",
+        "prefer-template": "warn",
         "no-unused-vars": "warn",
         "quote-props": [
             "warn",

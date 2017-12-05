@@ -13,7 +13,7 @@ chrome.storage.sync.get(['blacklist_array', 'cooldown_duration', 'cooldown_engli
 
 chrome.storage.local.get(['cooldown_lock', 'pause'], function (items) {
     document.getElementById('extra').innerHTML += `${'<br />' 
-        + 'cooldown_lock'}${  items.cooldown_lock
+        + 'cooldown_lock: '}${  items.cooldown_lock
     }<br />pause: ${  items.pause}`;
 });
 

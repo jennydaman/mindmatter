@@ -30,7 +30,7 @@ chrome.runtime.onInstalled.addListener(function () {
                 permissions: ['notifications']
             }, function (result) {
 
-                let message = "Thanks for installing Mind Matter! Here are the settings. Be sure to review the blacklist.";
+                let message = 'Thanks for installing Mind Matter! Here are the settings. Be sure to review the blacklist.';
                 if (result) {
                     chrome.notifications.create({
                         type: 'basic',
