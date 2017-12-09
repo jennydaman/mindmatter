@@ -70,7 +70,17 @@
                             }\nRetrieved question is not "fill in the blank"`);
                     }
 
-                    chrome.storage.local.set({ cooldown_lock: [new Date()] });
+                    let time = new Date();
+
+                    let pad0 = number => {
+                        return `${number < 10 ? '0' : ''}${number}`
+                    }
+                    chrome.storage.local.set({
+                        cooldown_lock: {
+                            value: time.valueOf(),
+                            english: `${pad0(time.getHours())}:${pad0(time.getMinutes())}:${pad0(time.getSeconds())}`
+                        }
+                    });
                     /*
                      * background.js will listen for changes to storage.
                      * When cooldown_duration is changed, a timeout will be set to remove the lock.

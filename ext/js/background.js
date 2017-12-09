@@ -17,7 +17,7 @@ chrome.runtime.onInstalled.addListener(function () {
         });
 
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'https://jennydaman.github.io/mindmatter/subjectsDB.json', true);
+        xhr.open('GET', 'https://jennydaman.github.io/mindmatter/subjects.json', true);
         xhr.onreadystatechange = function () {
             if (xhr.readyState == xhr.DONE)
                 chrome.storage.sync.set({ question_index: JSON.parse(xhr.responseText) });
