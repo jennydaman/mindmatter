@@ -1,18 +1,23 @@
 
 li button.destroy {
+	line-height: 0;
 	background: none;
 	border: none;
-
 	display: none;
 	position: absolute;
-	top: 6px;
+	top: 0px;
 	right: 10px;
+	box-sizing: border-box;
 	width: 36px;
 	height: 36px;
 	margin: auto 0;
-	font-size: 30px;
+	font-size: 16px;
 	color: #cc9a9a;
 	transition: color 0.2s ease-out;
+}
+
+li:hover button.destroy {
+	display: block;
 }
 
 li button.destroy:hover {
@@ -20,11 +25,7 @@ li button.destroy:hover {
 }
 
 li button.destroy:after {
-	content: '×';
-}
-
-li:hover button.destroy {
-	display: block;
+	content: '\1F5D9';
 }
 
 
