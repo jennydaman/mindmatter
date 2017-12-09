@@ -31,10 +31,6 @@
 	border-bottom: 1px solid #ededed;
 }
 
-.list li:last-child {
-	border-bottom: none;
-}
-
 /* Set all odd list items to a different color (zebra-stripes) */
 .list li:nth-child(odd) {
     background: #ededed;

@@ -54,7 +54,6 @@ const inflators = {
         });
     },
     'subjects.html': function () {
-
         chrome.storage.sync.get('question_index', function (items) {
             $('#subjects-block').append(JSON.stringify(items.question_index)
                 .replace(/{"enabled"/gi, '<br /><br />{"enabled"')
@@ -96,13 +95,10 @@ $(document).ready(function () {
  */
 function addRowToBlacklist(site) {
 
-    var row = $('<li>').append(
-        $('<label>').text(site), $('<button>').attr({
-            class: 'destroy',
-        })
-    );
+    let destroyButton = $('<button>').attr({class: 'destroy'});
+    let row = $('<li>').append($('<label>').text(site), destroyButton);
 
-    row.click(function (e) {
+    destroyButton.click(function (e) {
         blacklist_array.splice(blacklist_array.indexOf(site), 1);
         chrome.storage.sync.set({ blacklist_array: blacklist_array });
         row.remove();
