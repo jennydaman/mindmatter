@@ -1,3 +1,5 @@
+import { retrieveSQI } from "./sqi.js";
+
 //set up on install
 chrome.runtime.onInstalled.addListener(function () {
 
@@ -16,13 +18,7 @@ chrome.runtime.onInstalled.addListener(function () {
             //setup: true this will prevent initial set up from running.
         });
 
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'https://jennydaman.github.io/mindmatter/subjects.json', true);
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == xhr.DONE)
-                chrome.storage.sync.set({ question_index: JSON.parse(xhr.responseText) });
-        };
-        xhr.send();
+        retrieveSQI();
 
         chrome.runtime.openOptionsPage(function () {
 
