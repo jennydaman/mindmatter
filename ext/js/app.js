@@ -47,7 +47,7 @@
                         function checkBlankAns(allAnswers, user_response = '') {
                             user_response = user_response.toLowerCase().trim();
                             for (let possibleAnswer of allAnswers) {
-                                if (user_response == possibleAnswer)
+                                if (user_response.includes(possibleAnswer))
                                     return true;
                             }
                             return false;
