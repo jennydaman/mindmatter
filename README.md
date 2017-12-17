@@ -36,6 +36,8 @@ The psychologist Daniel Kahneman describes two systems of thinking. According to
 
 Surfing the Internet tends to be unproductive. The objective of *Mind Matter* is to disrupt cognitive ease and force users to perform system 2 thinking.
 
+*Although, the FCC chairman Ajit Pai's rejection of Net Neutrality might solve the issue of Internet distractions anyway...*
+
 #### Acknowledgements
 
 Thanks to Sally Zhao (Blair class of 2019) for the "brain in pot" logo.
@@ -44,4 +46,4 @@ Mr. Daniel Kim @dankimchi did a few things.
 
 *systole* was originally my [Bitcamp 2017](https://devpost.com/software/systole) idea. Without any experience with front-end web development, it was wholly unsuccessful. Misha let me submit *Mind Matter* to [BlairHacks_0](http://hacks.mbhs.edu/) [(Local Hack Day 2017)](https://localhackday.mlh.io/).
 
-Jennings is not a unicorn. Quite a bit of options page CSS was ~~stolen~~ borrowed from [preact :rocket:](https://github.com/developit/preact-cli) and [ToDoMVC :ballot_box_with_check:](https://www.npmjs.com/package/todomvc-app-css).
+Quite a bit of CSS was ~~stolen~~ borrowed from [preact :rocket:](https://github.com/developit/preact-cli) and [ToDoMVC :ballot_box_with_check:](https://www.npmjs.com/package/todomvc-app-css).
