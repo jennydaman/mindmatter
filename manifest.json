@@ -4,18 +4,24 @@
   "description": "Blocks distracting sites, granting access only if a trivia question is answered correctly.",
   "version": "0.4.2",
   "version_name": "0.4.2 alpha",
-  "minimum_chrome_version": "61",
+  "minimum_chrome_version": "51",
   "author": "Jennings Zhang",
   "background": {
     "scripts": [
+      "ext/js/sqi.js",
       "ext/js/background.js"
     ],
     "persistent": false
   },
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["ext/js/app.js"],
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "ext/js/sqi.js",
+        "ext/js/app.js"
+      ],
       "run_at": "document_start",
       "all_frames": false
     }
@@ -40,5 +46,7 @@
     "storage",
     "<all_urls>"
   ],
-  "optional_permissions": ["notifications"]
+  "optional_permissions": [
+    "notifications"
+  ]
 }

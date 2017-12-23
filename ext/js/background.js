@@ -1,5 +1,3 @@
-import { retrieveSQI } from "./sqi.js";
-
 //set up on install
 chrome.runtime.onInstalled.addListener(function () {
 
@@ -11,6 +9,7 @@ chrome.runtime.onInstalled.addListener(function () {
         if (items.setup)
             return; //extension already initialized
 
+        //TODO retrieve default blacklist from remote
         chrome.storage.sync.set({
             blacklist_array: ['youtube.com', 'facebook.com', 'reddit.com', 'buzzfeed.com'],
             cooldown_duration: '300000',
@@ -18,7 +17,7 @@ chrome.runtime.onInstalled.addListener(function () {
             //setup: true this will prevent initial set up from running.
         });
 
-        retrieveSQI();
+        retrieveQI();
 
         chrome.runtime.openOptionsPage(function () {
 
