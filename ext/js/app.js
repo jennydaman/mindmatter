@@ -1,7 +1,7 @@
 import { easyTime } from "./sqi";
 
 //This content_script is injected into every page.
-(function (window, document) {
+(function () {
 
     //check that setting is active
     chrome.storage.local.get(['cooldown_lock', 'pause'], function (items) {
@@ -63,4 +63,4 @@ import { easyTime } from "./sqi";
          * When cooldown_duration is changed, a timeout will be set to remove the lock.
          */
     }
-})(window, document);
+})();

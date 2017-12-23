@@ -23,14 +23,20 @@ Although this project is not quite ready for publication, it is installable as a
 3. Enable "Developer mode"
 4. Click "Load unpacked extension..." and select the mindmatter folder.
 ![Google Chrome extensions page](docs/screenshots/ext-page.png)
-5. Brace for dissapointment.
-![Mind Matter Blacklist options page screenshot](docs/screenshots/blacklist.png)
+
+## Screenshots
+
+![Blacklist options page](docs/screenshots/blacklist.png)
+![Question prompt](docs/screenshots/question.png)
+![Cooldown notification](docs/screenshots/cooldown.png)
 
 ### Rationale
 
 The psychologist Daniel Kahneman describes two systems of thinking. According to [Wikipedia](https://en.wikipedia.org/wiki/Thinking_Fast_and_Slow), "'System 1' is fast, instinctive, and emotional; 'System 2' is slower, more deliberative, and more logical."
 
 Surfing the Internet tends to be unproductive. The objective of *Mind Matter* is to disrupt cognitive ease and force users to perform system 2 thinking.
+
+*Although, the FCC chairman Ajit Pai's rejection of Net Neutrality might solve the issue of Internet distractions anyway...*
 
 #### Acknowledgements
 
@@ -40,4 +46,4 @@ Mr. Daniel Kim @dankimchi did a few things.
 
 *systole* was originally my [Bitcamp 2017](https://devpost.com/software/systole) idea. Without any experience with front-end web development, it was wholly unsuccessful. Misha let me submit *Mind Matter* to [BlairHacks_0](http://hacks.mbhs.edu/) [(Local Hack Day 2017)](https://localhackday.mlh.io/).
 
-Jennings is not a unicorn. Quite a bit of options page CSS was ~~stolen~~ borrowed from [preact :rocket:](https://github.com/developit/preact-cli) and [ToDoMVC :ballot_box_with_check:](https://www.npmjs.com/package/todomvc-app-css).
+Quite a bit of CSS was ~~stolen~~ borrowed from [preact :rocket:](https://github.com/developit/preact-cli) and [ToDoMVC :ballot_box_with_check:](https://www.npmjs.com/package/todomvc-app-css).
