@@ -22,7 +22,7 @@
                 else {
                     alert(`Mind Matter\n${
                         retrieved.question
-                    }\nRetrieved question is not "fill in the blank`);
+                        }\nRetrieved question is not "fill in the blank`);
                 }
 
                 setCooldown();
@@ -70,7 +70,7 @@
                 }
                 else if (questionHandler instanceof Function)
                     questionHandler(JSON.parse(xhr.responseText));
-                
+
             };
 
             xhr.send();
@@ -81,22 +81,19 @@
 
         if (!Array.isArray(retrieved.answer))
             retrieved.answer = [retrieved.answer];
-        retrieved.answer.forEach((possibleAnswer, index, allAnswers) => {
-            allAnswers[index] = possibleAnswer.toLowerCase();
-        });
 
-        const checkAns = (allAnswers, user_response = '') => {
-            user_response = user_response.toLowerCase().trim();
-            for (let possibleAnswer of allAnswers) {
-                if (user_response == possibleAnswer)
-                    return true;
-            }
-            return false;
+        const correctAnswers = retrieved.answer.map(possibleAnswer => possibleAnswer.toLowerCase());
+
+        const checkAns = (correctAnswers, user_response = '') => {
+            user_response = user_response.trim().toLowerCase();
+            return correctAnswers.find(possibleAnswer => {
+                return user_response.includes(possibleAnswer);
+            }) ? true : false;
         };
 
         let user_response = '';
 
-        while (!checkAns(retrieved.answer, user_response)) {
+        while (!checkAns(correctAnswers, user_response)) {
             if (user_response != '')
                 alert('Wrong, please try again.');
             user_response = prompt(`${'Mind Matter'
