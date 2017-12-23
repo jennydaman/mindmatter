@@ -1,3 +1,4 @@
+// show state of chrome.storage
 chrome.storage.sync.get(['blacklist_array', 'cooldown_duration', 'cooldown_english'], function (items) {
 
     if (!items.blacklist_array[0])

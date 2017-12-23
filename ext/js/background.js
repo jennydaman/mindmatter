@@ -72,5 +72,4 @@ function coolDone() {
         title: 'Mind Matter: Ready',
         message: 'This extension has come off cooldown. It will be activated by the next blacklisted site.'
     });
-    chrome.runtime.sendMessage({ cooldown: 'done' });
 }
