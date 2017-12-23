@@ -66,10 +66,11 @@
                         chrome.storage.local.set({ pause: true });
                     }
                     else //refresh question_index with the default URL before trying again
-                        retrieveQI(undefined, retrieveQuestion(true));
+                        retrieveQI(undefined, retrieveQuestion(questionHandler, true));
                 }
-                else
+                else if (questionHandler instanceof Function)
                     questionHandler(JSON.parse(xhr.responseText));
+                
             };
 
             xhr.send();
