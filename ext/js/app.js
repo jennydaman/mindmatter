@@ -1,5 +1,6 @@
 //This content script is injected into every page.
-(function (window, document) {
+(function () {
+
     chrome.storage.local.get(['cooldown_lock', 'pause'], function (items) {
 
         if (items.cooldown_lock || items.pause)
@@ -90,4 +91,4 @@
             xhr.send();
         });
     }
-})(window, document);
+})();
