@@ -24,7 +24,7 @@ function retrieveQI(url = 'https://jennydaman.github.io/mindmatter/subjects.json
     xhr.onload = function () {
         if (this.status != 200)
             connectionError(`Unexpected response code from server.\n${xhr.status}    ${xhr.statusText}`, this);
-        chrome.storage.sync.set({ question_index: JSON.parse(xhr.responseText) });
+        chrome.storage.sync.set({ question_index: JSON.parse(xhr.responseText) }, callback);
     };
     xhr.onerror = function () {
         connectionError('XMLHTTPRequest.onerror: I have no idea why.', this);

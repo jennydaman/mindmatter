@@ -65,8 +65,8 @@
                             + 'Failed two attempts to retrieve a question! Pausing myself and giving up...');
                         chrome.storage.local.set({ pause: true });
                     }
-                    else
-                        retrieveQI(true); //try again
+                    else //refresh question_index with the default URL before trying again
+                        retrieveQI(undefined, retrieveQuestion(true));
                 }
                 else
                     questionHandler(JSON.parse(xhr.responseText));
