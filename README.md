@@ -15,7 +15,11 @@ Mind Matter blocks blacklisted sites, granting access only if a trivia question 
 
 ## Installation
 
-Although this project is not quite ready for publication, it is installable as an **unpacked extension**.
+I hope to publish version 0.5 to the Chrome Web Store. Even though it's not ready yet, you're more than welcome to try it out!
+
+See the latest Github release here: https://github.com/jennydaman/mindmatter/releases/latest
+
+Or. install the development version (master branch) as an *unpacked extension*.
 
 1. `git clone https://github.com/jennydaman/mindmatter.git` or [Download ZIP](https://github.com/jennydaman/mindmatter/archive/master.zip) and extract it.
 2. Go to [chrome://extensions](chrome://extensions).
