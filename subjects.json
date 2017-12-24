@@ -4,32 +4,32 @@
             "enabled": false,
             "questions": [
                 {
-                    "chance": 24,
+                    "chance": 25,
                     "qpath": "https://jennydaman.github.io/mindmatter/subjects/history/janissary.json",
                     "timeSE": 1514084670.929258
                 },
                 {
-                    "chance": 24,
+                    "chance": 25,
                     "qpath": "https://jennydaman.github.io/mindmatter/subjects/history/magnacarta.json",
                     "timeSE": 1512361384.4650855
                 },
                 {
-                    "chance": 24,
+                    "chance": 25,
                     "qpath": "https://jennydaman.github.io/mindmatter/subjects/history/smallpox.json",
                     "timeSE": 1514078366.5753279
                 },
                 {
-                    "chance": 24,
+                    "chance": 25,
                     "qpath": "https://jennydaman.github.io/mindmatter/subjects/history/diogenes.json",
                     "timeSE": 1514083450.8654265
                 },
                 {
-                    "chance": 24,
+                    "chance": 25,
                     "qpath": "https://jennydaman.github.io/mindmatter/subjects/history/berlin-wall.json",
                     "timeSE": 1512349620.8244467
                 },
                 {
-                    "chance": 24,
+                    "chance": 25,
                     "qpath": "https://jennydaman.github.io/mindmatter/subjects/history/money_tang.json",
                     "timeSE": 1514082230.0790026
                 }
@@ -41,27 +41,27 @@
             "enabled": false,
             "questions": [
                 {
-                    "chance": 24,
+                    "chance": 25,
                     "qpath": "https://jennydaman.github.io/mindmatter/subjects/physics/higgs.json",
                     "timeSE": 1514085149.9125323
                 },
                 {
-                    "chance": 24,
+                    "chance": 25,
                     "qpath": "https://jennydaman.github.io/mindmatter/subjects/physics/phosphorene.json",
                     "timeSE": 1514077684.7854676
                 },
                 {
-                    "chance": 24,
+                    "chance": 25,
                     "qpath": "https://jennydaman.github.io/mindmatter/subjects/physics/angstrom.json",
                     "timeSE": 1514085383.787
                 },
                 {
-                    "chance": 24,
+                    "chance": 25,
                     "qpath": "https://jennydaman.github.io/mindmatter/subjects/physics/dft.json",
                     "timeSE": 1514085741.527397
                 },
                 {
-                    "chance": 24,
+                    "chance": 25,
                     "qpath": "https://jennydaman.github.io/mindmatter/subjects/physics/graphene.json",
                     "timeSE": 1514077578.805461
                 }
@@ -73,37 +73,42 @@
             "enabled": false,
             "questions": [
                 {
-                    "chance": 24,
+                    "chance": 25,
                     "qpath": "https://jennydaman.github.io/mindmatter/subjects/medicine/botulinum.json",
                     "timeSE": 1514077343.0620613
                 },
                 {
-                    "chance": 24,
+                    "chance": 25,
                     "qpath": "https://jennydaman.github.io/mindmatter/subjects/medicine/dystrophy.json",
                     "timeSE": 1514075476.0
                 },
                 {
-                    "chance": 24,
+                    "chance": 25,
                     "qpath": "https://jennydaman.github.io/mindmatter/subjects/medicine/lung_tissue.json",
                     "timeSE": 1514076093.585928
                 },
                 {
-                    "chance": 24,
+                    "chance": 25,
                     "qpath": "https://jennydaman.github.io/mindmatter/subjects/medicine/myasthenia.json",
                     "timeSE": 1512348026.759357
                 },
                 {
-                    "chance": 24,
+                    "chance": 25,
                     "qpath": "https://jennydaman.github.io/mindmatter/subjects/medicine/capillary.json",
                     "timeSE": 1514076403.949107
                 },
                 {
-                    "chance": 24,
+                    "chance": 25,
                     "qpath": "https://jennydaman.github.io/mindmatter/subjects/medicine/vitd.json",
                     "timeSE": 1514078129.4687345
                 },
                 {
-                    "chance": 24,
+                    "chance": 25,
+                    "qpath": "https://jennydaman.github.io/mindmatter/subjects/medicine/gout.json",
+                    "timeSE": 1514087710.9782403
+                },
+                {
+                    "chance": 25,
                     "qpath": "https://jennydaman.github.io/mindmatter/subjects/medicine/interosseous.json",
                     "timeSE": 1514076717.872266
                 }
@@ -121,32 +126,32 @@
             "enabled": false,
             "questions": [
                 {
-                    "chance": 24,
+                    "chance": 25,
                     "qpath": "https://jennydaman.github.io/mindmatter/subjects/comsci/dh.json",
                     "timeSE": 1514080976.1389942
                 },
                 {
-                    "chance": 24,
+                    "chance": 25,
                     "qpath": "https://jennydaman.github.io/mindmatter/subjects/comsci/kali.json",
                     "timeSE": 1512349614.9044504
                 },
                 {
-                    "chance": 24,
+                    "chance": 25,
                     "qpath": "https://jennydaman.github.io/mindmatter/subjects/comsci/linked_list.json",
                     "timeSE": 1514081995.1890314
                 },
                 {
-                    "chance": 24,
+                    "chance": 25,
                     "qpath": "https://jennydaman.github.io/mindmatter/subjects/comsci/stuxnet.json",
                     "timeSE": 1514078654.2452202
                 },
                 {
-                    "chance": 24,
+                    "chance": 25,
                     "qpath": "https://jennydaman.github.io/mindmatter/subjects/comsci/linux_kernel.json",
                     "timeSE": 1514081305.375
                 },
                 {
-                    "chance": 24,
+                    "chance": 25,
                     "qpath": "https://jennydaman.github.io/mindmatter/subjects/comsci/merge-sort.json",
                     "timeSE": 1512349608.7877874
                 }
@@ -155,6 +160,6 @@
             "subjectStorageKey": "comsci"
         }
     ],
-    "totalQuestions": 24,
-    "updateTime": 1514086105
+    "totalQuestions": 25,
+    "updateTime": 1514087965
 }
