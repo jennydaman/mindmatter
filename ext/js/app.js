@@ -116,7 +116,7 @@
      * @param {Number} wrongTries 
      */
     function updateScore(wrongTries) {
-        chrome.storage.sync.get('consistency', function(items) {
+        chrome.storage.sync.get('consistency', function (items) {
 
             if (wrongTries == 0) { //correct on first try
                 items.consistency.total++;
@@ -125,22 +125,14 @@
             else //wrong
                 items.consistency.total += wrongTries;
 
-            chrome.storage.sync.set({consistency: items.consistency});
+            chrome.storage.sync.set({ consistency: items.consistency });
         });
     }
 
     function setCooldown() {
 
-        const time = new Date();
-        const pad0 = number => {
-            return `${number < 10 ? '0' : ''}${number}`;
-        };
-
-        chrome.storage.local.set({
-            cooldown_lock: {
-                value: time.valueOf(),
-                english: `${pad0(time.getHours())}:${pad0(time.getMinutes())}:${pad0(time.getSeconds())}`
-            }
+        chrome.storage.sync.get('cooldown_info', function (items) {
+            chrome.storage.local.set({ cooldown_lock: new Date().getTime() + items.cooldown_info.duration });
         });
     }
 })();

@@ -13,7 +13,7 @@ const inflators = {
         $('form#cooldown-radio input[name="coold"]').click(function () {
             chrome.storage.sync.set({
                 cooldown_info: {
-                    duration: $(this).val(),
+                    duration: Number($(this).val()),
                     english: $(`label[for="${  $(this).attr('id')  }"`).text().toLowerCase()
                 }
             });

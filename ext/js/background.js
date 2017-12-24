@@ -47,25 +47,31 @@ chrome.runtime.onInstalled.addListener(function () {
     });
 });
 
+var cooldown_timeout;
+
 //set the cooldown timer
 chrome.storage.onChanged.addListener(function (changes) {
-    if (changes.cooldown_lock && changes.cooldown_lock.newValue) {
 
-        chrome.storage.sync.get('cooldown_info', function (items) {
+    if (changes.cooldown_lock) {
 
-            chrome.permissions.contains({ permissions: ['notifications'] }, function (result) {
-                if (result) {
-                    chrome.notifications.create({
-                        type: 'basic',
-                        iconUrl: '/assets/brain-in-pot128.png',
-                        title: 'Mind Matter: Cooldown',
-                        message: `You are correct! I'll leave you alone for ${items.cooldown_info.english}.`
-                    });
-                }
+        if (changes.cooldown_lock.newValue) { //cooldown_lock is set
+            chrome.storage.sync.get('cooldown_info', function (items) {
+
+                chrome.permissions.contains({ permissions: ['notifications'] }, function (result) {
+                    if (result) {
+                        chrome.notifications.create({
+                            type: 'basic',
+                            iconUrl: '/assets/brain-in-pot128.png',
+                            title: 'Mind Matter: Cooldown',
+                            message: `You are correct! I'll leave you alone for ${items.cooldown_info.english}.`
+                        });
+                    }
+                });
+                cooldown_timeout = setTimeout(coolDone, items.cooldown_info.duration);
             });
-
-            setTimeout(coolDone, items.cooldown_info.duration);
-        });
+        }
+        else //cooldown is off, stop countdown
+            clearTimeout(cooldown_timeout);
     }
 });
 
