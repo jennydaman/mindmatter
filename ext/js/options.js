@@ -30,8 +30,7 @@ const inflators = {
             else 
                 chrome.permissions.remove({permissions: ['notifications']});
         });
-
-
+        $('footer').css('display', 'initial');
     },
     'blacklist.html': function () {
 
@@ -52,6 +51,7 @@ const inflators = {
                 $(this).removeAttr('disabled');
             }
         });
+        $('footer').css('display', 'none');
     },
     'subjects.html': function () {
         chrome.storage.sync.get('question_index', function (items) {
@@ -60,7 +60,10 @@ const inflators = {
                 .replace(/{"chance"/gi, '<br />{"chance"')
                 .replace(/],/gi, '],<br />'));
         });
-
+        $('footer').css('display', 'none');
+    },
+    'information.html': function () {
+        $('footer').css('display', 'initial');
     }
 };
 
