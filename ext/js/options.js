@@ -88,6 +88,8 @@ $(document).ready(function () {
     chrome.storage.sync.get(['blacklist_array', 'subjects'], function (items) {
         blacklist_array = items.blacklist_array;
         subjects = items.subjects;
+
+        $('#settings_ln').trigger('click'); //open the settings page at start
     });
 });
 
