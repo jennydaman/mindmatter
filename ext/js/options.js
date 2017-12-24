@@ -75,7 +75,6 @@ $(document).ready(function () {
         $(this).addClass('active'); //make selected link have darker background
 
         $('#heading').html($(this).text()); //set heading
-
         let pageName = $(this).attr('href');
 
         //inject html into app div, then call appropriate inflator 
@@ -87,13 +86,11 @@ $(document).ready(function () {
     chrome.storage.sync.get(['blacklist_array', 'subjects'], function (items) {
         blacklist_array = items.blacklist_array;
         subjects = items.subjects;
-
-        $('#settings_ln').trigger('click'); //go to blacklist by default 
     });
 });
 
 /**
- * Updates the displayed blacklist (not the one in chrome.storage)
+ * Updates the displayed blacklist and overwrites blacklist_array in chrome.storage.sync
  * @param {string} site 
  */
 function addRowToBlacklist(site) {

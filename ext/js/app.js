@@ -20,9 +20,7 @@
                 if (retrieved.type == 'blank')
                     fillInTheBlank(retrieved);
                 else {
-                    alert(`Mind Matter\n${
-                        retrieved.question
-                        }\nRetrieved question is not "fill in the blank`);
+                    alert(`Mind Matter\n${retrieved.question}\nNO IMPLEMENTATION YET`);
                 }
 
                 setCooldown();
