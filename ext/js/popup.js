@@ -1,5 +1,5 @@
 // show state of chrome.storage
-chrome.storage.sync.get(['blacklist_array', 'cooldown_duration', 'cooldown_english'], function (items) {
+chrome.storage.sync.get(['blacklist_array', 'cooldown_info'], function (items) {
 
     if (!items.blacklist_array[0])
         items.blacklist_array[0] = 'none';
@@ -7,8 +7,8 @@ chrome.storage.sync.get(['blacklist_array', 'cooldown_duration', 'cooldown_engli
     for (let i = 1; i < items.blacklist_array.length; i++)
         str += `, ${  items.blacklist_array[i]}`;
     document.getElementById('dirty-blacklist').innerText = `${str  }]`;
-    document.getElementById('dirty-coold').innerText = `${items.cooldown_duration
-    }  (${  items.cooldown_english  })`;
+    document.getElementById('dirty-coold').innerText = `${items.cooldown_info.duration
+    }  (${  items.cooldown_info.english  })`;
 
 });
 

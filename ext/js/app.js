@@ -26,7 +26,7 @@
                 setCooldown();
                 /*
                  * background.js will listen for changes to storage.
-                 * When cooldown_duration is changed, a timeout will be set to remove the lock.
+                 * When cooldown_lock is changed, a timeout will be set to remove the lock.
                  */
             });
         });

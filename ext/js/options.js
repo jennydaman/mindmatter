@@ -6,14 +6,16 @@ const inflators = {
 
     'settings.html': function () {
 
-        chrome.storage.sync.get('cooldown_duration', function (items) {
-            $(`form#cooldown-radio input[name="coold"][value="${  items.cooldown_duration  }"]`).prop('checked', true);
+        chrome.storage.sync.get('cooldown_info', function (items) {
+            $(`form#cooldown-radio input[name="coold"][value="${  items.cooldown_info.duration  }"]`).prop('checked', true);
         });
 
         $('form#cooldown-radio input[name="coold"]').click(function () {
             chrome.storage.sync.set({
-                cooldown_duration: [$(this).val()],
-                cooldown_english: $(`label[for="${  $(this).attr('id')  }"`).text().toLowerCase()
+                cooldown_info: {
+                    duration: $(this).val(),
+                    english: $(`label[for="${  $(this).attr('id')  }"`).text().toLowerCase()
+                }
             });
         });
 

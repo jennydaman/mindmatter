@@ -12,8 +12,14 @@ chrome.runtime.onInstalled.addListener(function () {
         //TODO retrieve default blacklist from remote
         chrome.storage.sync.set({
             blacklist_array: ['youtube.com', 'facebook.com', 'reddit.com', 'buzzfeed.com'],
-            cooldown_duration: '300000',
-            cooldown_english: '5 minutes'
+            cooldown_info: {
+                duration: 300000,
+                english: '5 minutes'
+            },
+            consistency: {
+                total: 0,
+                score: 0
+            }
             //setup: true this will prevent initial set up from running.
         });
 
@@ -45,7 +51,7 @@ chrome.runtime.onInstalled.addListener(function () {
 chrome.storage.onChanged.addListener(function (changes) {
     if (changes.cooldown_lock && changes.cooldown_lock.newValue) {
 
-        chrome.storage.sync.get(['cooldown_english', 'cooldown_duration'], function (items) {
+        chrome.storage.sync.get('cooldown_info', function (items) {
 
             chrome.permissions.contains({ permissions: ['notifications'] }, function (result) {
                 if (result) {
@@ -53,12 +59,12 @@ chrome.storage.onChanged.addListener(function (changes) {
                         type: 'basic',
                         iconUrl: '/assets/brain-in-pot128.png',
                         title: 'Mind Matter: Cooldown',
-                        message: `You are correct! I'll leave you alone for ${items.cooldown_english}.`
+                        message: `You are correct! I'll leave you alone for ${items.cooldown_info.english}.`
                     });
                 }
             });
 
-            setTimeout(coolDone, items.cooldown_duration);
+            setTimeout(coolDone, items.cooldown_info.duration);
         });
     }
 });
