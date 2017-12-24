@@ -73,3 +73,14 @@ function coolDone() {
         message: 'This extension has come off cooldown. It will be activated by the next blacklisted site.'
     });
 }
+
+var refreshTimer;
+chrome.runtime.onStartup.addListener(function () {
+    retrieveQI(); //refresh question_index on startup
+    refreshTimer = setInterval(retrieveQI, 6.048e8); //refresh once a week
+});
+
+chrome.runtime.onSuspend.addListener(function () {
+    clearInterval(refreshTimer);
+    chrome.storage.local.remove('cooldown_lock');
+});
