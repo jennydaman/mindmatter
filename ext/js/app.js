@@ -52,8 +52,9 @@
 
             var xhr = new XMLHttpRequest();
             xhr.open('GET', qpath, true);
+            xhr.setRequestHeader('Cache-Control', 'no-cache');
             xhr.onerror = function () {
-                connectionError('XMLHTTPRequest error and I have no idea why.', this);
+                connectionError('XMLHttpRequest error and I have no idea why.', this);
             };
 
             xhr.onload = function () {
