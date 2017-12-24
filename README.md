@@ -6,10 +6,10 @@ Static server that provides global questions for Mind Matter.
 
 Questions are represented as JSON questions. Most attribute-value pairs have not been implemented yet through the client Chrome extension.
 
-When new questions are added, the `subjectsDB.json` file should be manually regenerated.
+When new questions are added, the `subjects.json` file should be manually regenerated.
 
 ```bash
-scripts/gensl.py > subjectsDB.json
+scripts/gensl.py > subjects.json
 ```
 
-The questions and subjectsDB format was poorly thought out. They might change in the future.
+The questions and subjects format was poorly thought out. They might change in the future.

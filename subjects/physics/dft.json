@@ -1,0 +1,5 @@
+{
+    "question": "When compared to the Hartree-Fock method, _______ __________ ______ calculations are less computationally demanding.",
+    "type": "blank",
+    "answer": ["DFT", "density functional"]
+}
