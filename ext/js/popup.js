@@ -1,5 +1,5 @@
 // show state of chrome.storage
-chrome.storage.sync.get(['blacklist_array', 'cooldown_info'], function (items) {
+chrome.storage.sync.get(['blacklist_array', 'cooldown_info', 'consistency'], function (items) {
 
     if (!items.blacklist_array[0])
         items.blacklist_array[0] = 'none';
@@ -10,6 +10,8 @@ chrome.storage.sync.get(['blacklist_array', 'cooldown_info'], function (items) {
     document.getElementById('dirty-coold').innerText = `${items.cooldown_info.duration
     }  (${  items.cooldown_info.english  })`;
 
+    let score = items.consistency.score / items.consistency.total * 10;
+    document.getElementById('consistency-score').innerText = `${score.toFixed(2)}${score > 9 ? ' :)' : score < 5 ? ' :(': ''}`;
 });
 
 chrome.storage.local.get(['cooldown_lock', 'pause'], function (items) {

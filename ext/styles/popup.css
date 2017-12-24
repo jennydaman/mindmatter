@@ -1,3 +1,11 @@
 #go-to-options {
     float: right;
 }
+
+section#uf-display {
+    width: 80%;
+}
+
+section#uf-display span {
+    float: right;
+}

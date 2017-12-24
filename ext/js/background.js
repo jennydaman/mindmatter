@@ -72,11 +72,15 @@ chrome.storage.onChanged.addListener(function (changes) {
 //called when cooldown is over.
 function coolDone() {
     chrome.storage.local.remove('cooldown_lock');
-    chrome.notifications.create({
-        type: 'basic',
-        iconUrl: '/assets/brain-in-pot128.png',
-        title: 'Mind Matter: Ready',
-        message: 'This extension has come off cooldown. It will be activated by the next blacklisted site.'
+    chrome.permissions.contains({
+        permissions: ['notifications']
+    }, function (result) {
+        chrome.notifications.create({
+            type: 'basic',
+            iconUrl: '/assets/brain-in-pot128.png',
+            title: 'Mind Matter: Ready',
+            message: 'This extension has come off cooldown. It will be activated by the next blacklisted site.'
+        });
     });
 }
 

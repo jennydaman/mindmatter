@@ -25,7 +25,7 @@
                     default:
                         alert(`Mind Matter\n${retrieved.question}\nNO IMPLEMENTATION YET`);
                 }
-
+                updateScore(wrongTries);
                 setCooldown();
                 /*
                  * background.js will listen for changes to storage.
@@ -124,7 +124,8 @@
             }
             else //wrong
                 items.consistency.total += wrongTries;
-            chrome.storage.sync.set({consistency: consistency});
+
+            chrome.storage.sync.set({consistency: items.consistency});
         });
     }
 
