@@ -4,21 +4,12 @@
     <link rel="stylesheet" href="/ext/styles/index.css">
     <link rel="stylesheet" href="/ext/styles/toggle-switch.css">
     <link rel="stylesheet" href="/ext/styles/popup.css">
-    <title>Mind Matters</title>
+    <title>Mind Matter</title>
 </head>
 
 <body>
-    <style type="text/css" media="all">
-        body {
-            min-width: 360px;
-            padding: 6px;
-        }
-    </style>
-
     <header role="banner">
-
         <img src="/assets/word-logo.png" alt="Mind Matter" height="40px" align="right" />
-
         <div class="onoffswitch">
             <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="pause-toggle">
             <label class="onoffswitch-label" for="pause-toggle">
@@ -26,35 +17,29 @@
                 <span class="onoffswitch-switch"></span>
             </label>
         </div>
-
     </header>
 
-    <h2>Popup</h2>
-
-    <p>Progress is slow...</p>
+    <h2>Mind Matter</h2>
 
     <section id="uf-display">
         <p title="This score reports how many questions answered right on the first time, over how many attempts you've made in total.">
             Consistency score (out of 10):
-            <strong><span id="consistency-score"></span></strong>
+            <strong>
+                <span id="consistency-score"></span>
+            </strong>
         </p>
-    
         <p>
             Cooldown timer:
-            <strong><span id="cooldown-timer"></span></strong>
+            <strong>
+                <span id="cooldown-timer"></span>
+            </strong>
         </p>
     </section>
 
-
     <button id="go-to-options">Go to options</button>
-
-    <!--TODO make pretty - change to a button?-->
-
     <hr />
 
     <h3>running-config</h3>
-
-    <em>(For debugging purposes)</em>
 
     <p>
         <b>Blacklisted Sites:</b>
@@ -62,12 +47,9 @@
     </p>
     <p>
         <b>Cooldown setting:</b>
-        <code id="dirty-coold"></code>
+        <span id="dirty-coold"></span>
     </p>
 
-    <p id="extra">
-        <b>storage.local</b>
-    </p>
     <script type="text/javascript" src="../js/toggle.js"></script>
     <script type="text/javascript" src="../js/popup.js"></script>
 </body>

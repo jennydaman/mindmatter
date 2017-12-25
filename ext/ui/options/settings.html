@@ -1,14 +1,16 @@
-<!--might be cool to make this into an uneven slider, like the one from VBox that sets virtual hard disk size.-->
+<link rel="stylesheet" href="/ext/styles/settings.css">
 
-This is the settings page.
-
-<p>
-    <input id="notification-checkbox" type="checkbox">
-    <label for="notification-checkbox" title="Get updates on the extension's cooldown and status.">Notifications</label>
-</p>
+<label id="checkbox-widget" class="p-rotate">
+    Get desktop notifications for when the cooldown finishes.
+    <input id="notification-checkbox" type="checkbox" />
+    <span class="checkmark"></span>
+</label>
 
 <fieldset>
-    <legend><h4 style="margin: 6px;">Cooldown timer</h4></legend>
+    <legend>
+        <h4 style="margin: 6px;">Cooldown timer</h4>
+    </legend>
+    <!--might be cool to make this into an uneven slider, like the one from VBox that sets virtual hard disk size.-->
     <form id="cooldown-radio">
         <input type="radio" name="coold" value="10000" id="cd-10s">
         <label for="cd-10s">10 seconds</label>

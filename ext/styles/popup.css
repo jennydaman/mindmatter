@@ -1,9 +1,14 @@
+body {
+    min-width: 340px;
+    padding: 6px;
+}
+
 #go-to-options {
     float: right;
 }
 
 section#uf-display {
-    width: 80%;
+    width: 85%;
 }
 
 section#uf-display span {

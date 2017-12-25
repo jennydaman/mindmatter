@@ -7,18 +7,10 @@ chrome.storage.sync.get(['blacklist_array', 'cooldown_info', 'consistency'], fun
     for (let i = 1; i < items.blacklist_array.length; i++)
         str += `, ${items.blacklist_array[i]}`;
     document.getElementById('dirty-blacklist').innerText = `${str}]`;
-    document.getElementById('dirty-coold').innerText = `${items.cooldown_info.duration
-    }  (${items.cooldown_info.english})`;
+    document.getElementById('dirty-coold').innerHTML = `${items.cooldown_info.english} <light>(${items.cooldown_info.duration})</light>`;
 
     let score = items.consistency.score / items.consistency.total * 10;
     document.getElementById('consistency-score').innerText = `${score.toFixed(2)}${score > 9 ? ' :)' : score < 5 ? ' :(' : ''}`;
-
-
-});
-
-chrome.storage.local.get(['cooldown_lock', 'pause'], function (items) {
-    document.getElementById('extra').innerHTML += `<br />pause: ${items.pause}`;
-
 });
 
 /*
