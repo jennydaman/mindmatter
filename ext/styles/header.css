@@ -12,12 +12,6 @@
 
 }
 
-.header img {
-	float: left;
-	padding: 0 15px;
-	height: 100%
-}
-
 .header h1 {
 	float: left;
 	text-align: center;
@@ -57,10 +51,3 @@
 .header nav a.active {
 	background: rgba(0,0,0,0.4);
 }
-
-.home {
-	padding: 40px 20px;
-	min-height: 100%;
-	width: 100%;
-}
-
