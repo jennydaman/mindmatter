@@ -2,10 +2,6 @@
     font-size: 1.2em;
 }
 
-fieldset#cooldown-field {
-    border: 2px lightgrey solid;
-}
-
 /* https://www.w3schools.com/howto/howto_css_custom_checkbox.asp */
 
 #checkbox-widget {
@@ -74,4 +70,29 @@ fieldset#cooldown-field {
         opacity: 1;
         transform: translateZ(0) rotate(45deg);
     }
+}
+
+fieldset#cooldown-field {
+    border: 2px lightgrey solid;
+}
+
+#cooldown-radio input[type="radio"] {
+    display: none;
+}
+
+#cooldown-radio label {
+    display: block;
+    width: 100%;
+    margin: 4px 0px;
+    padding: 4px 0px 4px 20px;
+}
+
+#cooldown-radio label:hover {
+    outline: 1px lightgrey solid;
+}
+
+#cooldown-radio input:checked+label {
+    background-color: #2196F3;
+    color: white;
+    transition: ease-out .4s;
 }
