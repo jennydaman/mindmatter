@@ -29,6 +29,7 @@ Or. install the development version (master branch) as an *unpacked extension*.
 
 ## Screenshots
 
+![Settings page](docs/screenshots/settings.png)
 ![Blacklist options page](docs/screenshots/blacklist.png)
 ![Question prompt](docs/screenshots/question.png)
 ![Cooldown notification](docs/screenshots/cooldown.png)
@@ -38,8 +39,6 @@ Or. install the development version (master branch) as an *unpacked extension*.
 The psychologist Daniel Kahneman describes two systems of thinking. According to [Wikipedia](https://en.wikipedia.org/wiki/Thinking_Fast_and_Slow), "'System 1' is fast, instinctive, and emotional; 'System 2' is slower, more deliberative, and more logical."
 
 Surfing the Internet tends to be unproductive. The objective of *Mind Matter* is to disrupt cognitive ease and force users to perform system 2 thinking.
-
-*Although, the FCC chairman Ajit Pai's rejection of Net Neutrality might solve the issue of Internet distractions anyway...*
 
 #### Acknowledgements
 
