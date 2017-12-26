@@ -87,7 +87,7 @@
         if (!Array.isArray(retrieved.answer))
             retrieved.answer = [retrieved.answer];
 
-        const correctAnswers = retrieved.answer.map(possibleAnswer => possibleAnswer.toLowerCase());
+        const correctAnswers = retrieved.answer.map(possibleAnswer => possibleAnswer instanceof String ? possibleAnswer.toLowerCase() : possibleAnswer);
 
         const checkAns = (correctAnswers, user_response = '') => {
             user_response = user_response.trim().toLowerCase();
