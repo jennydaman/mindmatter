@@ -24,7 +24,7 @@ Or. install the development version (master branch) as an *unpacked extension*.
 1. `git clone https://github.com/jennydaman/mindmatter.git` or [Download ZIP](https://github.com/jennydaman/mindmatter/archive/master.zip) and extract it.
 2. Go to [chrome://extensions](chrome://extensions).
 3. Enable "Developer mode"
-4. Click "Load unpacked extension..." and select the mindmatter folder.
+4. Click "Load unpacked extension..." and select the mindmatter/extension folder.
 ![Google Chrome extensions page](docs/screenshots/ext-page.png)
 
 ## Screenshots

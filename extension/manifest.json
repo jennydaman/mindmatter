@@ -8,8 +8,8 @@
   "author": "Jennings Zhang",
   "background": {
     "scripts": [
-      "ext/js/sqi.js",
-      "ext/js/background.js"
+      "js/sqi.js",
+      "js/background.js"
     ],
     "persistent": false
   },
@@ -19,8 +19,8 @@
         "<all_urls>"
       ],
       "js": [
-        "ext/js/sqi.js",
-        "ext/js/app.js"
+        "js/sqi.js",
+        "js/app.js"
       ],
       "run_at": "document_start",
       "all_frames": false
@@ -29,11 +29,11 @@
   "browser_action": {
     "default_icon": "assets/brain-in-pot16.png",
     "default_title": "Mind Matter",
-    "default_popup": "ext/ui/popup.html"
+    "default_popup": "ui/popup.html"
   },
-  "options_page": "ext/ui/options",
+  "options_page": "ui/options",
   "options_ui": {
-    "page": "ext/ui/options/index.html",
+    "page": "ui/options/index.html",
     "chrome_style": false
   },
   "icons": {
