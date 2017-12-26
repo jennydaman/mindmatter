@@ -12,4 +12,23 @@
 
 #vtoggle-container {
     margin-top: 5px;
+    opacity: 0;
+}
+
+#vtoggle-container:hover {
+    opacity: 1;
+}
+
+#vtoggle + label {
+    padding: 2px;
+    cursor: help;
+    display: inline-block;
+}
+
+#vtoggle + label:after {
+    content: "subjects";
+}
+
+#vtoggle:checked + label:after {
+    content: "debug (for developers only)";
 }

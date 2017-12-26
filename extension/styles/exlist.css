@@ -28,7 +28,20 @@ li button.destroy:hover {
 	color: #af0000;
 }
 
-.addBtn:hover, .errMsg {
+#addBtn {
+	position: absolute;
+	right: 0;
+    padding: 15px;
+	min-width: 180px;
+    color: #FFF;
+	background: #555;
+	font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#addBtn:hover, #addBtn.errMsg {
     background-color: #FF0000;
 }
 
@@ -52,17 +65,3 @@ li button.destroy:hover {
 	user-select: text;
 	-webkit-appearance: textfield;
 }
-
-.addBtn {
-	position: absolute;
-	right: 0;
-    padding: 15px;
-	width: 180px;
-    color: #FFF;
-	background: #555;
-	font-weight: bold;
-    text-align: center;
-    cursor: pointer;
-    transition: 0.3s;
-}
-

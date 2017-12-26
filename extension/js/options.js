@@ -1,75 +1,80 @@
 var blacklist_array;
 var subjects;
 
-//these functions are called when the corresponding key page is loaded.
-const inflators = {
+function settingsInflator() {
 
-    'settings.html': function () {
+    chrome.storage.sync.get('cooldown_info', function (items) {
+        $(`form#cooldown-radio input[name="coold"][value="${items.cooldown_info.duration}"]`).prop('checked', true);
+    });
 
-        chrome.storage.sync.get('cooldown_info', function (items) {
-            $(`form#cooldown-radio input[name="coold"][value="${  items.cooldown_info.duration  }"]`).prop('checked', true);
+    $('form#cooldown-radio input[name="coold"]').click(function () {
+        chrome.storage.sync.set({
+            cooldown_info: {
+                duration: Number($(this).val()),
+                english: $(`label[for="${$(this).attr('id')}"`).text().toLowerCase()
+            }
         });
+    });
 
-        $('form#cooldown-radio input[name="coold"]').click(function () {
-            chrome.storage.sync.set({
-                cooldown_info: {
-                    duration: Number($(this).val()),
-                    english: $(`label[for="${  $(this).attr('id')  }"`).text().toLowerCase()
-                }
+    let notificationsCheckbox = $('#notification-checkbox');
+    chrome.permissions.contains({ permissions: ['notifications'] }, function (result) {
+        notificationsCheckbox.prop('checked', result);
+    });
+    notificationsCheckbox.change(function () {
+        if (this.checked) {
+            chrome.permissions.request({ permissions: ['notifications'] }, function (granted) {
+                notificationsCheckbox.prop('checked', granted);
             });
-        });
+        }
+        else
+            chrome.permissions.remove({ permissions: ['notifications'] });
+    });
+    $('footer').css('display', 'initial');
+}
 
-        let notificationsCheckbox = $('#notification-checkbox');
-        chrome.permissions.contains({ permissions: ['notifications'] }, function (result) {
-            notificationsCheckbox.prop('checked', result);
-        });
-        notificationsCheckbox.change(function () {
-            if (this.checked) {
-                chrome.permissions.request({ permissions: ['notifications'] }, function (granted) {
-                    notificationsCheckbox.prop('checked', granted);
-                });
-            }
-            else
-                chrome.permissions.remove({permissions: ['notifications']});
-        });
-        $('footer').css('display', 'initial');
-    },
-    'blacklist.html': function () {
+function blacklistInflator() {
 
-        blacklist_array.forEach(function (site) {
-            addRowToBlacklist(site);
-        });
+    blacklist_array.forEach(function (site) {
+        addRowToBlacklist(site);
+    });
 
-        $('.addBtn').click(function () {
+    $('#addBtn').click(function () {
+        checkBLInput();
+    });
+    //'enter' key pressed in text field 
+    $('#bl_input').keyup(function (e) {
+        if (e.which === 13) {
+            //Disable textbox to prevent multiple submit
+            $(this).attr('disabled', 'disabled');
             checkBLInput();
-        });
-        //enter key pressed in text field 
-        $('#bl_input').keyup(function (e) {
-            if (e.which === 13) {
-                //Disable textbox to prevent multiple submit
-                $(this).attr('disabled', 'disabled');
-                checkBLInput();
-                //Enable the textbox again if needed.
-                $(this).removeAttr('disabled');
-            }
-        });
-        $('footer').css('display', 'none');
-    },
-    'subjects.html': function () {
-        chrome.storage.sync.get('question_index', function (items) {
-            $('#subjects-block').append(JSON.stringify(items.question_index)
-                .replace(/{"enabled"/gi, '<br /><br />{"enabled"')
-                .replace(/{"chance"/gi, '<br />{"chance"')
-                .replace(/],/gi, '],<br />'));
-        });
-        $('footer').css('display', 'none');
-    },
-    'information.html': function () {
-        $('footer').css('display', 'initial');
-    }
-};
+            //Enable the textbox again if needed.
+            $(this).removeAttr('disabled');
+        }
+    });
+    $('footer').css('display', 'none');
+}
+
+function subjectsInflator() {
+    chrome.storage.sync.get('question_index', function (items) {
+        $('#subjects-block').append(JSON.stringify(items.question_index)
+            .replace(/{"enabled"/gi, '<br /><br />{"enabled"')
+            .replace(/{"chance"/gi, '<br />{"chance"')
+            .replace(/],/gi, '],<br />'));
+    });
+    $('footer').css('display', 'none');
+}
 
 $(document).ready(function () {
+
+    //these functions are called when the corresponding key page is loaded.
+    const inflators = {
+        'settings.html': settingsInflator,
+        'blacklist.html': blacklistInflator,
+        'subjects.html': subjectsInflator,
+        'information.html': function () {
+            $('footer').css('display', 'initial');
+        }
+    };
 
     $('.header a').click(function (e) { //when any link from header is clicked...
 
@@ -94,14 +99,15 @@ $(document).ready(function () {
 });
 
 /**
- * Updates the displayed blacklist and overwrites blacklist_array in chrome.storage.sync
+ * Updates the displayed blacklist (and not blacklist_array in chrome.storage)
  * @param {string} site 
  */
 function addRowToBlacklist(site) {
 
-    let destroyButton = $('<button>').attr({class: 'destroy'});
+    let destroyButton = $('<button>').attr({ class: 'destroy' });
     let row = $('<li>').append($('<label>').text(site), destroyButton);
 
+    //remove from displayed blacklist and chrome.storage when destroyButton is clicked
     destroyButton.click(function (e) {
         blacklist_array.splice(blacklist_array.indexOf(site), 1);
         chrome.storage.sync.set({ blacklist_array: blacklist_array });
@@ -137,7 +143,6 @@ function checkBLInput() {
     for (let i = 0; i < smallSite.length; i++) {
         //bad URL 
         if (!validChars.includes(smallSite.charAt(i))) {
-
             //easter eggs, nothing here kiddo
             if (smallSite == 'free speech')
                 buttonWarning('The Internet is not your safe space!');
@@ -150,7 +155,6 @@ function checkBLInput() {
             return false;
         }
     }
-
     blacklist_array.push(site);
     chrome.storage.sync.set({ blacklist_array: blacklist_array });
     addRowToBlacklist(site);
@@ -158,14 +162,22 @@ function checkBLInput() {
     return true;
 }
 
+var orig;
+var errorButton_timeout;
 //changes the text of the "Add to blacklist" button temporarily for 2 seconds.
 function buttonWarning(warning) {
 
-    let orig = $('.addBtn').text();
-    $('.addBtn').html(warning);
-    $('.addBtn').addClass('errMsg');
-    setTimeout(function () {
-        $('.addBtn').html(orig);
-        $('.addBtn').removeClass('errMsg');
+    let button = $('#addBtn');
+    //if button is currently in error state, then clear that error first.
+    if (orig)
+        clearTimeout(errorButton_timeout);
+    else
+        orig = button.text();
+    button.html(warning);
+    button.addClass('errMsg');
+    errorButton = setTimeout(function () {
+        button.html(orig);
+        button.removeClass('errMsg');
+        orig = null; //remove lock
     }, 3000);
 }

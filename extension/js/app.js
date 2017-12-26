@@ -130,7 +130,6 @@
     }
 
     function setCooldown() {
-
         chrome.storage.sync.get('cooldown_info', function (items) {
             chrome.storage.local.set({ cooldown_lock: new Date().getTime() + items.cooldown_info.duration });
         });
