@@ -26,10 +26,10 @@ const inflators = {
         notificationsCheckbox.change(function () {
             if (this.checked) {
                 chrome.permissions.request({ permissions: ['notifications'] }, function (granted) {
-                    this.checked = granted;
+                    notificationsCheckbox.prop('checked', granted);
                 });
             }
-            else 
+            else
                 chrome.permissions.remove({permissions: ['notifications']});
         });
         $('footer').css('display', 'initial');
