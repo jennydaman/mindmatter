@@ -3,8 +3,13 @@
     overflow-x: scroll;
     background: #DDD;
     min-height: 360px;
+    max-height: 400px;
 }
 
 .inner-block {
     padding: 10px;
+}
+
+#vtoggle-container {
+    margin-top: 5px;
 }

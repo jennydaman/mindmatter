@@ -4,5 +4,6 @@ body {
 }
 
 div.bump {
-    padding: 55px 20px 20px 20px;
+    padding: 55px 20px 2px 20px;
+    max-height: 500px;
 }

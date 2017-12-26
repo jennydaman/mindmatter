@@ -11,7 +11,7 @@ li button.destroy {
 	width: 36px;
 	height: 36px;
 	margin: auto 0;
-	font-size: 16px;
+	font-size: inherit;
 	color: #cc9a9a;
 	transition: color 0.2s ease-out;
 }
@@ -43,7 +43,6 @@ li button.destroy:after {
 }
 
 .listapp input[type="url"] {
-
 	font-size: inherit;
     font-family: inherit;
     font-weight: inherit;
