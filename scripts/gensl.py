@@ -19,17 +19,14 @@ subjectStructure = {
 }
 
 for currentSubject in subjectStructure['subjects']:
-
-    titleFName = srootDir + "/" + currentSubject['subjectFolder'] + "/title"
-
-    if os.path.isfile(titleFName):
-        currentSubject['subjectName'] = open(titleFName, 'r').read(36).replace("\n", "")
-
     for questionFileName in next(os.walk(srootDir + "/" + currentSubject['subjectFolder']))[2]:
 
         qdir = srootDir + "/" + currentSubject['subjectFolder'] + "/" + questionFileName
         if not questionFileName.endswith(".json"):
-            print('W: [SKIP] ' + qdir, file=sys.stderr)
+            if questionFileName == 'title':
+                currentSubject['subjectName'] = open(qdir, 'r').read(36).replace("\n", "")
+            else:
+                print('W: [SKIP] ' + qdir, file=sys.stderr)
             continue
 
         questionData = json.load(open(qdir))
