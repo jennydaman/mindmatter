@@ -17,6 +17,6 @@
     ],
     "ans_range": [0, 10],
     "ans_exact": "use of this key is discouraged.",
-    "prop": ["math"],
-    "comment": "The 'prop' array lists properties of this specific question. 'math' means the question should be parsed with mathjax."
+    "prop": ["math", "markdown"],
+    "comment": "The 'prop' array lists properties of this specific question. 'math' means the question should be parsed with mathjax. 'markdown' means the question includes markdown formatting."
 }
