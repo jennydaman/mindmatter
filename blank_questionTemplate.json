@@ -11,6 +11,12 @@
     "hintURL": "a resource to help you out!",
     "answer": [
         "The response will have the whitespace trimmed, is not case-sensitive, and must contain this string to be correct.",
-        "This is another answer that is also correct."
-    ]
+        "This is another answer that is also correct.",
+        "Use 'ans_range' to specify a range of accepted numerical answers",
+        "Use 'ans_exact' to specify a correct answer that must be matched exactly, letter-by-letter. (answer is case-sensitive, use the '===' JS operator, whitespace is still trimmed)"
+    ],
+    "ans_range": [0, 10],
+    "ans_exact": "use of this key is discouraged.",
+    "prop": ["math"],
+    "comment": "The 'prop' array lists properties of this specific question. 'math' means the question should be parsed with mathjax."
 }
