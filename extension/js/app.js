@@ -19,11 +19,11 @@
 
                 let wrongTries = 0;
                 switch (retrieved.type) {
-                    case 'blank':
-                        wrongTries = fillInTheBlank(retrieved);
-                        break;
-                    default:
-                        alert(`Mind Matter\n${retrieved.question}\nNO IMPLEMENTATION YET`);
+                case 'blank':
+                    wrongTries = fillInTheBlank(retrieved);
+                    break;
+                default:
+                    alert(`Mind Matter\n${retrieved.question}\nNO IMPLEMENTATION YET`);
                 }
                 updateScore(wrongTries);
                 setCooldown();

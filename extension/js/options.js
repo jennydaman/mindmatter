@@ -108,7 +108,7 @@ function addRowToBlacklist(site) {
     let row = $('<li>').append($('<label>').text(site), destroyButton);
 
     //remove from displayed blacklist and chrome.storage when destroyButton is clicked
-    destroyButton.click(function (e) {
+    destroyButton.click(function () {
         blacklist_array.splice(blacklist_array.indexOf(site), 1);
         chrome.storage.sync.set({ blacklist_array: blacklist_array });
         row.remove();
@@ -175,7 +175,7 @@ function buttonWarning(warning) {
         orig = button.text();
     button.html(warning);
     button.addClass('errMsg');
-    errorButton = setTimeout(function () {
+    errorButton_timeout = setTimeout(function () {
         button.html(orig);
         button.removeClass('errMsg');
         orig = null; //remove lock

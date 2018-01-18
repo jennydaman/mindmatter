@@ -2,8 +2,8 @@
 
 /**
  * @param {string} errMsg
- * @param {XMLHTTPRequttp} xhr
- * @throws XMLHTTPRequttp
+ * @param {XMLHttpRequest} xhr
+ * @throws XMLHttpRequest
  */
 function connectionError(errMsg, xhr) {
     errMsg = `[${new Date()}] Mind Matter[sqi.js]: ERROR: ${  errMsg}`;
@@ -20,12 +20,13 @@ function connectionError(errMsg, xhr) {
 function retrieveQI(url = 'https://jennydaman.github.io/mindmatter/subjects.json', callback) {
 
     var xhr = new XMLHttpRequest();
+    xhr.responseType = 'json';
     xhr.open('GET', url, true);
     xhr.setRequestHeader('Cache-Control', 'no-cache');
     xhr.onload = function () {
         if (this.status != 200)
             connectionError(`Unexpected response code from server.\n${xhr.status}    ${xhr.statusText}`, this);
-        chrome.storage.sync.set({ question_index: JSON.parse(xhr.responseText) }, callback);
+        chrome.storage.sync.set({ question_index: xhr.response) }, callback);
     };
     xhr.onerror = function () {
         connectionError('XMLHttpRequest.onerror: I have no idea why.', this);

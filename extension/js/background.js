@@ -81,12 +81,14 @@ function coolDone() {
     chrome.permissions.contains({
         permissions: ['notifications']
     }, function (result) {
-        chrome.notifications.create({
-            type: 'basic',
-            iconUrl: '/assets/brain-in-pot128.png',
-            title: 'Mind Matter: Ready',
-            message: 'This extension has come off cooldown. It will be activated by the next blacklisted site.'
-        });
+        if (result) {
+            chrome.notifications.create({
+                type: 'basic',
+                iconUrl: '/assets/brain-in-pot128.png',
+                title: 'Mind Matter: Ready',
+                message: 'This extension has come off cooldown. It will be activated by the next blacklisted site.'
+            });
+        }
     });
 }
 
