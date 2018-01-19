@@ -1,0 +1,29 @@
+{
+  "name": "mindmatter",
+  "version": "0.5.1",
+  "description": "Blocks distracting sites, granting access only if a trivia question is answered correctly.",
+  "directories": {
+    "doc": "docs"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^4.12.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jennydaman/mindmatter.git"
+  },
+  "keywords": [
+    "chrome",
+    "education"
+  ],
+  "author": "Jennings Zhang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jennydaman/mindmatter/issues"
+  },
+  "homepage": "https://github.com/jennydaman/mindmatter#readme"
+}

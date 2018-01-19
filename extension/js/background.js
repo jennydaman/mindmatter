@@ -62,7 +62,7 @@ chrome.storage.onChanged.addListener(function (changes) {
                         chrome.notifications.create({
                             type: 'basic',
                             iconUrl: '/assets/brain-in-pot128.png',
-                            title: 'Mind Matter: Cooldown',
+                            title: 'Cooldown',
                             message: `You are correct! I'll leave you alone for ${items.cooldown_info.english}.`
                         });
                     }
@@ -85,8 +85,8 @@ function coolDone() {
             chrome.notifications.create({
                 type: 'basic',
                 iconUrl: '/assets/brain-in-pot128.png',
-                title: 'Mind Matter: Ready',
-                message: 'This extension has come off cooldown. It will be activated by the next blacklisted site.'
+                title: 'Ready',
+                message: 'Mind Matter has come off cooldown. It will be activated by the next blacklisted site.'
             });
         }
     });

@@ -6,8 +6,8 @@ chrome.storage.sync.get(['blacklist_array', 'cooldown_info', 'consistency'], fun
     let str = '['.concat(items.blacklist_array[0]);
     for (let i = 1; i < items.blacklist_array.length; i++)
         str += `, ${items.blacklist_array[i]}`;
-    document.getElementById('dirty-blacklist').innerText = `${str}]`;
-    document.getElementById('dirty-coold').innerHTML = `${items.cooldown_info.english} <light>(${items.cooldown_info.duration})</light>`;
+    document.getElementById('blacklist').innerText = `${str}]`;
+    document.getElementById('cooldown').innerHTML = `${items.cooldown_info.english} <light>(${items.cooldown_info.duration})</light>`;
 
     let score = items.consistency.score / items.consistency.total * 10;
     document.getElementById('consistency-score').innerText = `${score.toFixed(2)}${score > 9 ? ' :)' : score < 5 ? ' :(' : ''}`;
