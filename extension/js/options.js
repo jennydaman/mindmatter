@@ -6,6 +6,15 @@ function settingsInflator() {
     chrome.storage.sync.get('cooldown_info', function (items) {
         $(`form#cooldown-radio input[name="coold"][value="${items.cooldown_info.duration}"]`).prop('checked', true);
     });
+    chrome.storage.local.get('options_message', function (items) {
+        if (items.options_message) {
+            let message = $('#message');
+            message.text(items.options_message.text);
+            message.css('display', 'block');
+            if (items.options_message.once)
+                chrome.storage.local.remove('options_message');
+        }
+    });
 
     $('form#cooldown-radio input[name="coold"]').click(function () {
         chrome.storage.sync.set({
@@ -55,8 +64,8 @@ function blacklistInflator() {
 }
 
 function subjectsInflator() {
-    chrome.storage.sync.get('question_index', function (items) {
-        $('#subjects-block').append(JSON.stringify(items.question_index)
+    chrome.storage.sync.get('indexStructure', function (items) {
+        $('#subjects-block').append(JSON.stringify(items.indexStructure)
             .replace(/{"enabled"/gi, '<br /><br />{"enabled"')
             .replace(/{"chance"/gi, '<br />{"chance"')
             .replace(/],/gi, '],<br />'));

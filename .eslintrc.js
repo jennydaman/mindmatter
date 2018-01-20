@@ -25,7 +25,7 @@ module.exports = {
         "no-inner-declarations": "off",
         "no-console": "off",
         "prefer-template": "warn",
-        "no-unused-vars": "warn",
+        "no-unused-vars": "off",
         "quote-props": [
             "warn",
             "as-needed"
@@ -33,7 +33,7 @@ module.exports = {
     },
     "globals": {
         "chrome": false,
-        "connectionError": false,
-        "retrieveQI": false
+        "subjects": false,
+        "notif": false
     }
 };

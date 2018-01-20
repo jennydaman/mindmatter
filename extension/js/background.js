@@ -1,4 +1,3 @@
-//set up on install
 chrome.runtime.onInstalled.addListener(function () {
 
     chrome.storage.local.clear();
@@ -22,27 +21,31 @@ chrome.runtime.onInstalled.addListener(function () {
             }
             //setup: true this will prevent initial set up from running.
         });
-
-        retrieveQI();
-
-        chrome.runtime.openOptionsPage(function () {
-
-            chrome.permissions.contains({
-                permissions: ['notifications']
-            }, function (result) {
-
-                let message = 'Thanks for installing Mind Matter! Here are the settings. Be sure to review the blacklist.';
-                if (result) {
-                    chrome.notifications.create({
-                        type: 'basic',
-                        iconUrl: '/assets/brain-in-pot128.png',
-                        title: 'Mind Matter: First Install',
-                        message: message
-                    });
-                }
-                else
-                    alert(message);
+        subjects.pull().then(freshSubjects => {
+            subjects.store(freshSubjects);
+            var refreshTimer;
+            chrome.runtime.onStartup.addListener(function () {
+                subjects.update(); //refresh indexStructure on startup
+                refreshTimer = setInterval(subjects.update, 6.048e8); //refresh once a week
             });
+            chrome.runtime.onSuspend.addListener(function () {
+                clearInterval(refreshTimer);
+                chrome.storage.local.remove('cooldown_lock');
+            });
+        }, function (error) {
+            notif('Mind Matter', 'Could not initialize the subjects index! If this problem is unrelated to Internet issues, please report a bug.', true);
+            console.err(error);
+        }).finally(function () {
+            chrome.storage.local.set(
+                {
+                    options_message: {
+                        text: 'Thanks for installing Mind Matter! This is the options page, please have a look around.',
+                        once: true
+                    }
+                },
+                function () {
+                    chrome.runtime.openOptionsPage();
+                });
         });
     });
 });
@@ -56,18 +59,8 @@ chrome.storage.onChanged.addListener(function (changes) {
 
         if (changes.cooldown_lock.newValue) { //cooldown_lock is set
             chrome.storage.sync.get('cooldown_info', function (items) {
-
-                chrome.permissions.contains({ permissions: ['notifications'] }, function (result) {
-                    if (result) {
-                        chrome.notifications.create({
-                            type: 'basic',
-                            iconUrl: '/assets/brain-in-pot128.png',
-                            title: 'Cooldown',
-                            message: `You are correct! I'll leave you alone for ${items.cooldown_info.english}.`
-                        });
-                    }
-                });
                 cooldown_timeout = setTimeout(coolDone, items.cooldown_info.duration);
+                notif('Correct', `You are correct! I'll leave you alone for ${items.cooldown_info.english}.`);
             });
         }
         else //cooldown is off, stop countdown
@@ -78,27 +71,5 @@ chrome.storage.onChanged.addListener(function (changes) {
 //called when cooldown is over.
 function coolDone() {
     chrome.storage.local.remove('cooldown_lock');
-    chrome.permissions.contains({
-        permissions: ['notifications']
-    }, function (result) {
-        if (result) {
-            chrome.notifications.create({
-                type: 'basic',
-                iconUrl: '/assets/brain-in-pot128.png',
-                title: 'Ready',
-                message: 'Mind Matter has come off cooldown. It will be activated by the next blacklisted site.'
-            });
-        }
-    });
+    notif('Ready', 'Mind Matter has come off cooldown. It will be activated by the next blacklisted site.');
 }
-
-var refreshTimer;
-chrome.runtime.onStartup.addListener(function () {
-    retrieveQI(); //refresh question_index on startup
-    refreshTimer = setInterval(retrieveQI, 6.048e8); //refresh once a week
-});
-
-chrome.runtime.onSuspend.addListener(function () {
-    clearInterval(refreshTimer);
-    chrome.storage.local.remove('cooldown_lock');
-});

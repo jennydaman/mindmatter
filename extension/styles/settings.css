@@ -1,3 +1,10 @@
+#message {
+    color: #9966ff;
+    margin-bottom: 10px;
+    display: none;
+    font-size: initial;
+}
+
 #app {
     font-size: 1.2em;
 }
@@ -89,6 +96,7 @@ fieldset#cooldown-field {
 
 #cooldown-radio label:hover {
     outline: 1px lightgrey solid;
+    cursor: pointer;
 }
 
 #cooldown-radio input:checked+label {

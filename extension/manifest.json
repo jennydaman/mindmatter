@@ -8,7 +8,8 @@
   "author": "Jennings Zhang",
   "background": {
     "scripts": [
-      "js/sqi.js",
+      "js/helper/notif.js",
+      "js/helper/subjects.js",
       "js/background.js"
     ],
     "persistent": false
@@ -19,7 +20,6 @@
         "<all_urls>"
       ],
       "js": [
-        "js/sqi.js",
         "js/app.js"
       ],
       "run_at": "document_start",

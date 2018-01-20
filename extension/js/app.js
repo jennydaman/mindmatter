@@ -1,6 +1,6 @@
+// TODO handle multiple blacklisted tabs open
 //This messy content_script is injected into every page.
 (function () {
-
     chrome.storage.local.get(['cooldown_lock', 'pause'], function (items) {
 
         //check that setting is active
@@ -15,15 +15,14 @@
             if (!blacklistedURL)
                 return;
 
-            retrieveQuestion(retrieved => {
-
-                let wrongTries = 0;
-                switch (retrieved.type) {
-                case 'blank':
-                    wrongTries = fillInTheBlank(retrieved);
-                    break;
-                default:
-                    alert(`Mind Matter\n${retrieved.question}\nNO IMPLEMENTATION YET`);
+            let wrongTries = 0;
+            retrieveQuestion(function (ret) {
+                switch (ret.type) {
+                    case 'blank':
+                        wrongTries = fillInTheBlank(ret);
+                        break;
+                    default:
+                        alert(`Mind Matter\n${ret.question}\nNO IMPLEMENTATION YET`);
                 }
                 updateScore(wrongTries);
                 setCooldown();
@@ -36,14 +35,13 @@
     });
 
     //callback questionHandler invoked if and only if retrieval is successful.
-    function retrieveQuestion(questionHandler, secondTry = false) {
-
-        chrome.storage.sync.get('question_index', function (items) {
+    function retrieveQuestion(callback, secondTry = false) {
+        chrome.storage.sync.get('indexStructure', function (items) {
 
             //TODO: improve this algorithm, implement 'chance'
             //add all questions to one big array
             let allQuestions = [];
-            items.question_index.subjects.forEach(subjectInfo => {
+            items.indexStructure.subjects.forEach(subjectInfo => {
                 subjectInfo.questions.forEach(question => {
                     allQuestions.push(question);
                 });
@@ -52,29 +50,36 @@
             let qpath = allQuestions[Math.random() * allQuestions.length | 0].qpath;
 
             var xhr = new XMLHttpRequest();
+            xhr.responseType = 'json';
             xhr.open('GET', qpath, true);
             xhr.setRequestHeader('Cache-Control', 'no-cache');
             xhr.onerror = function () {
-                connectionError('XMLHttpRequest error and I have no idea why.', this);
+                reject('XHR error, IDK why');
             };
-
             xhr.onload = function () {
-
-                if (xhr.status != 200) {
-
+                if (xhr.status === 200)
+                    callback(xhr.response);
+                else {
                     if (secondTry) {
-                        alert('Mind Matter\n'
-                            + 'Failed two attempts to retrieve a question! Pausing myself and giving up...');
                         chrome.storage.local.set({ pause: true });
+                        alert('Mind Matter\n'
+                            + 'Failed two attempts to retrieve a question! Pausing myself and giving up...\n'
+                            + 'Response code: ' + xhr.statusText);
                     }
-                    else //refresh question_index with the default URL before trying again
-                        retrieveQI(undefined, retrieveQuestion(questionHandler, true));
+                    else { // try again after refreshing database
+                        subjects.pull().then(freshSubjects => {
+                            subjects.store(freshSubjects, function () {
+                                retrieveQuestion(callback, true);
+                            });
+                        }).catch(error => {
+                            chrome.storage.local.set({ pause: true });
+                            alert('Mind Matter\n'
+                                + error.toString() + '\n'
+                                + 'Pausing myself and giving up...');
+                        });
+                    }
                 }
-                else if (questionHandler instanceof Function)
-                    questionHandler(JSON.parse(xhr.responseText));
-
             };
-
             xhr.send();
         });
     }
@@ -88,10 +93,11 @@
             retrieved.answer = [retrieved.answer];
 
         const correctAnswers = retrieved.answer.map(possibleAnswer => possibleAnswer instanceof String ? possibleAnswer.toLowerCase() : possibleAnswer);
-
+        console.log(correctAnswers.toString())
         const checkAns = (correctAnswers, user_response = '') => {
             user_response = user_response.trim().toLowerCase();
             return correctAnswers.find(possibleAnswer => {
+                // TODO check fails when you go to a different tab
                 return user_response.includes(possibleAnswer);
             }) ? true : false;
         };
@@ -105,8 +111,8 @@
             }
             user_response = prompt(`${'Mind Matter'
                 + '\n'}${retrieved.question}`);
-            if (user_response == null)
-                user_response = '';
+            if (user_response === null)
+                user_response = ''; // TODO close window
         }
         return wrongTries;
     }
@@ -118,13 +124,13 @@
     function updateScore(wrongTries) {
         chrome.storage.sync.get('consistency', function (items) {
 
-            if (wrongTries == 0) { //correct on first try
+            if (wrongTries === 0) { //correct on first try
                 items.consistency.total++;
                 items.consistency.score++;
             }
             else //wrong
                 items.consistency.total += wrongTries;
-
+            items.consistency.total = Math.max(items.consistency.total, 10);
             chrome.storage.sync.set({ consistency: items.consistency });
         });
     }
