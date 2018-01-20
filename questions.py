@@ -112,3 +112,5 @@ for subject in subjectStructure["subjects"]:
 if args.shouldWrite:
     with open(args.buildDir + "/" + args.resultFile, "w") as resultFile:
         resultFile.write(json.dumps(subjectStructure, sort_keys=True, indent=2))
+    with open(args.buildDir + "/" + "README.md", "w") as readmeFile:
+        readmeFile.write("# Mind Matter Static\nThis branch hosts files for questions.")

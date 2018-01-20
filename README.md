@@ -1,5 +1,6 @@
 # Mind Matter questions database
 
+[![Build Status](https://travis-ci.org/jennydaman/mindmatter.svg?branch=questions)](https://travis-ci.org/jennydaman/mindmatter)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/jennydaman/mindmatter/pulls)
 
 Static server that provides global questions for Mind Matter.
