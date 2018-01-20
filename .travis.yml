@@ -1,7 +1,7 @@
 language: python
 python: "3.6"
 
-script: questions.py
+script: python questions.py --overwrite --verbose
 
 branches:
   only:
