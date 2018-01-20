@@ -1,5 +1,0 @@
-{
-    "question": "What is the algorithmic complexity of Merge Sort?",
-    "type": "blank",    
-    "answer": ["nlogn", "nlog(n)"]
-}
