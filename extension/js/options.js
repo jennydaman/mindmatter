@@ -65,6 +65,8 @@ function blacklistInflator() {
 
 function subjectsInflator() {
     chrome.storage.sync.get('indexStructure', function (items) {
+        if (!items.indexStructure)
+            return;
         $('#subjects-block').append(JSON.stringify(items.indexStructure)
             .replace(/{"enabled"/gi, '<br /><br />{"enabled"')
             .replace(/{"chance"/gi, '<br />{"chance"')

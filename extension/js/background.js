@@ -33,8 +33,11 @@ chrome.runtime.onInstalled.addListener(function () {
                 chrome.storage.local.remove('cooldown_lock');
             });
         }, function (error) {
-            notif('Mind Matter', 'Could not initialize the subjects index! If this problem is unrelated to Internet issues, please report a bug.', true);
-            console.err(error);
+            let msg = 'Could not initialize the subjects index! If this problem is unrelated to Internet issues, please report a bug.';
+            notif('Mind Matter', msg).catch(function () {
+                alert(msg);
+            })
+            console.log(error);
         }).finally(function () {
             chrome.storage.local.set(
                 {
