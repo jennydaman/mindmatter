@@ -1,0 +1,19 @@
+language: python
+python: "3.6"
+
+script: questions.py
+
+branches:
+  only:
+    - questions
+
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN  # Set in travis-ci.org dashboard, marked secure
+  keep-history: true
+  local-dir: build
+  on:
+    branch: questions
+  target-branch: gh-pages
+  

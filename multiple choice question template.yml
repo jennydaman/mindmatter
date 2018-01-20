@@ -1,0 +1,22 @@
+question: This is an AMAZING multiple-choice question in YAML?
+
+moreInfo: A longer explination to the question.
+type: choice
+image:
+  src: https://jennydaman.github.io/mindmatter/image.jpg
+  author: A great artist that deserves credit
+  link: https://artistprofile.com/wearegoodpeoplebecausewecite
+hint: Your first choice was wrong, this message will appear now.
+
+choices:
+  -
+    correct: true
+    option: This is the correct answer.
+    explain: Because choices[0].correct == true.
+  - 
+    option: The cake is a lie
+    explain: It's a reference to portal2
+  - 
+    option: This is not correct.
+    explain: because it doesn't have the correct key set to true.
+  - option: Fourth option
