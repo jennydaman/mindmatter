@@ -175,7 +175,8 @@ function fillInTheBlank(retrieved) {
     $('#response').load('fill_blank.html', function () {
         $('#blank').ready(function () {
             let button = $('#submit');
-            button.css('height', $('#blank').css('height'));
+            button.css('height', '38px');
+            //button.css('height', $('#blank').css('height'));
             // HACK wrapper span#response is 4px wider than child input#blank
             button.css('position', 'relative');
             button.css('right', '4px');

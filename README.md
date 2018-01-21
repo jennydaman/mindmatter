@@ -17,11 +17,7 @@ Mind Matter blocks blacklisted sites, granting access only if a trivia question 
 
 ## Installation
 
-I hope to publish version 0.5 to the Chrome Web Store. Even though it's not ready yet, you're more than welcome to try it out!
-
-See the latest Github release here: https://github.com/jennydaman/mindmatter/releases/latest
-
-Or. install the development version (master branch) as an *unpacked extension*.
+I hope to publish version 0.5 to the Chrome Web Store. Even though it's not ready yet, you're more than welcome to try it out! The master branch contains the most recent and stable version. It can be installed as an *unpacked extension*.
 
 1. `git clone https://github.com/jennydaman/mindmatter.git` or [Download ZIP](https://github.com/jennydaman/mindmatter/archive/master.zip) and extract it.
 2. Go to [chrome://extensions](chrome://extensions).
@@ -45,9 +41,3 @@ Surfing the Internet tends to be unproductive. The objective of *Mind Matter* is
 #### Acknowledgements
 
 Thanks to Sally Zhao (Blair class of 2019) for the "brain in pot" logo.
-
-Mr. Daniel Kim @dankimchi did a few things.
-
-*systole* was originally my [Bitcamp 2017](https://devpost.com/software/systole) idea. Without any experience with front-end web development, it was wholly unsuccessful. Misha let me submit *Mind Matter* to [BlairHacks_0](http://hacks.mbhs.edu/) [(Local Hack Day 2017)](https://localhackday.mlh.io/).
-
-Quite a bit of CSS was ~~stolen~~ borrowed from [preact :rocket:](https://github.com/developit/preact-cli) and [ToDoMVC :ballot_box_with_check:](https://www.npmjs.com/package/todomvc-app-css).
