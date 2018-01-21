@@ -4,7 +4,7 @@
   "description": "Blocks distracting sites, granting access only if a trivia question is answered correctly.",
   "version": "0.5.1",
   "version_name": "0.5.1 alpha",
-  "minimum_chrome_version": "61",
+  "minimum_chrome_version": "63",
   "author": "Jennings Zhang",
   "background": {
     "page": "background.html"
