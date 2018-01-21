@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var box = document.getElementById('pause-toggle');
 
-    //load preexisting setings from memory
+    //load preexisting settings from memory
     chrome.storage.local.get(['pause', 'cooldown_lock'], function (items) {
         if (items.cooldown_lock) {
             box.checked = false;
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     //change toggle when cooldown runs out
     chrome.storage.onChanged.addListener(function(changes, namespace) {
-        if (namespace == 'local' && changes.cooldown_lock && !changes.cooldown_lock.newValue) {
+        if (namespace === 'local' && changes.cooldown_lock && !changes.cooldown_lock.newValue) {
             chrome.storage.local.get('pause', function(items) {
                 box.checked = !items.pause;
             });

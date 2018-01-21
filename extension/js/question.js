@@ -1,22 +1,60 @@
+var siteQueue;
+var wrongTries = 0;
 // retrieve question data and inflate components
-// TODO: singleton
 $(document).ready(function () {
 
-    chrome.storage.local.get('trigger', function (items) {
-        $('#trigger').text(items.trigger);
-    });
+    chrome.storage.local.get(['trigger', 'singleton'], function (items) {
+        chrome.storage.local.remove('trigger');
 
-    $('#modal-delete').click(closeModal);
-    $('#modal-background').click(closeModal);
-
-    retrieveQuestion(ret => {
-        if (ret.type === 'blank') {
-            fillInTheBlank(ret);
+        // user attempt to open multiple blacklisted sites, while another questions page is running
+        if (items.singleton) {
+            // do not use chrome.tabs.sendMessage, MessageSender tab is not registered
+            chrome.runtime.sendMessage({ anotherSite: items.trigger }); // kill me
         }
-        else
-            alert('retrieved question is not yet implemented');
+        // this instance is the first and only instance of the question page
+        else {
+            claimSingleton(items.trigger);
+
+            $('#trigger').text(items.trigger);
+            $('#modal-delete').click(closeModal);
+            $('#modal-background').click(closeModal);
+
+            retrieveQuestion(ret => {
+                if (ret.type === 'blank') {
+                    fillInTheBlank(ret);
+                }
+                else
+                    alert('retrieved question is not yet implemented');
+            });
+        }
     });
 });
+
+function claimSingleton(firstSite) {
+    chrome.tabs.getCurrent(currentTab => {
+        chrome.storage.local.set({ singleton: currentTab.id });
+    });
+    siteQueue = [firstSite];
+    chrome.runtime.onMessage.addListener((message, sender) => {
+        if (message.anotherSite) {
+
+            chrome.tabs.getCurrent(currentTab => {
+                chrome.tabs.highlight({
+                    tabs: currentTab.index,
+                    windowId: currentTab.windowId
+                });
+            });
+
+            if (siteQueue.length === 1) // replace with a list
+                $('#trigger').replaceWith(`<ul id="trigger-list"><li>${siteQueue[0]}</li><li>${message.anotherSite}</li></ul>`);
+            else
+                $('#trigger-list').append(`<li>${message.anotherSite}</li>`);
+
+            siteQueue.push(message.anotherSite);
+            chrome.tabs.remove(sender.tab.id);
+        }
+    });
+}
 
 //callback questionHandler invoked if and only if retrieval is successful.
 function retrieveQuestion(callback, secondTry = false) {
@@ -68,8 +106,6 @@ function retrieveQuestion(callback, secondTry = false) {
     });
 }
 
-
-var wrongTries = 0;
 /**
  * Compares the response against an array of possible answers.
  * If the response is incorrect, wrongTries is incremented by one.
@@ -97,7 +133,7 @@ function checkTextAnswer(user_response = '', retrieved) {
     else if (retrieved.answer) {
         user_response = user_response.trim().toLowerCase();
         let correct = retrieved.answer.find(possibleAns => {
-            return typeof(possibleAns) === "string" ? user_response.includes(possibleAns) : user_response == possibleAns;
+            return typeof (possibleAns) === "string" ? user_response.includes(possibleAns) : user_response == possibleAns;
         });
         if (correct)
             return true;
@@ -147,12 +183,21 @@ function fillInTheBlank(retrieved) {
 }
 
 function finish(wrongTries) {
+    chrome.storage.local.remove('singleton');
     updateScore(wrongTries);
-    setCooldown(function() {
+    setCooldown(function () {
         // remove lock
-        chrome.storage.local.remove('trigger', function() {
-            // go back to original location
-            window.location.replace($('#trigger').text());
+        chrome.storage.local.remove('trigger', function () {
+
+            // open queued sites in other tabs
+            for (let i = 1; i < siteQueue.length; i++) {
+                chrome.tabs.create({
+                    url: siteQueue[i],
+                    active: false
+                });
+            }
+            // replace current tab with the first queued site
+            window.location.replace(siteQueue[0]);
         });
     });
 }

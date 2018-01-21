@@ -10,7 +10,8 @@ img.logo {
     margin-left: 26em;
 }
 
-#trigger {
+#trigger,
+#trigger-list {
     color: darkred;
     text-decoration: underline;
 }

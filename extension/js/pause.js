@@ -2,7 +2,7 @@
 var box = document.getElementById('pause-toggle');
 
 chrome.storage.onChanged.addListener(function (changes, namespace) {
-    if (namespace == 'local' && changes.pause)
+    if (namespace === 'local' && changes.pause)
         box.checked = !changes.pause.newValue;
 });
 

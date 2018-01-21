@@ -53,9 +53,11 @@ chrome.runtime.onInstalled.addListener(function () {
     });
 });
 
-var cooldown_timeout;
-
 //set the cooldown timer
+var cooldown_timeout;
+// listen for when singleton page becomes active
+var singletonID;
+
 chrome.storage.onChanged.addListener(function (changes) {
 
     if (changes.cooldown_lock) {
@@ -69,6 +71,8 @@ chrome.storage.onChanged.addListener(function (changes) {
         else //cooldown is off, stop countdown
             clearTimeout(cooldown_timeout);
     }
+    else if (changes.singleton)
+        singletonID = changes.singleton.newValue;
 });
 
 //called when cooldown is over.
@@ -76,3 +80,13 @@ function coolDone() {
     chrome.storage.local.remove('cooldown_lock');
     notif('Ready', 'Mind Matter has come off cooldown. It will be activated by the next blacklisted site.');
 }
+
+chrome.tabs.onRemoved.addListener(function(tabID) {
+    if (tabID === singletonID)
+        chrome.storage.local.remove('singleton');
+})
+
+
+chrome.runtime.onSuspend.addListener(function () {
+    chrome.storage.local.remove(['singleton', 'cooldown_lock']);
+});
