@@ -6,12 +6,12 @@ $(document).ready(function () {
         chrome.storage.local.remove('trigger');
 
         chrome.tabs.getCurrent(currentTab => {
+
             // this instance is the first and only instance of the question page
             if (!items.singleton || items.singleton === currentTab.id) {
 
                 claimSingleton(items.trigger, currentTab.id);
 
-                $('#trigger').text(items.trigger);
                 $('#modal-delete').click(closeModal);
                 $('#modal-background').click(closeModal);
 
@@ -38,7 +38,7 @@ function claimSingleton(firstSite, currentTabId) {
     chrome.storage.local.get('siteQueue', function (items) {
         if (items.siteQueue) { // was refreshed
             if (items.siteQueue.length === 1)
-                $('#trigger').text(items.trigger);
+                $('#trigger').text(items.siteQueue[0]);
             else {
                 $('#trigger').replaceWith(function () {
                     let dispList = $(`<ul id="trigger-list"></ul>`);
