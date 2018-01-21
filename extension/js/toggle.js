@@ -31,10 +31,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
     //change toggle when cooldown runs out
     chrome.storage.onChanged.addListener(function(changes, namespace) {
-        if (namespace === 'local' && changes.cooldown_lock && !changes.cooldown_lock.newValue) {
-            chrome.storage.local.get('pause', function(items) {
-                box.checked = !items.pause;
-            });
+        if (namespace === 'local' && changes.cooldown_lock) {
+            if (!changes.cooldown_lock.newValue) {
+                chrome.storage.local.get('pause', function(items) {
+                    box.checked = !items.pause;
+                });
+            }
+            else {
+                box.checked = false;
+                document.getElementById('offswitch-label').className += ' onCooldown'; //change content
+            }
         }
     });
 });
