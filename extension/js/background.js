@@ -1,4 +1,8 @@
+import * as subjects from './helper/subjects.js';
+import notif from './helper/notif.js';
+
 chrome.runtime.onInstalled.addListener(function () {
+
 
     chrome.storage.local.clear();
     chrome.storage.local.set({ pause: false });

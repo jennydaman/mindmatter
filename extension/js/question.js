@@ -1,3 +1,5 @@
+import * as subjects from './helper/subjects.js'
+
 var wrongTries = 0;
 // retrieve question data and inflate components
 $(document).ready(function () {

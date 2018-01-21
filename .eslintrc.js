@@ -32,8 +32,6 @@ module.exports = {
         ]
     },
     "globals": {
-        "chrome": false,
-        "subjects": false,
-        "notif": false
+        "chrome": false
     }
 };

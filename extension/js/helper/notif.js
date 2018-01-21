@@ -4,7 +4,7 @@
  * @param {string} title 
  * @param {string} message 
  */
-function notif(title, message) {
+export default function notif(title, message) {
     return new Promise(function (resolve, reject) {
         chrome.permissions.contains({
             permissions: ['notifications']
