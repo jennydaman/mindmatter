@@ -9,17 +9,19 @@ import argparse
 from calendar import timegm
 from time import gmtime
 
+
 def nothing():
     pass
+
 
 def errExit():
     sys.exit(1)
 
-
 ap = argparse.ArgumentParser()
 ap.add_argument("-f", "--force", action="store_const", const=nothing, default=errExit, dest="errorAction",
                 help="skip file on error instead of quit")
-ap.add_argument("-v", "--verbose", action="store_true", default=False, dest="verbose")
+ap.add_argument("-v", "--verbose", action="store_true",
+                default=False, dest="verbose")
 ap.add_argument("--folder", type=str, default="subjects",
                 help="specify the root folder of the subjects")
 ap.add_argument("--url", type=str, default="https://jennydaman.github.io/mindmatter",
@@ -42,7 +44,7 @@ if args.shouldWrite:
                 os.makedirs(args.buildDir)
             else:
                 print('Build error: ' + args.buildDir +
-                    " is not empty.", file=sys.stderr)
+                      " is not empty.", file=sys.stderr)
                 sys.exit(1)
     else:
         os.makedirs(args.buildDir)
@@ -54,7 +56,8 @@ subjectStructure = {
 }
 
 for currentSubject in subjectStructure['subjects']:
-    os.makedirs(args.buildDir + "/" + currentSubject["folder"])
+    if args.shouldWrite:
+        os.makedirs(args.buildDir + "/" + currentSubject["folder"])
     for questionFileName in next(os.walk(args.folder + "/" + currentSubject['folder']))[2]:
 
         questionLocation = args.folder + "/" + \
@@ -72,12 +75,22 @@ for currentSubject in subjectStructure['subjects']:
 
         healthy = True
         try:
-            # json.load(open(questionLocation))
             questionData = yaml.load(open(questionLocation, 'r').read())
         except yaml.YAMLError:
             print('E: [YAMLError] ' + questionLocation, file=sys.stderr)
             args.errorAction()
             healthy = False
+
+        # convert answers to a list
+        if not isinstance(questionData["answer"], list):
+            questionData["answer"] = [questionData["answer"]]
+        if not isinstance(questionData["ans_exact"], list):
+            questionData["ans_exact"] = [questionData["ans_exact"]]
+
+        # trim whiespace and convert to lower case
+        questionData["answer"] = list(map(lambda ans:ans.strip().lower() if isinstance(ans, str) else ans, questionData["answer"]))
+
+        # proofread
         if not 'question' in questionData:
             print('E [Missing question] ' + questionLocation, file=sys.stderr)
             args.errorAction()
@@ -91,9 +104,17 @@ for currentSubject in subjectStructure['subjects']:
                   questionLocation, file=sys.stderr)
             args.errorAction()
             healthy = False
+        if 'ans_range' in questionData:
+            if not 'min' in questionData['ans_range'] or not 'max' in questionData['ans_range']:
+                print('E [ans_range missing min or max] ' +
+                      questionLocation, file=sys.stderr)
+                args.errorAction()
+                healthy = False
 
+        # if question passes all checks, then save it
         if healthy:
-            questionJSON = currentSubject["folder"] + "/" + questionFileName[0:len(questionFileName)-4] + "json"
+            questionJSON = currentSubject["folder"] + "/" + \
+                questionFileName[0:len(questionFileName) - 4] + "json"
             if args.verbose:
                 print(questionJSON)
             currentSubject['questions'].append(
@@ -102,7 +123,7 @@ for currentSubject in subjectStructure['subjects']:
             if args.shouldWrite:
                 with open(args.buildDir + "/" + questionJSON, "w") as questionOut:
                     questionOut.write(json.dumps(questionData))
-            
+
 
 for subject in subjectStructure["subjects"]:
     subject["enabled"] = True
@@ -111,6 +132,8 @@ for subject in subjectStructure["subjects"]:
 
 if args.shouldWrite:
     with open(args.buildDir + "/" + args.resultFile, "w") as resultFile:
-        resultFile.write(json.dumps(subjectStructure, sort_keys=True, indent=2))
+        resultFile.write(json.dumps(
+            subjectStructure, sort_keys=True, indent=2))
     with open(args.buildDir + "/" + "README.md", "w") as readmeFile:
-        readmeFile.write("# Mind Matter Static\nThis branch hosts files for questions.")
+        readmeFile.write(
+            "# Mind Matter Static\nThis branch hosts files for questions.")

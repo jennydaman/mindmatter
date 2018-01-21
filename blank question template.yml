@@ -7,12 +7,14 @@ image:
   link: https://artistprofile.com/wearegoodpeoplebecausewecite
 hint: Your first choice was wrong, this message will appear now.
 
-answer":
+answer:
   - The response will have the whitespace trimmed, is not case-sensitive, and must contain this string to be correct
   - This is another answer that is also correct.
 
 # Use 'ans_range' to specify a range of accepted numerical answers
-ans_range: [0, 10]
+ans_range:
+  - min: 0
+  - max: 10
 
 # Use 'ans_exact' to specify a correct answer that must be matched exactly, letter-by-letter. 
 # answer is case-sensitive, use the '===' JS operator, whitespace is still trimmed
