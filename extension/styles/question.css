@@ -15,8 +15,12 @@ img.logo {
     text-decoration: underline;
 }
 
-.question {
-    font-size: 130%;
+#info {
+    color: dimgrey;
+}
+
+#question {
+    font-weight: bolder;
 }
 
 #submit {
@@ -25,10 +29,9 @@ img.logo {
     color: white;
     padding: 8px 24px;
     text-decoration: none;
-    display: inline-block;
     font-size: inherit;
     transition: 0.2s;
-    margin-left: 2em;
+    display: inline;
 }
 
 #submit:hover {
@@ -36,8 +39,14 @@ img.logo {
     cursor: pointer;
 }
 
+#submit:disabled {
+    background-color: #A9A9A9;
+    cursor: not-allowed;
+}
+
 input {
     border: 2px solid #A9A9A9;
     min-width: 30em;
     max-width: 40em;
+    padding: 6px;
 }

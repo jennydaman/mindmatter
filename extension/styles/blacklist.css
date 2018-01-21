@@ -48,4 +48,6 @@ li button.destroy:hover {
 input[type="url"] {
 	border: none;
 	width: 420px;
+	padding: 15px;
+	padding-left: 30px;
 }

@@ -1,24 +1,21 @@
 // retrieve question data and inflate components
+// TODO: singleton
 $(document).ready(function () {
 
     chrome.storage.local.get('trigger', function (items) {
         $('#trigger').text(items.trigger);
     });
 
-    toggleModal();
     $('#modal-delete').click(closeModal);
     $('#modal-background').click(closeModal);
 
-/*     retrieveQuestion(ret => {
-        const correct;
-        const checkAnswer;
+    retrieveQuestion(ret => {
         if (ret.type === 'blank') {
-            inflateBlank(ret);
-            correct = parseFillInTheBlankAnswer(ret);
+            fillInTheBlank(ret);
         }
         else
             alert('retrieved question is not yet implemented');
-    }); */
+    });
 });
 
 //callback questionHandler invoked if and only if retrieval is successful.
@@ -71,8 +68,11 @@ function retrieveQuestion(callback, secondTry = false) {
     });
 }
 
+
+var wrongTries = 0;
 /**
  * Compares the response against an array of possible answers.
+ * If the response is incorrect, wrongTries is incremented by one.
  * @param {string} response 
  * @param {string} correct 
  * @returns true if the response contains any of the key words in the correct array.
@@ -96,34 +96,65 @@ function checkTextAnswer(user_response = '', retrieved) {
     // finally, compare against possible answers
     else if (retrieved.answer) {
         user_response = user_response.trim().toLowerCase();
-        let correct = retrieved.ans_exact.find(possibleAns => {
-            return possibleAns instanceof String ? user_response.includes(possibleAns) : user_response == possibleAns;
+        let correct = retrieved.answer.find(possibleAns => {
+            return typeof(possibleAns) === "string" ? user_response.includes(possibleAns) : user_response == possibleAns;
         });
         if (correct)
             return true;
     }
+    wrongTries++;
     return false;
 }
 
-function handleFillInTheBlank(retrieved) {
+function fillInTheBlank(retrieved) {
+    let wrongTries = 0;
 
     // inflate
     $('#question').text(retrieved.question);
-    $('#response').load('fill_blank.html');
+    $('#response').load('fill_blank.html', function () {
+        $('#blank').ready(function () {
+            let button = $('#submit');
+            button.css('height', $('#blank').css('height'));
+            // HACK wrapper span#response is 4px wider than child input#blank
+            button.css('position', 'relative');
+            button.css('right', '4px');
+        });
+        $('#blank').keyup(function (e) {
 
-    $('#response input').keyup(function (e) {
-        if (e.which === 13) {
-            $(this).attr('disabled', 'disabled'); //Disable textbox to prevent multiple submit
-            if (checkTextAnswer($(this).val(), retrieved))
-                finish(); // TODO
+            if ($(this).val().length === 0)
+                $('#submit').attr('disabled', 'disabled');
             else
-                $(this).removeAttr('disabled'); //Enable the textbox again
-        }
+                $('#submit').removeAttr('disabled');
+
+            if (e.which === 13) { //enter key
+                $(this).attr('disabled', 'disabled'); //Disable textbox to prevent multiple submit
+                if (checkTextAnswer($(this).val(), retrieved))
+                    finish(wrongTries);
+                else {
+                    $(this).removeAttr('disabled'); //Enable the textbox again
+                    openModal('Incorrect. Wrong tries: ' + ++wrongTries);
+                }
+            }
+        });
     });
+
     $('#submit').click(function () {
-        if (checkTextAnswer($('#response input').val(), retrieved))
-            finish(); // TODO
-    })
+        if (checkTextAnswer($('#blank').val(), retrieved))
+            finish(wrongTries);
+        else
+            openModal('Incorrect. Wrong tries: ' + ++wrongTries);
+    });
+}
+
+function finish(wrongTries) {
+    updateScore(wrongTries);
+    setCooldown(function() {
+        // remove lock
+        chrome.storage.local.remove('trigger', function() {
+            // go back to original location
+            window.location.replace($('#trigger').text());
+        });
+    });
 }
 
 /**
@@ -144,15 +175,21 @@ function updateScore(wrongTries) {
     });
 }
 
-function setCooldown() {
+/**
+ * 
+ * @param {Function} callback 
+ */
+function setCooldown(callback) {
     chrome.storage.sync.get('cooldown_info', function (items) {
-        chrome.storage.local.set({ cooldown_lock: new Date().getTime() + items.cooldown_info.duration });
+        chrome.storage.local.set({ cooldown_lock: new Date().getTime() + items.cooldown_info.duration }, callback);
     });
 }
 
-function toggleModal() {
-    $('.modal').toggleClass('is-active');
-    $('html').toggleClass('is-clipped');
+function openModal(message) {
+    if (message)
+        $('#modal-text').text(message);
+    $('.modal').addClass('is-active');
+    $('html').addClass('is-clipped');
 }
 
 function closeModal() {
