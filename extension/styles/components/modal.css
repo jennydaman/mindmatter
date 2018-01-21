@@ -1,0 +1,123 @@
+/* https://bulma.io/ 
+   MIT License */
+.modal {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    -webkit-box-align: center;
+    align-items: center;
+    display: none;
+    -webkit-box-pack: center;
+    justify-content: center;
+    overflow: hidden;
+    position: fixed;
+    z-index: 40;
+}
+
+.modal.is-active {
+    display: -webkit-box;
+    display: flex;
+}
+
+#modal-background {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: rgba(10, 10, 10, 0.86);
+}
+
+.modal-content,
+.modal-card {
+    margin: 0 20px;
+    max-height: calc(100vh - 160px);
+    overflow: auto;
+    position: relative;
+    width: 100%;
+}
+
+@media screen and (min-width: 769px), print {
+    .modal-content,
+    .modal-card {
+        margin: 0 auto;
+        max-height: calc(100vh - 40px);
+        width: 640px;
+    }
+}
+
+.is-clipped {
+    overflow: hidden !important;
+}
+
+.modal-card {
+    display: flex;
+    flex-direction: column;
+    /* flex-grow: 1; */
+    flex-shrink: 1;
+    max-height: calc(100vh - 40px);
+    max-width: 50em;
+    padding: 20px;
+    border-radius: 5px;
+    overflow: auto;
+    color: #363636;
+    background-color: white;
+}
+
+#modal-delete {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-appearance: none;
+    background-color: rgba(10, 10, 10, 0.2);
+    border: none;
+    border-radius: 290486px;
+    cursor: pointer;
+    display: inline-block;
+    -webkit-box-flex: 0;
+    flex-grow: 0;
+    flex-shrink: 0;
+    font-size: 0;
+    height: 20px;
+    max-height: 20px;
+    max-width: 20px;
+    min-height: 20px;
+    min-width: 20px;
+    outline: none;
+    position: relative;
+    vertical-align: top;
+    width: 20px;
+}
+
+#modal-delete:before, #modal-delete:after {
+    background-color: white;
+    content: "";
+    display: block;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateX(-50%) translateY(-50%) rotate(45deg);
+            transform: translateX(-50%) translateY(-50%) rotate(45deg);
+    -webkit-transform-origin: center center;
+            transform-origin: center center;
+}
+
+#modal-delete:before {
+    height: 2px;
+    width: 50%;
+}
+
+#modal-delete:after {
+    height: 50%;
+    width: 2px;
+}
+
+#modal-delete:hover, #modal-delete:focus {
+    background-color: rgba(10, 10, 10, 0.3);
+}
+
+#modal-delete:active {
+    background-color: rgba(10, 10, 10, 0.4);
+}

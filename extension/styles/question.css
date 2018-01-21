@@ -1,0 +1,43 @@
+body {
+    margin: 1em auto;
+    max-width: 50em;
+    padding: 0 .62em;
+}
+
+img.logo {
+    max-width: 24em;
+    display: block;
+    margin-left: 26em;
+}
+
+#trigger {
+    color: darkred;
+    text-decoration: underline;
+}
+
+.question {
+    font-size: 130%;
+}
+
+#submit {
+    background-color: #A9A9A9;
+    border: none;
+    color: white;
+    padding: 8px 24px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: inherit;
+    transition: 0.2s;
+    margin-left: 2em;
+}
+
+#submit:hover {
+    background-color: #2196F3;
+    cursor: pointer;
+}
+
+input {
+    border: 2px solid #A9A9A9;
+    min-width: 30em;
+    max-width: 40em;
+}

@@ -45,23 +45,7 @@ li button.destroy:hover {
     background-color: #FF0000;
 }
 
-.listapp input::-webkit-input-placeholder {
-	font-style: italic;
-	font-weight: 300;
-	color: #e6e6e6;
-}
-
-.listapp input[type="url"] {
-	font-size: inherit;
-    font-family: inherit;
-    font-weight: inherit;
-	width: 420px;
-	padding: 15px;
-	padding-left: 30px;
+input[type="url"] {
 	border: none;
-	background: rgba(0, 0, 0, 0.003);
-	box-shadow: inset 0 -2px 1px rgba(0,0,0,0.03);
-	cursor: auto;
-	user-select: text;
-	-webkit-appearance: textfield;
+	width: 420px;
 }

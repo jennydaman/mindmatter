@@ -1,36 +1,24 @@
-// TODO handle multiple blacklisted tabs open
-//This messy content_script is injected into every page.
-chrome.storage.local.get(['cooldown_lock', 'pause'], function (items) {
+// retrieve question data and inflate components
+$(document).ready(function () {
 
-    //check that setting is active
-    if (items.cooldown_lock || items.pause)
-        return;
-
-    chrome.storage.sync.get('blacklist_array', function (items) {
-        //check that site is blacklisted
-        let blacklistedURL = items.blacklist_array.find((bl_keyword) => {
-            return location.href.includes(bl_keyword);
-        });
-        if (!blacklistedURL)
-            return;
-
-        alert(chrome.runtime.getURL('/ui/question/index.html'))
-        /*let wrongTries = 0;
-        retrieveQuestion(function (ret) {
-            switch (ret.type) {
-                case 'blank':
-                    wrongTries = fillInTheBlank(ret);
-                    break;
-                default:
-                    alert(`Mind Matter\n${ret.question}\nNO IMPLEMENTATION YET`);
-            }
-            updateScore(wrongTries);
-            setCooldown();
-            /*
-             * background.js will listen for changes to storage.
-             * When cooldown_lock is changed, a timeout will be set to remove the lock.
-             */
+    chrome.storage.local.get('trigger', function (items) {
+        $('#trigger').text(items.trigger);
     });
+
+    toggleModal();
+    $('#modal-delete').click(closeModal);
+    $('#modal-background').click(closeModal);
+
+/*     retrieveQuestion(ret => {
+        const correct;
+        const checkAnswer;
+        if (ret.type === 'blank') {
+            inflateBlank(ret);
+            correct = parseFillInTheBlankAnswer(ret);
+        }
+        else
+            alert('retrieved question is not yet implemented');
+    }); */
 });
 
 //callback questionHandler invoked if and only if retrieval is successful.
@@ -46,11 +34,11 @@ function retrieveQuestion(callback, secondTry = false) {
             });
         });
 
-        let qpath = allQuestions[Math.random() * allQuestions.length | 0].qpath;
+        let url = allQuestions[Math.random() * allQuestions.length | 0].url;
 
         var xhr = new XMLHttpRequest();
         xhr.responseType = 'json';
-        xhr.open('GET', qpath, true);
+        xhr.open('GET', url, true);
         xhr.setRequestHeader('Cache-Control', 'no-cache');
         xhr.onerror = function () {
             reject('XHR error, IDK why');
@@ -84,35 +72,58 @@ function retrieveQuestion(callback, secondTry = false) {
 }
 
 /**
- * @returns number of wrong attempts.
+ * Compares the response against an array of possible answers.
+ * @param {string} response 
+ * @param {string} correct 
+ * @returns true if the response contains any of the key words in the correct array.
  */
-function fillInTheBlank(retrieved) {
+function checkTextAnswer(user_response = '', retrieved) {
 
-    if (!Array.isArray(retrieved.answer))
-        retrieved.answer = [retrieved.answer];
-
-    const correctAnswers = retrieved.answer.map(possibleAnswer => possibleAnswer instanceof String ? possibleAnswer.toLowerCase() : possibleAnswer);
-    const checkAns = (correctAnswers, user_response = '') => {
-        user_response = user_response.trim().toLowerCase();
-        return correctAnswers.find(possibleAnswer => {
-            // TODO check fails when you go to a different tab
-            return user_response.includes(possibleAnswer);
-        }) ? true : false;
-    };
-
-    let user_response = '';
-    let wrongTries = 0;
-    while (!checkAns(correctAnswers, user_response)) {
-        if (user_response != '') {
-            alert('Wrong, please try again.');
-            wrongTries++;
-        }
-        user_response = prompt(`${'Mind Matter'
-            + '\n'}${retrieved.question}`);
-        if (user_response === null)
-            user_response = ''; // TODO close window
+    // first, check strict answers
+    if (retrieved.ans_exact) {
+        let correct = retrieved.ans_exact.find(exactAns => {
+            return user_response == exactAns;
+        });
+        if (correct)
+            return true;
     }
-    return wrongTries;
+    // next, see if numerical ans fits in specified range
+    else if (retrieved.ans_range) {
+        let num = Number(user_response);
+        if (num >= retrieved.ans_range.min && num <= retrieved.ans_range.max)
+            return true;
+    }
+    // finally, compare against possible answers
+    else if (retrieved.answer) {
+        user_response = user_response.trim().toLowerCase();
+        let correct = retrieved.ans_exact.find(possibleAns => {
+            return possibleAns instanceof String ? user_response.includes(possibleAns) : user_response == possibleAns;
+        });
+        if (correct)
+            return true;
+    }
+    return false;
+}
+
+function handleFillInTheBlank(retrieved) {
+
+    // inflate
+    $('#question').text(retrieved.question);
+    $('#response').load('fill_blank.html');
+
+    $('#response input').keyup(function (e) {
+        if (e.which === 13) {
+            $(this).attr('disabled', 'disabled'); //Disable textbox to prevent multiple submit
+            if (checkTextAnswer($(this).val(), retrieved))
+                finish(); // TODO
+            else
+                $(this).removeAttr('disabled'); //Enable the textbox again
+        }
+    });
+    $('#submit').click(function () {
+        if (checkTextAnswer($('#response input').val(), retrieved))
+            finish(); // TODO
+    })
 }
 
 /**
@@ -137,4 +148,14 @@ function setCooldown() {
     chrome.storage.sync.get('cooldown_info', function (items) {
         chrome.storage.local.set({ cooldown_lock: new Date().getTime() + items.cooldown_info.duration });
     });
+}
+
+function toggleModal() {
+    $('.modal').toggleClass('is-active');
+    $('html').toggleClass('is-clipped');
+}
+
+function closeModal() {
+    $('.modal').removeClass('is-active');
+    $('html').removeClass('is-clipped');
 }

@@ -26,6 +26,9 @@
       "all_frames": false
     }
   ],
+  "web_accessible_resources": [
+    "ui/question/index.html"
+  ],
   "browser_action": {
     "default_icon": "assets/brain-in-pot16.png",
     "default_title": "Mind Matter",

@@ -8,9 +8,35 @@
     <meta name="theme-color" content="#A9A9A9">
     <link rel="shortcut icon" href="/assets/favicon.ico">
 
+    <link rel="stylesheet" href="/styles/index.css">
+    <link rel="stylesheet" href="/styles/question.css">
+    <link rel="stylesheet" href="/styles/components/modal.css">
+    <script type="text/javascript" src="/vendor/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/question.js"></script>
     <title>Mind Matter</title>
 </head>
+
 <body>
-    <h1>yay</h1>
+    <div class="modal">
+        <div id="modal-background"></div>
+        <div class="modal-card">
+            <div style="text-align: right;">
+                <button id="modal-delete" aria-label="close"></button>
+            </div>
+            <p id="modal-text">Modal text</p>
+        </div>
+    </div>
+
+    <img src="/assets/word-logo.png" alt="Mind Matter" class="logo" />
+    <p>
+        You were trying to access
+        <i id="trigger"></i>.
+    </p>
+    <p id="question"></p>
+    <div id="response"></div>
+    <button id="submit">Submit</button>
+    <span></span>
+
 </body>
+
 </html>

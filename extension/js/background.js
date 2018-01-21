@@ -76,20 +76,3 @@ function coolDone() {
     chrome.storage.local.remove('cooldown_lock');
     notif('Ready', 'Mind Matter has come off cooldown. It will be activated by the next blacklisted site.');
 }
-
-/*
- * content_script detects blacklist violation and fires a message.
- * This handler will open the question page in a new tab and
- * close the MessageSender using chrome.tabs
- */
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-    if (request.triggerURL) {
-        chrome.storage.local.set({ triggerURL: request.triggerURL }, function () {
-            chrome.tabs.remove(sender.tab.id, function () {
-                chrome.tabs.create({
-                    url: chrome.runtime.getURL('/ui/question/index.html'),
-                })
-            });
-        });
-    }
-});
