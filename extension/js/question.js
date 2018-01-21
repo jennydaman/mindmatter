@@ -1,4 +1,3 @@
-var siteQueue;
 var wrongTries = 0;
 // retrieve question data and inflate components
 $(document).ready(function () {
@@ -6,53 +5,77 @@ $(document).ready(function () {
     chrome.storage.local.get(['trigger', 'singleton'], function (items) {
         chrome.storage.local.remove('trigger');
 
-        // user attempt to open multiple blacklisted sites, while another questions page is running
-        if (items.singleton) {
-            // do not use chrome.tabs.sendMessage, MessageSender tab is not registered
-            chrome.runtime.sendMessage({ anotherSite: items.trigger }); // kill me
-        }
-        // this instance is the first and only instance of the question page
-        else {
-            claimSingleton(items.trigger);
+        chrome.tabs.getCurrent(currentTab => {
+            // this instance is the first and only instance of the question page
+            if (!items.singleton || items.singleton === currentTab.id) {
 
-            $('#trigger').text(items.trigger);
-            $('#modal-delete').click(closeModal);
-            $('#modal-background').click(closeModal);
+                claimSingleton(items.trigger, currentTab.id);
 
-            retrieveQuestion(ret => {
-                if (ret.type === 'blank') {
-                    fillInTheBlank(ret);
-                }
-                else
-                    alert('retrieved question is not yet implemented');
-            });
-        }
+                $('#trigger').text(items.trigger);
+                $('#modal-delete').click(closeModal);
+                $('#modal-background').click(closeModal);
+
+                retrieveQuestion(ret => {
+                    if (ret.type === 'blank') {
+                        fillInTheBlank(ret);
+                    }
+                    else
+                        alert('retrieved question is not yet implemented');
+                });
+            }
+            // user attempt to open multiple blacklisted sites, while another questions page is running
+            else
+                // do not use chrome.tabs.sendMessage, MessageSender tab is not registered
+                chrome.runtime.sendMessage({ anotherSite: items.trigger }); // kill me
+        });
     });
 });
 
-function claimSingleton(firstSite) {
-    chrome.tabs.getCurrent(currentTab => {
-        chrome.storage.local.set({ singleton: currentTab.id });
-    });
-    siteQueue = [firstSite];
-    chrome.runtime.onMessage.addListener((message, sender) => {
-        if (message.anotherSite) {
+function claimSingleton(firstSite, currentTabId) {
+    chrome.storage.local.set({ singleton: currentTabId });
 
-            chrome.tabs.getCurrent(currentTab => {
-                chrome.tabs.highlight({
-                    tabs: currentTab.index,
-                    windowId: currentTab.windowId
+    // in case of refresh 
+    chrome.storage.local.get('siteQueue', function (items) {
+        if (items.siteQueue) { // was refreshed
+            if (items.siteQueue.length === 1)
+                $('#trigger').text(items.trigger);
+            else {
+                $('#trigger').replaceWith(function () {
+                    let dispList = $(`<ul id="trigger-list"></ul>`);
+                    items.siteQueue.forEach(url => {
+                        dispList.append(`<li>${url}</li>`);
+                    });
+                    return dispList;
                 });
-            });
+            }
+        }
+        else
+            chrome.storage.local.set({ siteQueue: [firstSite] }); // initialize siteQueue cache
+    });
 
-            if (siteQueue.length === 1) // replace with a list
-                $('#trigger').replaceWith(`<ul id="trigger-list"><li>${siteQueue[0]}</li><li>${message.anotherSite}</li></ul>`);
+    // message from additional blacklisted sites
+    chrome.runtime.onMessage.addListener((message, sender) => {
+        if (!message.anotherSite)
+            return; // ignore irrelevant messages
+
+        chrome.tabs.getCurrent(currentTab => {
+            chrome.tabs.highlight({
+                tabs: currentTab.index,
+                windowId: currentTab.windowId
+            });
+        });
+
+        chrome.storage.local.get('siteQueue', function (items) {
+            if (items.siteQueue.length === 1) // replace with a list
+                $('#trigger').replaceWith(`<ul id="trigger-list"><li>${items.siteQueue[0]}</li><li>${message.anotherSite}</li></ul>`);
             else
                 $('#trigger-list').append(`<li>${message.anotherSite}</li>`);
 
-            siteQueue.push(message.anotherSite);
-            chrome.tabs.remove(sender.tab.id);
-        }
+            items.siteQueue.push(message.anotherSite);
+            chrome.storage.local.set({ siteQueue: items.siteQueue }); // backup result
+        });
+
+        chrome.tabs.remove(sender.tab.id); // close the MessageSender
     });
 }
 
@@ -183,21 +206,21 @@ function fillInTheBlank(retrieved) {
 }
 
 function finish(wrongTries) {
-    chrome.storage.local.remove('singleton');
     updateScore(wrongTries);
-    setCooldown(function () {
-        // remove lock
-        chrome.storage.local.remove('trigger', function () {
+
+    chrome.storage.local.get('siteQueue', function (items) {
+        chrome.storage.local.remove(['singleton', 'siteQueue']);
+        setCooldown(function () {
 
             // open queued sites in other tabs
-            for (let i = 1; i < siteQueue.length; i++) {
+            for (let i = 1; i < items.siteQueue.length; i++) {
                 chrome.tabs.create({
-                    url: siteQueue[i],
+                    url: items.siteQueue[i],
                     active: false
                 });
             }
             // replace current tab with the first queued site
-            window.location.replace(siteQueue[0]);
+            window.location.replace(items.siteQueue[0]);
         });
     });
 }

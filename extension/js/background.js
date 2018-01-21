@@ -83,10 +83,10 @@ function coolDone() {
 
 chrome.tabs.onRemoved.addListener(function(tabID) {
     if (tabID === singletonID)
-        chrome.storage.local.remove('singleton');
+        chrome.storage.local.remove(['singleton', 'siteQueue']);
 })
 
 
 chrome.runtime.onSuspend.addListener(function () {
-    chrome.storage.local.remove(['singleton', 'cooldown_lock']);
+    chrome.storage.local.remove(['singleton', 'siteQueue', 'cooldown_lock']);
 });
