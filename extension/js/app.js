@@ -15,7 +15,7 @@ chrome.storage.local.get(['cooldown_lock', 'pause'], function (items) {
             return;
 
         chrome.storage.local.set({ trigger: location.href }, function () {
-            window.location.replace(chrome.runtime.getURL("/ui/question/index.html"));
+            window.location.replace(chrome.runtime.getURL('/ui/question/index.html'));
         });
     });
 });

@@ -1,4 +1,4 @@
-import * as subjects from './helper/subjects.js'
+import * as subjects from './helper/subjects.js';
 
 var wrongTries = 0;
 // retrieve question data and inflate components
@@ -43,7 +43,7 @@ function claimSingleton(firstSite, currentTabId) {
                 $('#trigger').text(items.siteQueue[0]);
             else {
                 $('#trigger').replaceWith(function () {
-                    let dispList = $(`<ul id="trigger-list"></ul>`);
+                    let dispList = $('<ul id="trigger-list"></ul>');
                     items.siteQueue.forEach(url => {
                         dispList.append(`<li>${url}</li>`);
                     });
@@ -101,7 +101,7 @@ function retrieveQuestion(callback, secondTry = false) {
         xhr.open('GET', url, true);
         xhr.setRequestHeader('Cache-Control', 'no-cache');
         xhr.onerror = function () {
-            reject('XHR error, IDK why');
+            alert('XHR error, IDK why');
         };
         xhr.onload = function () {
             if (xhr.status === 200)
@@ -109,9 +109,9 @@ function retrieveQuestion(callback, secondTry = false) {
             else {
                 if (secondTry) {
                     chrome.storage.local.set({ pause: true });
-                    alert('Mind Matter\n'
+                    alert(`${'Mind Matter\n'
                         + 'Failed two attempts to retrieve a question! Pausing myself and giving up...\n'
-                        + 'Response code: ' + xhr.statusText);
+                        + 'Response code: '}${  xhr.statusText}`);
                 }
                 else { // try again after refreshing database
                     subjects.pull().then(freshSubjects => {
@@ -120,8 +120,8 @@ function retrieveQuestion(callback, secondTry = false) {
                         });
                     }).catch(error => {
                         chrome.storage.local.set({ pause: true });
-                        alert('Mind Matter\n'
-                            + error.toString() + '\n'
+                        alert(`Mind Matter\n${
+                            error.toString()  }\n`
                             + 'Pausing myself and giving up...');
                     });
                 }
@@ -158,7 +158,7 @@ function checkTextAnswer(user_response = '', retrieved) {
     else if (retrieved.answer) {
         user_response = user_response.trim().toLowerCase();
         let correct = retrieved.answer.find(possibleAns => {
-            return typeof (possibleAns) === "string" ? user_response.includes(possibleAns) : user_response == possibleAns;
+            return typeof (possibleAns) === 'string' ? user_response.includes(possibleAns) : user_response == possibleAns;
         });
         if (correct)
             return true;
@@ -193,7 +193,7 @@ function fillInTheBlank(retrieved) {
                     finish(wrongTries);
                 else {
                     $(this).removeAttr('disabled'); //Enable the textbox again
-                    openModal('Incorrect. Wrong tries: ' + ++wrongTries);
+                    openModal(`Incorrect. Wrong tries: ${  ++wrongTries}`);
                 }
             }
         });
@@ -203,7 +203,7 @@ function fillInTheBlank(retrieved) {
         if (checkTextAnswer($('#blank').val(), retrieved))
             finish(wrongTries);
         else
-            openModal('Incorrect. Wrong tries: ' + ++wrongTries);
+            openModal(`Incorrect. Wrong tries: ${  ++wrongTries}`);
     });
 }
 
