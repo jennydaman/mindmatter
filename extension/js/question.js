@@ -20,7 +20,7 @@ $(document).ready(function () {
                 else {
                     modalAction(openTabs);
                     openModal(`ret.type=${ret.type}` +
-                    '\nQuestion type not yet supported. This is a bug.');
+                        '\nQuestion type not yet supported. This is a bug.');
                 }
             });
         });
@@ -103,7 +103,7 @@ function retrieveQuestion(callback, trial = 0) {
                     openModal('Request timed out, check your Internet connection.');
                 else
                     openModal('jqXHR error, IDK why.'
-                        + `\ntextStatus: ${textStatus}`,
+                        + `\ntextStatus: ${textStatus}`
                         + `\nerrorThrown: ${errorThrown}`);
             },
             statusCode: {
