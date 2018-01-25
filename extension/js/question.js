@@ -1,64 +1,57 @@
 import * as subjects from './helper/subjects.js';
 
 var wrongTries = 0;
+var siteQueue;
 // retrieve question data and inflate components
 $(document).ready(function () {
 
-    chrome.storage.local.get(['trigger', 'singleton'], function (items) {
+    chrome.storage.local.get(['trigger'], function (items) {
         chrome.storage.local.remove('trigger');
 
-        chrome.tabs.getCurrent(currentTab => {
+        // notify singleton page and background
+        chrome.runtime.sendMessage({ trigger: items.trigger }, response => {
+            // response is fired by background.js only if this page holds the singleton lock
+            siteQueue = response.siteQueue;
+            setup();
 
-            // this instance is the first and only instance of the question page
-            if (!items.singleton || items.singleton === currentTab.id) {
-
-                claimSingleton(items.trigger, currentTab.id);
-
-                $('#modal-delete').click(closeModal);
-                $('#modal-background').click(closeModal);
-
-                retrieveQuestion(ret => {
-                    if (ret.type === 'blank') {
-                        fillInTheBlank(ret);
-                    }
-                    else
-                        alert('retrieved question is not yet implemented');
-                });
-            }
-            // user attempt to open multiple blacklisted sites, while another questions page is running
-            else
-                // do not use chrome.tabs.sendMessage, MessageSender tab is not registered
-                chrome.runtime.sendMessage({ anotherSite: items.trigger }); // kill me
+            retrieveQuestion(ret => {
+                if (ret.type === 'blank')
+                    fillInTheBlank(ret);
+                else {
+                    modalAction(openTabs);
+                    openModal(`ret.type=${ret.type}` +
+                    '\nQuestion type not yet supported. This is a bug.');
+                }
+            });
         });
+        /*
+         * If this tab does not receive a message, execution stops.
+         * background.js will eventually close this tab.
+         */
     });
 });
 
-function claimSingleton(firstSite, currentTabId) {
-    chrome.storage.local.set({ singleton: currentTabId });
+function setup() {
 
-    // in case of refresh 
-    chrome.storage.local.get('siteQueue', function (items) {
-        if (items.siteQueue) { // was refreshed
-            if (items.siteQueue.length === 1)
-                $('#trigger').text(items.siteQueue[0]);
-            else {
-                $('#trigger').replaceWith(function () {
-                    let dispList = $('<ul id="trigger-list"></ul>');
-                    items.siteQueue.forEach(url => {
-                        dispList.append(`<li>${url}</li>`);
-                    });
-                    return dispList;
-                });
-            }
-        }
-        else
-            chrome.storage.local.set({ siteQueue: [firstSite] }); // initialize siteQueue cache
-    });
+    modalAction(closeModal);
+
+    if (siteQueue.length === 1)
+        $('#trigger').text(siteQueue[0]);
+    else {
+        $('#trigger').replaceWith(function () {
+            let dispList = $('<ul id="trigger-list"></ul>');
+            siteQueue.forEach(url => {
+                dispList.append(`<li>${url}</li>`);
+            });
+            return dispList;
+        });
+    }
 
     // message from additional blacklisted sites
-    chrome.runtime.onMessage.addListener((message, sender) => {
-        if (!message.anotherSite)
-            return; // ignore irrelevant messages
+    chrome.runtime.onMessage.addListener(message => {
+
+        if (!message.trigger)
+            return;
 
         chrome.tabs.getCurrent(currentTab => {
             chrome.tabs.highlight({
@@ -67,25 +60,29 @@ function claimSingleton(firstSite, currentTabId) {
             });
         });
 
-        chrome.storage.local.get('siteQueue', function (items) {
-            if (items.siteQueue.length === 1) // replace with a list
-                $('#trigger').replaceWith(`<ul id="trigger-list"><li>${items.siteQueue[0]}</li><li>${message.anotherSite}</li></ul>`);
-            else
-                $('#trigger-list').append(`<li>${message.anotherSite}</li>`);
+        if (siteQueue.length === 1)
+            $('#trigger').replaceWith(`<ul id="trigger-list"><li>${siteQueue[0]}</li><li>${message.trigger}</li></ul>`);
+        else
+            $('#trigger-list').append(`<li>${message.trigger}</li>`);
 
-            items.siteQueue.push(message.anotherSite);
-            chrome.storage.local.set({ siteQueue: items.siteQueue }); // backup result
-        });
-
-        chrome.tabs.remove(sender.tab.id); // close the MessageSender
+        siteQueue.push(message.trigger);
     });
 }
 
 //callback questionHandler invoked if and only if retrieval is successful.
-function retrieveQuestion(callback, secondTry = false) {
-    chrome.storage.sync.get('indexStructure', function (items) {
+function retrieveQuestion(callback, trial = 0) {
+
+    if (trial === 2) {
+        chrome.storage.local.set({ pause: true });
+        modalAction(openTabs);
+        openModal('Failed two attempts to retrieve a question! Pausing myself and giving up...');
+        return;
+    }
+
+    chrome.storage.sync.get('indexStructure', items => {
 
         //TODO: improve this algorithm, implement 'chance'
+
         //add all questions to one big array
         let allQuestions = [];
         items.indexStructure.subjects.forEach(subjectInfo => {
@@ -94,40 +91,40 @@ function retrieveQuestion(callback, secondTry = false) {
             });
         });
 
-        let url = allQuestions[Math.random() * allQuestions.length | 0].url;
+        $.ajax({
+            url: allQuestions[Math.random() * allQuestions.length | 0].url,
+            cache: false,
+            dataType: 'json',
+            error: (jqXHR, textStatus, errorThrown) => {
 
-        var xhr = new XMLHttpRequest();
-        xhr.responseType = 'json';
-        xhr.open('GET', url, true);
-        xhr.setRequestHeader('Cache-Control', 'no-cache');
-        xhr.onerror = function () {
-            alert('XHR error, IDK why');
-        };
-        xhr.onload = function () {
-            if (xhr.status === 200)
-                callback(xhr.response);
-            else {
-                if (secondTry) {
-                    chrome.storage.local.set({ pause: true });
-                    alert(`${'Mind Matter\n'
-                        + 'Failed two attempts to retrieve a question! Pausing myself and giving up...\n'
-                        + 'Response code: '}${  xhr.statusText}`);
-                }
-                else { // try again after refreshing database
+                modalAction(openTabs);
+
+                if (textStatus === 'timeout')
+                    openModal('Request timed out, check your Internet connection.');
+                else
+                    openModal('jqXHR error, IDK why.'
+                        + `\ntextStatus: ${textStatus}`,
+                        + `\nerrorThrown: ${errorThrown}`);
+            },
+            statusCode: {
+                404: function () { // refresh question index before trying again
                     subjects.pull().then(freshSubjects => {
                         subjects.store(freshSubjects, function () {
-                            retrieveQuestion(callback, true);
+                            retrieveQuestion(callback, trial + 1);
                         });
                     }).catch(error => {
                         chrome.storage.local.set({ pause: true });
-                        alert(`Mind Matter\n${
-                            error.toString()  }\n`
+                        openModal(`Mind Matter\n${
+                            error.toString()}\n`
                             + 'Pausing myself and giving up...');
                     });
+                },
+                200: data => {
+                    callback(data);
                 }
-            }
-        };
-        xhr.send();
+            },
+            timeout: 5000
+        });
     });
 }
 
@@ -194,7 +191,7 @@ function fillInTheBlank(retrieved) {
                     finish(wrongTries);
                 else {
                     $(this).removeAttr('disabled'); //Enable the textbox again
-                    openModal(`Incorrect. Wrong tries: ${  ++wrongTries}`);
+                    openModal(`Incorrect. Wrong tries: ${++wrongTries}`);
                 }
             }
         });
@@ -204,28 +201,14 @@ function fillInTheBlank(retrieved) {
         if (checkTextAnswer($('#blank').val(), retrieved))
             finish(wrongTries);
         else
-            openModal(`Incorrect. Wrong tries: ${  ++wrongTries}`);
+            openModal(`Incorrect. Wrong tries: ${++wrongTries}`);
     });
 }
 
 function finish(wrongTries) {
+
     updateScore(wrongTries);
-
-    chrome.storage.local.get('siteQueue', function (items) {
-        chrome.storage.local.remove(['singleton', 'siteQueue']);
-        setCooldown(function () {
-
-            // open queued sites in other tabs
-            for (let i = 1; i < items.siteQueue.length; i++) {
-                chrome.tabs.create({
-                    url: items.siteQueue[i],
-                    active: false
-                });
-            }
-            // replace current tab with the first queued site
-            window.location.replace(items.siteQueue[0]);
-        });
-    });
+    setCooldown().then(openTabs);
 }
 
 /**
@@ -233,7 +216,7 @@ function finish(wrongTries) {
  * @param {Number} wrongTries 
  */
 function updateScore(wrongTries) {
-    chrome.storage.sync.get('consistency', function (items) {
+    chrome.storage.sync.get('consistency', items => {
 
         if (wrongTries === 0) { //correct on first try
             items.consistency.total++;
@@ -247,13 +230,27 @@ function updateScore(wrongTries) {
 }
 
 /**
- * 
- * @param {Function} callback 
+ * @return {Promise}
  */
 function setCooldown(callback) {
-    chrome.storage.sync.get('cooldown_info', function (items) {
-        chrome.storage.local.set({ cooldown_lock: new Date().getTime() + items.cooldown_info.duration }, callback);
+    return new Promise(resolve => {
+        chrome.storage.sync.get('cooldown_info', items => {
+            chrome.storage.local.set({ cooldown_lock: new Date().getTime() + items.cooldown_info.duration }, resolve);
+        });
     });
+}
+
+function openTabs() {
+    // open queued sites in other tabs
+    for (let i = 1; i < siteQueue.length; i++) {
+        chrome.tabs.create({
+            url: siteQueue[i],
+            active: false
+        });
+    }
+    // replace current tab with the first queued site
+    window.location.replace(siteQueue[0]);
+    // background.js will clean up after change to cooldown_lock registers
 }
 
 function openModal(message) {
@@ -261,6 +258,11 @@ function openModal(message) {
         $('#modal-text').text(message);
     $('.modal').addClass('is-active');
     $('html').addClass('is-clipped');
+}
+
+function modalAction(action) {
+    $('#modal-delete').click(action);
+    $('#modal-background').click(action);
 }
 
 function closeModal() {

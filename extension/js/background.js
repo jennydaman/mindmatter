@@ -60,23 +60,33 @@ chrome.runtime.onInstalled.addListener(function () {
 //set the cooldown timer
 var cooldown_timeout;
 // listen for when singleton page becomes active
-var singletonID;
+var questionSingleton = null;
+var siteQueue = null; // cache site queue in background page memory
+
+chrome.runtime.onSuspend.addListener(function () {
+    chrome.storage.local.remove(['siteQueue', 'cooldown_lock']);
+});
 
 chrome.storage.onChanged.addListener(function (changes) {
 
     if (changes.cooldown_lock) {
 
         if (changes.cooldown_lock.newValue) { //cooldown_lock is set
-            chrome.storage.sync.get('cooldown_info', function (items) {
+            chrome.storage.sync.get('cooldown_info', items => {
+                
+                // set the cooldown timer
                 cooldown_timeout = setTimeout(coolDone, items.cooldown_info.duration);
+
+                // clear singleton page lock and site queue cache
+                questionSingleton = null;
+                siteQueue = null;
+
                 notif('Correct', `You are correct! I'll leave you alone for ${items.cooldown_info.english}.`);
             });
         }
         else //cooldown is off, stop countdown
             clearTimeout(cooldown_timeout);
     }
-    else if (changes.singleton)
-        singletonID = changes.singleton.newValue;
 });
 
 //called when cooldown is over.
@@ -85,12 +95,28 @@ function coolDone() {
     notif('Ready', 'Mind Matter has come off cooldown. It will be activated by the next blacklisted site.');
 }
 
-chrome.tabs.onRemoved.addListener(function(tabID) {
-    if (tabID === singletonID)
-        chrome.storage.local.remove(['singleton', 'siteQueue']);
+// clear singleton lock if question page is closed 
+chrome.tabs.onRemoved.addListener(function (tabID) {
+    if (tabID === questionSingleton) {
+        questionSingleton = null;
+        siteQueue = null;
+    }
 });
 
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
-chrome.runtime.onSuspend.addListener(function () {
-    chrome.storage.local.remove(['singleton', 'siteQueue', 'cooldown_lock']);
+    if (!request.trigger)
+        return;
+
+    switch (questionSingleton) {
+        case null:                              // MessageSender is first instance of question page
+            questionSingleton = sender.tab.id;  // create lock
+            siteQueue = [request.trigger];
+        case sender.tab.id:                     // MessageSender is the singleton, user might have refreshed page
+            sendResponse({siteQueue: siteQueue});
+            break; 
+        default: // is an additional tab
+            siteQueue.push(request.trigger);           // add site to cache
+            chrome.tabs.remove(sender.tab.id); // close the MessageSender
+    }
 });
