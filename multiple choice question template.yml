@@ -1,11 +1,13 @@
-question: This is an AMAZING multiple-choice question in YAML?
-
-moreInfo: A longer explination to the question.
 type: choice
+
+question: This is an AMAZING multiple-choice question in YAML?
+moreInfo: A longer explination to the question.
+
 image:
   src: https://jennydaman.github.io/mindmatter/image.jpg
   author: A great artist that deserves credit
   link: https://artistprofile.com/wearegoodpeoplebecausewecite
+
 hint: Your first choice was wrong, this message will appear now.
 
 choices:
@@ -14,4 +16,3 @@ choices:
     - this ain't right
     - neither is this
     - have at least four total choices
-

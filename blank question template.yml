@@ -1,10 +1,12 @@
+type: blank
+
 question: This is an AMAZING fill-in-the-blank question in YAML?
 moreInfo: This is a longer explination to the question.
-type: blank
 image:
   src: https://jennydaman.github.io/mindmatter/image.jpg
   author: A great artist that deserves credit
   link: https://artistprofile.com/wearegoodpeoplebecausewecite
+
 hint: Your first choice was wrong, this message will appear now.
 
 answer:

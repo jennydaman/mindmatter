@@ -1,0 +1,10 @@
+type: choice
+
+question: Which of the muscles below abducts the thumb?
+
+choices:
+  correct: abductor pollicis longus
+  wrong:
+    - flexor pollicis longus
+    - extensor pollicis longus
+    - extensor pollicis brevis

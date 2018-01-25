@@ -1,0 +1,8 @@
+type: choice
+question: Which of these muscles both extend and abduct the wrist?
+choices:
+  correct: extensor carpi radialis
+  wrong:
+    - extensor carpi ulnaris
+    - extensor digitorum
+    - abductor pollicis longus

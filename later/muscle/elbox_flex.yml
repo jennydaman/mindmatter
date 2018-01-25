@@ -1,0 +1,8 @@
+type: choice
+question: which muscle extends the elbow joint?
+choices:
+  correct: triceps brachii
+  wrong:
+    - pronator teres
+    - pronator quadratus
+    - biceps brachii
