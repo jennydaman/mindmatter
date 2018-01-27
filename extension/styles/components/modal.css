@@ -49,7 +49,7 @@
 }
 
 .is-clipped {
-    overflow: hidden !important;
+    overflow: hidden;
 }
 
 .modal-card {
