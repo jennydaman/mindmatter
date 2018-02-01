@@ -1,11 +1,21 @@
 {
   "name": "mindmatter",
-  "dependencies": {},
+  "version": "0.5.1",
+  "author": {
+    "name": "Jennings Zhang",
+    "email": "jenni_zh@protonmail.com",
+    "url": "https://jennydaman.github.io/"
+  },
+  "dependencies": {
+    "jquery": "^3.3.1"
+  },
   "devDependencies": {
     "eslint": "^4.12.1"
   },
   "scripts": {
-    "test": "exit 0"
+    "postinstall": "cp node_modules/jquery/dist/jquery.min.js extension/vendor/",
+    "lint": "eslint extension",
+    "lit": "eslint --fix extension"
   },
   "repository": {
     "type": "git",
@@ -15,10 +25,8 @@
     "chrome",
     "education"
   ],
-  "author": "Jennings Zhang",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/jennydaman/mindmatter/issues"
-  },
-  "homepage": "https://github.com/jennydaman/mindmatter#readme"
+  }
 }

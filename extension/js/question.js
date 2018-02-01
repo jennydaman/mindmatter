@@ -1,5 +1,29 @@
 import * as subjects from './helper/subjects.js';
 
+const modal = {
+    /**
+     * @param {String} message text to display
+     */
+    show: message => {
+        if (message)
+            $('#modal-text').text(message);
+        $('.modal').addClass('is-active');
+        $('html').addClass('is-clipped');
+    },
+    /**
+     * Assign function to modal close event.
+     * @param {Function} action function to be called when modal is closed.
+     */
+    onClose: action => {
+        $('#modal-delete').click(action);
+        $('#modal-background').click(action);
+    },
+    close: function () {
+        $('.modal').removeClass('is-active');
+        $('html').removeClass('is-clipped');
+    }
+};
+
 var wrongTries = 0;
 var siteQueue;
 // retrieve question data and inflate components
@@ -14,14 +38,27 @@ $(document).ready(function () {
             siteQueue = response.siteQueue;
             setup();
 
-            retrieveQuestion(ret => {
-                if (ret.type === 'blank')
-                    fillInTheBlank(ret);
-                else {
-                    modalAction(openTabs);
-                    openModal(`ret.type=${ret.type}` +
-                        '\nQuestion type not yet supported. This is a bug.');
+            retrieveQuestion().then(question => {
+                handleQuestionType(question);
+            }).catch(error => {
+                if (error.statusCode === 404) {
+                    // refresh question index before trying again
+                    subjects.update().then(function () {
+                        // after question index is retrieved and stored, try to get another question
+                        retrieveQuestion().then(question => {
+                            handleQuestionType(question);
+                        }).catch(secondError => {
+                            fail('Missed two attempts to retrieve a question.\nPausing myself and giving up...'
+                            + `\nSecond questionURL: ${secondError.questionURL}:`);
+                        });
+                    }).catch(subjectsUpdateError => {
+                        fail(`Question --> 404\nSubjects --> ${subjectsUpdateError}`);
+                    });
                 }
+                else
+                    fail(error.textStatus == 'timeout' ?
+                        'Connection timeout. Please check your internet connection.' :
+                        `$.ajax errorThrown: ${error.errorThrown}\nquestionURL: ${error.questionURL}`);
             });
         });
         /*
@@ -31,9 +68,20 @@ $(document).ready(function () {
     });
 });
 
+/**
+ * Shows a modal, set pause to true, open tabs when modal is closed.
+ * @param {String} message 
+ */
+function fail(message) {
+    modal.onClose(openTabs);
+    chrome.storage.local.set({ pause: true }, function () {
+        modal.show(message);
+    });
+}
+
 function setup() {
 
-    modalAction(closeModal);
+    modal.onClose(modal.close);
 
     if (siteQueue.length === 1)
         $('#trigger').text(siteQueue[0]);
@@ -69,63 +117,67 @@ function setup() {
     });
 }
 
-//callback questionHandler invoked if and only if retrieval is successful.
-function retrieveQuestion(callback, trial = 0) {
+/**
+ * @returns {Promise}
+ */
+function pickQuestion() {
+    return new Promise(resolve => {
+        chrome.storage.sync.get('indexStructure', items => {
+            // TODO chance map
+            let allQuestions = [];
+            items.indexStructure.subjects.forEach(subjectInfo => {
 
-    if (trial === 2) {
-        chrome.storage.local.set({ pause: true });
-        modalAction(openTabs);
-        openModal('Failed two attempts to retrieve a question! Pausing myself and giving up...');
-        return;
-    }
+                if (!subjectInfo.enabled)
+                    return;
 
-    chrome.storage.sync.get('indexStructure', items => {
-
-        //TODO: improve this algorithm, implement 'chance'
-
-        //add all questions to one big array
-        let allQuestions = [];
-        items.indexStructure.subjects.forEach(subjectInfo => {
-            subjectInfo.questions.forEach(question => {
-                allQuestions.push(question);
+                subjectInfo.questions.forEach(question => {
+                    allQuestions.push(question);
+                });
             });
-        });
-
-        $.ajax({
-            url: allQuestions[Math.random() * allQuestions.length | 0].url,
-            cache: false,
-            dataType: 'json',
-            error: (jqXHR, textStatus, errorThrown) => {
-
-                modalAction(openTabs);
-
-                if (textStatus === 'timeout')
-                    openModal('Request timed out, check your Internet connection.');
-                else
-                    openModal('jqXHR error, IDK why.'
-                        + `\ntextStatus: ${textStatus}`
-                        + `\nerrorThrown: ${errorThrown}`);
-            },
-            statusCode: {
-                404: function () { // refresh question index before trying again
-                    subjects.pull().then(freshSubjects => {
-                        subjects.store(freshSubjects, function () {
-                            retrieveQuestion(callback, trial + 1);
-                        });
-                    }).catch(error => {
-                        chrome.storage.local.set({ pause: true });
-                        openModal(`Mind Matter\n${
-                            error.toString()}\n`
-                            + 'Pausing myself and giving up...');
-                    });
-                },
-                200: data => {
-                    callback(data);
-                }
-            },
-            timeout: 5000
+            resolve(allQuestions[Math.random() * allQuestions.length | 0].url);
         });
     });
+}
+
+// maybe I should reject with an Error object?
+/**
+ * @return {Promise} reject keys: questionURL, textStatus, errorThrown, statusCode
+ */
+function retrieveQuestion() {
+    return new Promise((resolve, reject) => {
+        pickQuestion().then(questionURL => {
+            $.ajax({
+                url: questionURL,
+                dataType: 'json',
+                error: (jqXHR, textStatus, errorThrown) =>
+                    reject({
+                        statusCode: jqXHR.status,
+                        textStatus: textStatus,
+                        errorThrown: errorThrown,
+                        questionURL: questionURL
+                    }),
+                statusCode: {
+                    404: function () {
+                        reject({
+                            statusCode: 404,
+                            questionURL: questionURL
+                        });
+                    },
+                    200: data => resolve(data)
+                },
+                timeout: 5000
+            });
+        });
+    });
+}
+
+function handleQuestionType(question) {
+    if (question.type === 'blank')
+        fillInTheBlank(question);
+    else {
+        fail(`question.type=${question.type}` +
+            '\nQuestion type not yet supported. This is a bug.');
+    }
 }
 
 /**
@@ -191,7 +243,7 @@ function fillInTheBlank(retrieved) {
                     finish(wrongTries);
                 else {
                     $(this).removeAttr('disabled'); //Enable the textbox again
-                    openModal(`Incorrect. Wrong tries: ${++wrongTries}`);
+                    modal.show(`Incorrect. Wrong tries: ${++wrongTries}`);
                 }
             }
         });
@@ -201,7 +253,7 @@ function fillInTheBlank(retrieved) {
         if (checkTextAnswer($('#blank').val(), retrieved))
             finish(wrongTries);
         else
-            openModal(`Incorrect. Wrong tries: ${++wrongTries}`);
+            modal.show(`Incorrect. Wrong tries: ${++wrongTries}`);
     });
 }
 
@@ -213,7 +265,7 @@ function finish(wrongTries) {
 
 /**
  * Updates consistency score in chrome.storage.sync
- * @param {Number} wrongTries 
+ * @param {Number} wrongTries
  */
 function updateScore(wrongTries) {
     chrome.storage.sync.get('consistency', items => {
@@ -222,9 +274,9 @@ function updateScore(wrongTries) {
             items.consistency.total++;
             items.consistency.score++;
         }
-        else //wrong
+        else // FIXME bump total whenever question is wrong instead of when question is completed
             items.consistency.total += wrongTries;
-        items.consistency.total = Math.max(items.consistency.total, 10);
+        items.consistency.total = Math.min(items.consistency.total, 10);
         chrome.storage.sync.set({ consistency: items.consistency });
     });
 }
@@ -251,21 +303,4 @@ function openTabs() {
     // replace current tab with the first queued site
     window.location.replace(siteQueue[0]);
     // background.js will clean up after change to cooldown_lock registers
-}
-
-function openModal(message) {
-    if (message)
-        $('#modal-text').text(message);
-    $('.modal').addClass('is-active');
-    $('html').addClass('is-clipped');
-}
-
-function modalAction(action) {
-    $('#modal-delete').click(action);
-    $('#modal-background').click(action);
-}
-
-function closeModal() {
-    $('.modal').removeClass('is-active');
-    $('html').removeClass('is-clipped');
 }

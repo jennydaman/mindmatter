@@ -22,13 +22,13 @@ module.exports = {
             "single"
         ],
         "semi": [
-            "warn",
+            "error",
             "always"
         ],
         "no-inner-declarations": "off",
         "no-console": "off",
         "prefer-template": "warn",
-        "no-unused-vars": "off",
+        "no-unused-vars": "warn",
         "quote-props": [
             "warn",
             "as-needed"

@@ -20,28 +20,33 @@ function pull(url = 'https://jennydaman.github.io/mindmatter/subjects.json') {
                 reject(Error(`Couldn't get subjects data. Response code: ${xhr.statusText}`));
         };
         xhr.onerror = function () {
-            reject(Error('Request for subjects data was unsuccessful, I HAVE NO IDEA WHY.'));
+            reject(Error('XHR for subjects refresh error, I HAVE NO IDEA WHY.'));
         };
         xhr.send();
     });
 }
 
 /**
- * Gets updated subjects and stores it, without handling XHR errors.
+ * @returns {Promise}
  */
 function update() {
-    pull().then(function (freshSubjects) {
-        store(freshSubjects);
+    return new Promise((resolve, reject) => {
+        pull().then(freshSubjects => {
+            store(freshSubjects).then(resolve);
+        }).catch(err => reject(err)); // pass the error along
     });
 }
 
 /**
  * Saves questions to chrome.storage.sync.
- * @param freshSubjects 
+ * @param freshSubjects
+ * @returns {Promise}
  */
-function store(freshSubjects, callback) {
+function store(freshSubjects) {
     // TODO update individual subject and question settings
-    chrome.storage.sync.set({ indexStructure: freshSubjects }, callback);
+    return new Promise(resolve => {
+        chrome.storage.sync.set({ indexStructure: freshSubjects }, resolve);
+    });
 }
 
 export {pull, update, store};
