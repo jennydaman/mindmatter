@@ -1,5 +1,5 @@
-import * as subjects from './helper/subjects.js';
-import notif from './helper/notif.js';
+import * as subjects from './util/subjects.js';
+import notif from './util/notif.js';
 
 chrome.runtime.onInstalled.addListener(function () {
 

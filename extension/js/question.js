@@ -1,4 +1,6 @@
-import * as subjects from './helper/subjects.js';
+// TODO close tab when pause is true storage.onChanged
+
+import * as subjects from './util/subjects.js';
 
 const modal = {
     /**

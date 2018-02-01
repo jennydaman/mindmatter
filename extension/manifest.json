@@ -5,7 +5,13 @@
   "version": "0.5.1",
   "version_name": "0.5.1 alpha",
   "minimum_chrome_version": "63",
-  "author": "Jennings Zhang",
+  "author": {
+    "name": "Jennings Zhang",
+    "email": "jenni_zh@protonmail.com"
+  },
+  "default_locale": "en",
+  "homepage_url": "https://github.com/jennydaman/mindmatter",
+  "incognito": "not_allowed",
   "background": {
     "page": "background.html"
   },
