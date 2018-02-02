@@ -1,7 +1,5 @@
 // TODO close tab when pause is true storage.onChanged
 
-import * as subjects from './util/subjects.js';
-
 const modal = {
     /**
      * @param {String} message text to display
@@ -43,20 +41,8 @@ $(document).ready(function () {
             retrieveQuestion().then(question => {
                 handleQuestionType(question);
             }).catch(error => {
-                if (error.statusCode === 404) {
-                    // refresh question index before trying again
-                    subjects.update().then(function () {
-                        // after question index is retrieved and stored, try to get another question
-                        retrieveQuestion().then(question => {
-                            handleQuestionType(question);
-                        }).catch(secondError => {
-                            fail('Missed two attempts to retrieve a question.\nPausing myself and giving up...'
-                            + `\nSecond questionURL: ${secondError.questionURL}:`);
-                        });
-                    }).catch(subjectsUpdateError => {
-                        fail(`Question --> 404\nSubjects --> ${subjectsUpdateError}`);
-                    });
-                }
+                if (error.statusCode === 404)
+                    retrieveQuestionAgain();
                 else
                     fail(error.textStatus == 'timeout' ?
                         'Connection timeout. Please check your internet connection.' :
@@ -169,6 +155,23 @@ function retrieveQuestion() {
                 },
                 timeout: 5000
             });
+        });
+    });
+}
+
+function retrieveQuestionAgain() {
+    // https://developers.google.com/web/updates/2017/11/dynamic-import
+    import('./util/subjects.js').then(subjects => {
+        subjects.update().then(function () {
+            // after question index is retrieved and stored, try to get another question
+            retrieveQuestion().then(question => {
+                handleQuestionType(question);
+            }).catch(secondError => {
+                fail('Missed two attempts to retrieve a question.\nPausing myself and giving up...'
+                    + `\nSecond questionURL: ${secondError.questionURL}:`);
+            });
+        }).catch(subjectsUpdateError => {
+            fail(`Question --> 404\nSubjects --> ${subjectsUpdateError}`);
         });
     });
 }
