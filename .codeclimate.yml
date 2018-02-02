@@ -1,0 +1,13 @@
+checks:
+  method-lines:
+    config:
+      threshold: 64
+
+engines:
+  eslint:
+    enabled: true
+    checks:
+      prefer-template:
+        enabled: false
+      fatal:
+        enabled: false # ignore 'Parsing error: 'import' and 'export' may only appear at the top level'

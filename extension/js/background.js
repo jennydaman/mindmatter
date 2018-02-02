@@ -26,8 +26,8 @@ chrome.runtime.onInstalled.addListener(function () {
         });
 
         subjects.update().catch(error => {
-            let msg = 'Could not initialize the subjects index! If this problem is unrelated to Internet issues, please report a bug.'
-                + '\n' + error;
+            let msg = `${'Could not initialize the subjects index! If this problem is unrelated to Internet issues, please report a bug.'
+                + '\n'}${  error}`;
             notif('Mind Matter', msg).catch(function () {
                 alert(msg);
             });
@@ -108,15 +108,15 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         return;
 
     switch (questionSingleton) {
-        case null:                              // MessageSender is first instance of question page
-            questionSingleton = sender.tab.id;  // create lock
-            siteQueue = [request.trigger];
+    case null:                              // MessageSender is first instance of question page
+        questionSingleton = sender.tab.id;  // create lock
+        siteQueue = [request.trigger];
         // falls through
-        case sender.tab.id:                     // MessageSender is the singleton, user might have refreshed page
-            sendResponse({ siteQueue: siteQueue });
-            break;
-        default: // is an additional tab
-            siteQueue.push(request.trigger);    // add site to cache
-            chrome.tabs.remove(sender.tab.id);  // close the MessageSender
+    case sender.tab.id:                     // MessageSender is the singleton, user might have refreshed page
+        sendResponse({ siteQueue: siteQueue });
+        break;
+    default: // is an additional tab
+        siteQueue.push(request.trigger);    // add site to cache
+        chrome.tabs.remove(sender.tab.id);  // close the MessageSender
     }
 });
