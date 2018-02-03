@@ -20,7 +20,7 @@
         "<all_urls>"
       ],
       "js": [
-        "js/app.js"
+        "js/detect.js"
       ],
       "run_at": "document_start",
       "all_frames": false

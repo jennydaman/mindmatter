@@ -14,3 +14,4 @@ before_script:
 after_script:
   - npm run codecov
   - ./cc-test-reporter after-build -t lcov -p ./coverage --exit-code $TRAVIS_TEST_RESULT --debug || echo 'Skipping cc-test-reporter after-build...'
+  - cat ./coverage/lcov.info |  node_modules/.bin/codacy-coverage -f lcov
