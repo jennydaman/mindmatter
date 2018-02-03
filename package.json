@@ -18,9 +18,7 @@
     "nyc": "^11.4.1"
   },
   "scripts": {
-    "pretest": "[ -e './cc-test-reporter' ] || curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter && chmod +x ./cc-test-reporter && ./cc-test-reporter before-build",
     "test": "nyc mocha --require babel-preset-env",
-    "posttest": "nyc report --reporter=lcov && ./cc-test-reporter after-build -t lcov -p ./coverage -r f5a6e6e5b828565b7a3cfc8c1bae84d3d2c1d7b22a863683af69bb3e2153ace8",
     "lint": "eslint extension",
     "lit": "eslint --fix extension",
     "postinstall": "cp node_modules/jquery/dist/jquery.min.js extension/vendor/"
