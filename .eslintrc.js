@@ -1,9 +1,12 @@
 module.exports = {
+    "parser": "babel-eslint",
     "parserOptions": {
+        "allowImportExportEverywhere": false,
         "sourceType": "module"
     },
     "env": {
         "browser": true,
+        "node": true,
         "es6": true,
         "jquery": true        
     },

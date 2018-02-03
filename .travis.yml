@@ -1,3 +1,6 @@
+git:
+  depth: false
+
 language: node_js
 node_js:
   - "node"
@@ -8,8 +11,6 @@ cache:
 
 before_script:
   - '[ -e "./cc-test-reporter" ] || curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter && chmod +x ./cc-test-reporter && ./cc-test-reporter before-build'
-
 after_script:
-  - nyc report --reporter=lcov
-  - ./cc-test-reporter after-build -t lcov -p ./coverage --debug || echo 'Skipping cc-test-reporter after-build...'
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  - npm run codecov
+  - ./cc-test-reporter after-build -t lcov -p ./coverage --exit-code $TRAVIS_TEST_RESULT --debug || echo 'Skipping cc-test-reporter after-build...'
