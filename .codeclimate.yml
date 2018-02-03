@@ -1,7 +1,7 @@
 checks:
   method-lines:
     config:
-      threshold: 64
+      threshold: 36
 
 engines:
   eslint:
