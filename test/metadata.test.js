@@ -1,9 +1,9 @@
 const expect = require('chai').expect;
 
-var packageFile = require('../package.json');
-var manifestFile = require('../extension/manifest.json');
-
 describe('Metadata', function () {
+
+    var packageFile = require('../package.json');
+    var manifestFile = require('../extension/manifest.json');
 
     it('should be consistent in both manifest.json and package.json', function () {
 

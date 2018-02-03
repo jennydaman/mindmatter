@@ -49,4 +49,4 @@ function store(freshSubjects) {
     });
 }
 
-export {pull, update, store};
+export default update;

@@ -1,16 +1,12 @@
-import * as subjects from './util/subjects.js';
 import notif from './util/notif.js';
+import refreshSubjects from './util/subjects.js';
+chrome.runtime.onInstalled.addListener(
+    (details, getSubjects = refreshSubjects, callback = chrome.runtime.openOptionsPage) => {
 
-chrome.runtime.onInstalled.addListener(function () {
-
-
-    chrome.storage.local.clear();
-    chrome.storage.local.set({ pause: false });
-
-    chrome.storage.sync.get('setup', function (items) {
-
-        if (items.setup)
-            return; //extension already initialized
+        /* if (details.reason === 'update')
+            return; */
+        chrome.storage.local.clear();
+        chrome.storage.local.set({ pause: false });
 
         chrome.storage.sync.set({
             blacklist_array: ['youtube.com', 'facebook.com', 'reddit.com', 'buzzfeed.com'],
@@ -22,34 +18,33 @@ chrome.runtime.onInstalled.addListener(function () {
                 total: 0,
                 score: 0
             }
-            //setup: true this will prevent initial set up from running.
         });
 
-        subjects.update().catch(error => {
-            let msg = `${'Could not initialize the subjects index! If this problem is unrelated to Internet issues, please report a bug.'
-                + '\n'}${  error}`;
+        getSubjects().catch(error => {
+
+            let msg = 'Could not initialize the subjects index!'
+                + 'If this problem is unrelated to Internet issues, please report a bug.\n'
+                + error;
             notif('Mind Matter', msg).catch(function () {
                 alert(msg);
             });
         }).finally(function () {
+
             chrome.storage.local.set(
                 {
                     options_message: {
-                        text: 'Thanks for installing Mind Matter! This is the options page, please have a look around.',
+                        text: 'Thanks for installing Mind Matter! '
+                            + 'This is the options page, please have a look around.',
                         once: true
                     }
-                },
-                function () {
-                    chrome.runtime.openOptionsPage();
-                });
+                }, callback);
         });
     });
-});
 
 var refreshTimer;
 chrome.runtime.onStartup.addListener(function () {
-    subjects.update(); //refresh indexStructure on startup
-    refreshTimer = setInterval(subjects.update, 6.048e8); //refresh once a week
+    refreshSubjects();
+    refreshTimer = setInterval(refreshSubjects, 6.048e8); //refresh once a week
 });
 chrome.runtime.onSuspend.addListener(function () {
     clearInterval(refreshTimer);
@@ -61,10 +56,6 @@ var cooldown_timeout;
 // listen for when singleton page becomes active
 var questionSingleton = null;
 var siteQueue = null; // cache site queue in background page memory
-
-chrome.runtime.onSuspend.addListener(function () {
-    chrome.storage.local.remove(['siteQueue', 'cooldown_lock']);
-});
 
 chrome.storage.onChanged.addListener(function (changes) {
 
@@ -108,15 +99,15 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         return;
 
     switch (questionSingleton) {
-    case null:                              // MessageSender is first instance of question page
-        questionSingleton = sender.tab.id;  // create lock
-        siteQueue = [request.trigger];
+        case null:                              // MessageSender is first instance of question page
+            questionSingleton = sender.tab.id;  // create lock
+            siteQueue = [request.trigger];
         // falls through
-    case sender.tab.id:                     // MessageSender is the singleton, user might have refreshed page
-        sendResponse({ siteQueue: siteQueue });
-        break;
-    default: // is an additional tab
-        siteQueue.push(request.trigger);    // add site to cache
-        chrome.tabs.remove(sender.tab.id);  // close the MessageSender
+        case sender.tab.id:                     // MessageSender is the singleton, user might have refreshed page
+            sendResponse({ siteQueue: siteQueue });
+            break;
+        default: // is an additional tab
+            siteQueue.push(request.trigger);    // add site to cache
+            chrome.tabs.remove(sender.tab.id);  // close the MessageSender
     }
 });
