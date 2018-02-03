@@ -136,4 +136,4 @@ if args.shouldWrite:
             subjectStructure, sort_keys=True, indent=2))
     with open(args.buildDir + '/' + 'README.md', 'w') as readmeFile:
         readmeFile.write(
-            '# Mind Matter Static\nThis branch hosts files for questions.')
+            '# Mind Matter Static\n\nThis branch hosts files for questions.')

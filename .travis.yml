@@ -3,10 +3,6 @@ python: "3.6"
 
 script: python questions.py --overwrite --verbose
 
-branches:
-  only:
-    - questions
-
 deploy:
   provider: pages
   skip-cleanup: true
