@@ -15,5 +15,5 @@ before_script:
 after_script:
   - nyc report --reporter=lcov
   - codecov
-  - cat ./coverage/lcov.info | codacy-coverage -f lcov
+  - cat ./coverage/lcov.info | codacy-coverage -f lcov -t $CODACY_PROJECT_TOKEN
   - ./cc-test-reporter after-build -t lcov -p ./coverage --exit-code $TRAVIS_TEST_RESULT --debug || echo 'Skipping cc-test-reporter after-build...'

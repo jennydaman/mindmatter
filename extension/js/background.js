@@ -1,5 +1,5 @@
-import * as bk from './lib/backgroundController.js'
-import subjects from './util/subjects.js'
+import * as bk from './lib/backgroundController.js';
+import subjects from './util/subjects.js';
 
 const background = new bk.BackgroundModule(subjects);
 

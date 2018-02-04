@@ -294,7 +294,7 @@ function updateScore(wrongTries) {
 /**
  * @return {Promise}
  */
-function setCooldown(callback) {
+function setCooldown() {
     return new Promise(resolve => {
         chrome.storage.sync.get('cooldown_info', items => {
             chrome.storage.local.set({ cooldown_lock: new Date().getTime() + items.cooldown_info.duration }, resolve);
