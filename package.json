@@ -23,7 +23,7 @@
     "sinon-chrome": "^2.2.4"
   },
   "scripts": {
-    "test": "nyc mocha --require babel-preset-env",
+    "test": "nyc mocha --require babel-preset-env --require babel-register --require babel-polyfill",
     "lint": "eslint extension",
     "lit": "eslint --fix extension",
     "postinstall": "cp node_modules/jquery/dist/jquery.min.js extension/vendor/"

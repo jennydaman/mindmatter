@@ -32,8 +32,13 @@ $(document).ready(function () {
     chrome.storage.local.get(['trigger'], function (items) {
         chrome.storage.local.remove('trigger');
 
+        if (!items.trigger)
+            items.trigger = 'refresh';
         // notify singleton page and background
         chrome.runtime.sendMessage({ trigger: items.trigger }, response => {
+            
+            if (!response)
+                return; // about to be killed by background.js anyway
             // response is fired by background.js only if this page holds the singleton lock
             siteQueue = response.siteQueue;
             setup();
