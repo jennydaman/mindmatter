@@ -114,7 +114,7 @@ for currentSubject in subjectStructure['subjects']:
         # if question passes all checks, then save it
         if healthy:
             questionJSON = currentSubject['folder'] + '/' + \
-                questionFileName[0:len(questionFileName) - 4] + 'json'
+                questionFileName[0:questionFileName.rfind('.') + 1] + 'json'
             if args.verbose:
                 print(questionJSON)
             
