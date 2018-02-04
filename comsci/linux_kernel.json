@@ -1,1 +1,1 @@
-{"answer": ["kernel"], "question": "By itself, Linux is not an operating system. It is a ______.", "type": "blank"}
+{"type": "blank", "questionText": "By itself, Linux is not an operating system. It is a ______.", "ansKeyWord": ["kernel"]}

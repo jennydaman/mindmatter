@@ -1,1 +1,1 @@
-{"answer": ["nlogn", "nlog(n)"], "question": "What is the algorithmic complexity of Merge Sort?", "type": "blank"}
+{"type": "blank", "questionText": "What is the algorithmic complexity of Merge Sort?", "ansKeyWord": ["nlogn", "nlog(n)"]}
