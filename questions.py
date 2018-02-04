@@ -117,10 +117,18 @@ for currentSubject in subjectStructure['subjects']:
                 questionFileName[0:len(questionFileName) - 4] + 'json'
             if args.verbose:
                 print(questionJSON)
+            
             currentSubject['questions'].append(
                 {'url': args.url + '/' + questionJSON, 'mtime': os.path.getmtime(questionLocation)})
+            
             subjectStructure['totalQuestions'] += 1
+
             if args.shouldWrite:
+                # rename a few keys for clarity
+                questionData['questionText'] = questionData['question']
+                questionData.pop('question', None)
+                questionData['ansKeyWord'] = questionData['answer']
+                questionData.pop('answer', None)
                 with open(args.buildDir + '/' + questionJSON, 'w') as questionOut:
                     questionOut.write(json.dumps(questionData))
 
