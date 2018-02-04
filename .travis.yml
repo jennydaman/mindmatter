@@ -11,9 +11,9 @@ cache:
 
 before_script:
   - '[ -e "./cc-test-reporter" ] || curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter && chmod +x ./cc-test-reporter && ./cc-test-reporter before-build'
-  - npm install --save-dev codacy codecov
+  - npm install --save-dev codacy-coverage codecov
 after_script:
-  - node_modules/.bin/nyc report --reporter=lcov
-  - node_modules/.bin/codecov
-  - cat ./coverage/lcov.info |  node_modules/.bin/codacy-coverage -f lcov
+  - nyc report --reporter=lcov
+  - codecov
+  - cat ./coverage/lcov.info | codacy-coverage -f lcov
   - ./cc-test-reporter after-build -t lcov -p ./coverage --exit-code $TRAVIS_TEST_RESULT --debug || echo 'Skipping cc-test-reporter after-build...'
