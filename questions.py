@@ -9,11 +9,8 @@ import argparse
 from calendar import timegm
 from time import gmtime
 
-
 def nothing():
     pass
-
-
 def errExit():
     sys.exit(1)
 
@@ -75,7 +72,7 @@ for currentSubject in subjectStructure['subjects']:
 
         healthy = True
         try:
-            questionData = yaml.load(open(questionLocation, 'r').read())
+            questionData = yaml.safe_load(open(questionLocation, 'r').read())
         except yaml.YAMLError:
             print('E: [YAMLError] ' + questionLocation, file=sys.stderr)
             args.errorAction()
@@ -117,7 +114,6 @@ for currentSubject in subjectStructure['subjects']:
                 questionFileName[0:questionFileName.rfind('.') + 1] + 'json'
             if args.verbose:
                 print(questionJSON)
-            
             currentSubject['questions'].append(
                 {'url': args.url + '/' + questionJSON, 'mtime': os.path.getmtime(questionLocation)})
             
@@ -142,6 +138,4 @@ if args.shouldWrite:
     with open(args.buildDir + '/' + args.resultFile, 'w') as resultFile:
         resultFile.write(json.dumps(
             subjectStructure, sort_keys=True, indent=2))
-    with open(args.buildDir + '/' + 'README.md', 'w') as readmeFile:
-        readmeFile.write(
-            '# Mind Matter Static\n\nThis branch hosts files for questions.')
+    shutil.copyfile('./README_built.md', args.buildDir + '/' + 'README.md')
