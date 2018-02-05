@@ -6,6 +6,7 @@
 [![Build Status](https://travis-ci.org/jennydaman/mindmatter.svg?branch=master)](https://travis-ci.org/jennydaman/mindmatter)
 [![codecov](https://codecov.io/gh/jennydaman/mindmatter/branch/master/graph/badge.svg)](https://codecov.io/gh/jennydaman/mindmatter)
 [![Maintainability](https://api.codeclimate.com/v1/badges/82e119c8634ba4101a73/maintainability)](https://codeclimate.com/github/jennydaman/mindmatter/maintainability)
+[![Say Thanks!](https://img.shields.io/badge/say-thanks-ff69b4.svg)](https://saythanks.io/to/jennydaman)
 
 Mind Matter is an educational Chrome extension that blocks blacklisted sites, granting access only if a trivia question is answered correctly. It deters excessive use of distrating websites while helping users to reinforce their knowledge. This project is open source and ad-free.
 
