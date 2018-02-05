@@ -9,10 +9,7 @@ chrome.runtime.onInstalled.addListener(details => bk.init(details, {
         duration: 300000,
         english: '5 minutes'
     },
-    consistency: {
-        total: 0,
-        score: 0
-    }
+    consistency: []
 }, subjects));
 
 background.attachRefreshHandler(subjects);

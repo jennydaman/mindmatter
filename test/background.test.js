@@ -4,25 +4,32 @@ chai.use(require('sinon-chai'));
 const sinon = require('sinon');
 
 describe('backgroundController.js', function () {
-
-    const bk = require('../extension/js/lib/backgroundController.js');
-    const defaultSettings = {
-        blacklist_array: ['youtube.com', 'facebook.com', 'reddit.com', 'buzzfeed.com'],
-        cooldown_info: {
-            duration: 300000,
-            english: '5 minutes'
-        },
-        consistency: {
-            total: 0,
-            score: 0
-        }
-    };
-
+    
     before(function () {
         global.chrome = require('sinon-chrome/extensions');
     });
 
+    const bk = require('../extension/js/lib/backgroundController.js');
+    var background;
+
+    beforeEach(function() {
+        background = new bk.BackgroundModule();
+    });
+
+    afterEach(function() {
+        background = undefined;
+    });
+
     it('should complete init (attached with onInstalled.addListener)', function () {
+
+        const defaultSettings = {
+            blacklist_array: ['youtube.com', 'facebook.com', 'reddit.com', 'buzzfeed.com'],
+            cooldown_info: {
+                duration: 300000,
+                english: '5 minutes'
+            },
+            consistency: []
+        };
 
         let spy = sinon.spy(bk, 'init');
         try {
@@ -47,9 +54,6 @@ describe('backgroundController.js', function () {
 
     it('should clear question page singleton lock after cooldown_lock is assigned', function () {
         chrome.storage.sync.get.callsArgWith(1, { cooldown_info: { duration: 300000 } });
-
-        let background = new bk.BackgroundModule();
-
         chrome.storage.onChanged.trigger({ cooldown_lock: { newValue: 1600000000000 } });
 
         expect(background.cooldown_timeout).to.be.an('object');
@@ -64,7 +68,6 @@ describe('backgroundController.js', function () {
 
         chrome.tabs.remove.reset();
 
-        let background = new bk.BackgroundModule();
         let responseSpy = sinon.spy();
         let websites = ['url.com'];
         let firstTab = 2;
@@ -102,7 +105,6 @@ describe('backgroundController.js', function () {
     // for the sake of coverage
     it('should handle updates with attachCooldownHandler and chrome.runtime.onSuspend.addListener', function () {
 
-        let background = new bk.BackgroundModule();
         let spy = sinon.spy(background, 'attachRefreshHandler');
         try {
             background.attachRefreshHandler();

@@ -30,12 +30,15 @@ module.exports = {
         ],
         "no-inner-declarations": "off",
         "no-console": "off",
-        "prefer-template": "warn",
+        "prefer-template": "off",
         "no-unused-vars": "warn",
         "quote-props": [
             "warn",
             "as-needed"
-        ]
+        ],
+        "max-len": ["warn", {
+            "code": 120
+        }]
     },
     "globals": {
         "chrome": false

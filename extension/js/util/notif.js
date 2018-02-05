@@ -5,10 +5,10 @@
  * @param {string} message 
  */
 export default function notif(title, message) {
-    return new Promise(function (resolve, reject) {
+    return new Promise((resolve, reject) => {
         chrome.permissions.contains({
             permissions: ['notifications']
-        }, function (result) {
+        }, result => {
             if (result) {
                 chrome.notifications.create({
                     type: 'basic',

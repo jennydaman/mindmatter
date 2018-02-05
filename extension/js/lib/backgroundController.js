@@ -66,7 +66,8 @@ export class BackgroundModule {
             }
         });
 
-        chrome.runtime.onMessage.addListener((request, sender, sendResponse) => this.messageHandler(request, sender, sendResponse));
+        chrome.runtime.onMessage.addListener(
+            (request, sender, sendResponse) => this.messageHandler(request, sender, sendResponse));
     }
 
     attachRefreshHandler(refresher, interval = 6.048e8) {
@@ -113,7 +114,7 @@ export class BackgroundModule {
      */
     messageHandler(request, sender, sendResponse) {
 
-        if (!request.trigger)
+        if (!request.trigger || !sender.tab.id)
             return;
 
         switch (this.questionSingleton) {

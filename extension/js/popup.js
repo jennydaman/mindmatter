@@ -7,10 +7,17 @@ chrome.storage.sync.get(['blacklist_array', 'cooldown_info', 'consistency'], fun
     for (let i = 1; i < items.blacklist_array.length; i++)
         str += `, ${items.blacklist_array[i]}`;
     document.getElementById('blacklist').innerText = `${str}]`;
-    document.getElementById('cooldown').innerHTML = `${items.cooldown_info.english} <light>(${items.cooldown_info.duration})</light>`;
+    let cdText = `${items.cooldown_info.english} <light>(${items.cooldown_info.duration})</light>`;
+    document.getElementById('cooldown').innerHTML = cdText;
 
-    let score = items.consistency.score / items.consistency.total * 10;
-    document.getElementById('consistency-score').innerText = `${score.toFixed(2)}${score > 9 ? ' :)' : score < 5 ? ' :(' : ''}`;
+    let score = 0;
+    items.consistency.forEach(correct => {
+        if (correct === true)
+            score++;
+    });
+    score = score / items.consistency.length * 10;
+    score = `${score.toFixed(2)}${score > 9 ? ' :)' : score < 5 ? ' :(' : ''}`;
+    document.getElementById('consistency-score').innerText = score;
 });
 
 /*

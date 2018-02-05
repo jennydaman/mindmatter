@@ -27,17 +27,6 @@ function pull(url = 'https://jennydaman.github.io/mindmatter/subjects.json') {
 }
 
 /**
- * @returns {Promise}
- */
-function update() {
-    return new Promise((resolve, reject) => {
-        pull().then(freshSubjects => {
-            store(freshSubjects).then(resolve);
-        }).catch(err => reject(err)); // pass the error along
-    });
-}
-
-/**
  * Saves questions to chrome.storage.sync.
  * @param freshSubjects
  * @returns {Promise}
@@ -49,4 +38,13 @@ function store(freshSubjects) {
     });
 }
 
-export default update;
+/**
+ * @returns {Promise} resolve(freshSubjects)
+ */
+export default function update() {
+    return new Promise((resolve, reject) => {
+        pull().then(freshSubjects => {
+            store(freshSubjects).then(() => resolve(freshSubjects));
+        }).catch(err => reject(err)); // pass the error along
+    });
+}
