@@ -20,10 +20,6 @@ module.exports = {
             "error",
             "unix"
         ],
-        "quotes": [
-            "warn",
-            "single"
-        ],
         "semi": [
             "error",
             "always"

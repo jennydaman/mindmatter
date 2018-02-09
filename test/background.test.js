@@ -41,7 +41,7 @@ describe('backgroundController.js', function () {
         const installReason = { reason: 'install' };
         let refreshSuccess = sinon.stub().returns(new Promise(resolve => resolve()));
         chrome.storage.local.set.onSecondCall().callsArg(1);
-
+        chrome.storage.sync.set.callsArg(1);
         return new Promise(resolve =>
             bk.init(installReason, defaultSettings, refreshSuccess, resolve))
             .then(resolve => { // do it again, but pretend that subjects refresh failed

@@ -1,7 +1,7 @@
 import * as bk from './lib/backgroundController.js';
-import subjects from './util/subjects.js';
+import getSubjects from './util/subjects.js';
 
-const background = new bk.BackgroundModule(subjects);
+const background = new bk.BackgroundModule(getSubjects);
 
 chrome.runtime.onInstalled.addListener(details => bk.init(details, {
     blacklist_array: ['youtube.com', 'facebook.com', 'reddit.com', 'buzzfeed.com'],
@@ -9,7 +9,10 @@ chrome.runtime.onInstalled.addListener(details => bk.init(details, {
         duration: 300000,
         english: '5 minutes'
     },
-    consistency: []
-}, subjects));
+    consistency: [],
+    indexStructure: {
+        subjects: [] // dummy object to avoid special case in subjects.js
+    }
+}, getSubjects));
 
-background.attachRefreshHandler(subjects);
+background.attachRefreshHandler(getSubjects);

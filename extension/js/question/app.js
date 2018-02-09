@@ -86,18 +86,21 @@ function setup() {
 function loadQuestion() {
 
     pick().then(questionURL => {
-        console.log(questionURL);
-        fetch(questionURL).then(question => {
-            handleQuestionType(question);
-        });
+        console.info(questionURL);
+
+        fetch(questionURL).then(question => handleQuestionType(question))
+            .catch(error => {
+                if (error.statusCode === 404)
+                    tryToGetQuestionAgain();
+                else
+                    fail(error.textStatus == 'timeout' ?
+                        'Connection timeout. Please check your internet connection.' :
+                        `$.ajax errorThrown: ${error.errorThrown}`
+                        + `\nquestionURL: ${error.questionURL}`);
+            });
     }).catch(error => {
-        if (error.statusCode === 404)
-            tryToGetQuestionAgain();
-        else
-            fail(error.textStatus == 'timeout' ?
-                'Connection timeout. Please check your internet connection.' :
-                `$.ajax errorThrown: ${error.errorThrown}`
-                + `\nquestionURL: ${error.questionURL}`);
+        console.warn(error, "This shouldn't have happened.");
+        tryToGetQuestionAgain();
     });
 }
 
@@ -131,22 +134,33 @@ function fetch(questionURL) {
     });
 }
 
+/** 
+ * Updates subject indexStructure before trying to pick a fresh question.
+ */
 function tryToGetQuestionAgain() {
-    // https://developers.google.com/web/updates/2017/11/dynamic-import
+    /*
+     * https://developers.google.com/web/updates/2017/11/dynamic-import
+     * 
+     * to whoever is reading this, I'm really sorry...
+     * I'll refactor it some day, I *Promise*
+     */
     import('./util/subjects.js').then(subjectsModule => {
         subjectsModule.default().then(freshSubjects => {
             // after question index is updated,
-            pick(freshSubjects).then(question => {
-                handleQuestionType(question);
-            }).catch(secondError => {
-                fail('Missed two attempts to retrieve a question.'
-                    + '\nPausing myself and giving up...'
-                    + `\nSecond questionURL: ${secondError.questionURL}:`);
-            });
-        }).catch(subjectsUpdateError => {
-            fail(`Question --> 404\nSubjects --> ${subjectsUpdateError}`);
-        });
-    });
+            pick(freshSubjects).then(url => {
+                fetch(url).then(question => handleQuestionType(url))
+                    .catch(secondError =>
+                        fail('Missed two attempts to retrieve a question.'
+                            + '\nPausing myself and giving up...'
+                            + `\nSecond questionURL: ${secondError.questionURL}`));
+            }).catch(pickError => fail("Couldn't pick a question, "
+                + 'even after a successful refresh of the subjects index.\n'
+                + pickError));
+        }).catch(subjectsUpdateError =>
+            fail("Question retrieval 404-ed, couldn't update subjects either."
+                + '\n' + subjectsUpdateError));
+    }).catch(error => fail(error
+        + '\nCould not dynamically import the subjects update helper!'));
 }
 
 function handleQuestionType(question) {

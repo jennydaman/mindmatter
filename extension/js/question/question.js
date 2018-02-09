@@ -129,9 +129,12 @@ class Question {
 function pick(subjects) {
 
     // TODO chance map
-    const select = indexStructure => {
+    const select = (all, resolve, reject) => {
+
+        if (all.subjects.length === 0)
+            reject(new Error('Subjects index in storage is empty!'));
         let allQuestions = [];
-        indexStructure.subjects.forEach(subjectInfo => {
+        all.subjects.forEach(subjectInfo => {
 
             if (!subjectInfo.enabled)
                 return;
@@ -140,15 +143,15 @@ function pick(subjects) {
                 allQuestions.push(question);
             });
         });
-        return allQuestions[Math.random() * allQuestions.length | 0].url;
+        resolve(allQuestions[Math.random() * allQuestions.length | 0].url);
     };
 
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
         if (subjects)
-            resolve(select(subjects));
+            select(subjects, resolve, reject);
         else
             chrome.storage.sync.get('indexStructure',
-                i => resolve(select(i.indexStructure)));
+                i =>select(i.indexStructure, resolve, reject));
     });
 }
 

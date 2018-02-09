@@ -46,7 +46,6 @@ function store(fresh) {
         chrome.storage.sync.get('indexStructure', items => {
 
             items.indexStructure.subjects.forEach(oldSubject => {
-
                 // points to a single subject in allSubjects
                 let freshSubject = allSubjects.get(oldSubject.folder);
                 if (freshSubject)
