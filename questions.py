@@ -9,10 +9,14 @@ import argparse
 from calendar import timegm
 from time import gmtime
 
+
 def nothing():
     pass
+
+
 def errExit():
     sys.exit(1)
+
 
 ap = argparse.ArgumentParser()
 ap.add_argument('-f', '--force', action='store_const', const=nothing, default=errExit, dest='errorAction',
@@ -85,7 +89,8 @@ for currentSubject in subjectStructure['subjects']:
             questionData['ans_exact'] = [questionData['ans_exact']]
 
         # trim whiespace and convert to lower case
-        questionData['answer'] = list(map(lambda ans:ans.strip().lower() if isinstance(ans, str) else ans, questionData['answer']))
+        questionData['answer'] = list(map(lambda ans: ans.strip().lower(
+        ) if isinstance(ans, str) else ans, questionData['answer']))
 
         # proofread
         if not 'question' in questionData:
@@ -96,7 +101,8 @@ for currentSubject in subjectStructure['subjects']:
             print('E [Missing answer] ' + questionLocation, file=sys.stderr)
             args.errorAction()
             healthy = False
-        if not 'type' in questionData or questionData['type'] not in ['blank']: # list of accepted answer types
+        # list of accepted answer types
+        if not 'type' in questionData or questionData['type'] not in ['blank']:
             print('E [invalid question type] ' +
                   questionLocation, file=sys.stderr)
             args.errorAction()
@@ -115,8 +121,8 @@ for currentSubject in subjectStructure['subjects']:
             if args.verbose:
                 print(questionJSON)
             currentSubject['questions'].append(
-                {'url': args.url + '/' + questionJSON, 'mtime': os.path.getmtime(questionLocation)})
-            
+                {'url': args.url + '/' + questionJSON})
+
             subjectStructure['totalQuestions'] += 1
 
             if args.shouldWrite:
