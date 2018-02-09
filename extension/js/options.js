@@ -1,6 +1,7 @@
 var blacklist_array;
 var subjects;
 
+// TODO option to decide if cooldown resets when chrome suspends
 function settingsInflator() {
 
     chrome.storage.sync.get('cooldown_info', function (items) {

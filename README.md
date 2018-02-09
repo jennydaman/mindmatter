@@ -6,7 +6,6 @@
 [![Build Status](https://travis-ci.org/jennydaman/mindmatter.svg?branch=master)](https://travis-ci.org/jennydaman/mindmatter)
 [![codecov](https://codecov.io/gh/jennydaman/mindmatter/branch/master/graph/badge.svg)](https://codecov.io/gh/jennydaman/mindmatter)
 [![Maintainability](https://api.codeclimate.com/v1/badges/82e119c8634ba4101a73/maintainability)](https://codeclimate.com/github/jennydaman/mindmatter/maintainability)
-[![Say Thanks!](https://img.shields.io/badge/-saythanks.io-ff69b4.svg?logo=data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAADAAAAAqCAMAAADCkShIAAABqlBMVEUAAADvO0LiJi3vO0LvO0LiJi3vO0LvO0LvO0LvO0LiJi3vO0LiJi3vO0LiJi3vO0LiJS3vO0LiJS3vO0LiJS3iJSzvO0LvO0LvO0LvO0LvO0LvO0LiJCzvO0LvO0LhJCzvO0LvO0LvO0LvO0LvO0LhJCvhIyvvO0LvO0LpMTjhIyvhIyvvO0LhIyvhIyrhIyrgIyrvO0LkKTDgIirvO0LgIirgIirvO0LkKDDvO0LgISnjJi7vO0LgISnvO0LvO0LiJS3gISnfISjfICjvO0LhJCvfICjfICjvO0LvO0LgIinvO0LvO0LfICffISjvO0LeHyfeHybeHibeHybvO0LeHibeHibvO0LdHSXdHSXvO0LvO0LdHSTdHSTvO0LvO0LvO0LvO0LvO0LvO0LcGyPvO0LcGyLvO0LvO0LbGSHvO0LvO0LaGB%2FaGCDvO0LvO0LZFx%2FZFh7vO0LvO0LZFh7vO0LYFR3vO0LYFBzYFR3uOkHXExvYFBzvO0LWERnWEhrXEhrXExvYFBzfICjgISngIingIirnLjboLjboLzboMDfuOkHvOkHvO0JHr331AAAAfnRSTlMAAQICAwQGBwgJDA8QExQUISIjJCUqLS8zNjc6QUJKS0tMTlBRUmJmaWtucHBzdHZ5fX6AgIGEhY6OlJSUlp2en6Cnqamqq62usLGxs7jAwsPFx8fLzc7P1NbW2Nnb3N3f4ePk5%2Bfp6%2Bzu7vH29vb3%2BPn5%2Bvv7%2FPz9%2Ff3%2B%2Fv4qZr0RAAABc0lEQVR42pXUVXfyUBCF4f25a93d3d3d3d2dqlCbUNf5z6WswCIwpw3P9Z6V9yYHui9x5V2T0%2F3N6X4wSB3cOCU6WGwKgLtvOcusO2sPgkvmBjlpw%2F%2FhEjLFbg6LPsLh%2Bwi5s2ZBF2tho7bPsPu9QkZaKRzCdthT%2FTvg%2FTx50jJg92OOvSUBjeTt6C%2BAEhas%2Fgk4IcEg8GuTJfndJLH5I5lFs0ckqkULix5INo8ZFt2QbA9nLLogBaiLZNhnyTUpaBhjwZOyaBtVLLgnlQlEsuCKVPLwYdSXoq1PQLQvRQWwqzRfNI4XX4fMFq3%2FhMO%2FOXNFB%2BHQ%2BS2YKbJGwSVw6e0iawIgX9yR5CQBBsFr7HQp7hPhIdR58Xiu3hsvLOxwK%2F3KaRBEWFRFtgxAvpCLtGwoxOxKRVohlGJ3%2BVLaq8UfexVV4FUpF%2FJeLdf4iRq8qdhmeBlNKNPIqQ6mVJOuAyY1KPZqrWTXAx90EvXCJ30DkD0DFY6c2EtNX54AAAAASUVORK5CYII%3D)](https://saythanks.io/to/jennydaman)
 
 Mind Matter is an educational Chrome extension that blocks blacklisted sites, granting access only if a trivia question is answered correctly. It deters excessive use of distrating websites while helping users to reinforce their knowledge. This project is open source and ad-free.
 
@@ -35,4 +34,4 @@ Surfing the Internet tends to be unproductive. The objective of *Mind Matter* is
 
 #### Acknowledgements
 
-Thanks to Sally Zhao (Blair class of 2019) for the "brain in pot" logo.
+Thanks to Sally Zhao for the "brain in pot" logo.

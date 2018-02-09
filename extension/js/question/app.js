@@ -1,5 +1,4 @@
 import { Question, pick } from './question.js';
-// TODO close tab when pause is true storage.onChanged
 
 const modal = {
     /**
@@ -35,6 +34,12 @@ function fail(message) {
         modal.show(message);
     });
 }
+
+// close activity if pause is toggled
+chrome.storage.onChanged.addListener(changes => {
+    if (changes.pause && changes.pause.newValue === true)
+        openAllTabs();
+});
 
 const q = new Question();
 Question.getTrigger().then(triggerURL => {
@@ -147,14 +152,10 @@ function tryToGetQuestionAgain() {
 function handleQuestionType(question) {
     if (question.type === 'blank')
         fillInTheBlank(question);
-    else {
+    else
         fail(`question.type=${question.type}` +
             '\nQuestion type not yet supported. This is a bug.');
-    }
 }
-
-// TODO move everything related to fill-in-the-blank to a new file
-
 
 /**
  * @param {*} retrieved question data

@@ -28,13 +28,32 @@ function pull(url = 'https://jennydaman.github.io/mindmatter/subjects.json') {
 
 /**
  * Saves questions to chrome.storage.sync.
- * @param freshSubjects
+ * Checks for if the subject has been disabled originally.
+ * 
+ * @param fresh
  * @returns {Promise}
  */
-function store(freshSubjects) {
-    // TODO update individual subject and question settings
+function store(fresh) {
+
+    // create a map where keys point to fresh subjects
+    let allSubjects = new Map();
+    fresh.subjects.forEach(currentSubject => {
+        allSubjects.set(currentSubject.folder, currentSubject);
+    });
+
     return new Promise(resolve => {
-        chrome.storage.sync.set({ indexStructure: freshSubjects }, resolve);
+
+        chrome.storage.sync.get('indexStructure', items => {
+
+            items.indexStructure.subjects.forEach(oldSubject => {
+
+                // points to a single subject in allSubjects
+                let freshSubject = allSubjects.get(oldSubject.folder);
+                if (freshSubject)
+                    freshSubject.enabled = oldSubject.enabled;
+            });
+            chrome.storage.sync.set({ indexStructure: fresh }, resolve);
+        });
     });
 }
 

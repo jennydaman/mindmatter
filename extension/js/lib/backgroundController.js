@@ -21,8 +21,7 @@ export function init(details, defaultSettings, getSubjects, callback = chrome.ru
     getSubjects().catch(error => {
 
         let msg = `${'Could not initialize the subjects index!'
-            + 'If this problem is unrelated to Internet issues, please report a bug.\n'}${
-            error}`;
+            + 'If this problem is unrelated to Internet issues, please report a bug.\n'}${error}`;
         notif('Mind Matter', msg).catch(function () {
             alert(msg);
         });
@@ -50,7 +49,6 @@ export class BackgroundModule {
 
         // ---------- events ---------
 
-        // TODO remove cooldown lock on suspend in settings
         chrome.runtime.onSuspend.addListener(() => {
             clearInterval(this.refreshTimer);
             chrome.storage.local.remove('cooldown_lock');
@@ -71,7 +69,7 @@ export class BackgroundModule {
     }
 
     attachRefreshHandler(refresher, interval = 6.048e8) {
-        if (typeof (refresher) !== 'function')
+        if (typeof refresher !== 'function')
             throw new TypeError('Questions index refresher must be a function.');
         chrome.runtime.onStartup.addListener(refresher => {
             this.refreshTimer = setInterval(refresher, interval); //refresh once a week
@@ -109,7 +107,7 @@ export class BackgroundModule {
      * Determines if the sender is or is not in control of the question page singleton lock.
      * Tabs besides the original will be closed.
      * @param {*} request 
-     * @param {*} sender 
+     * @param {MessageSender} sender
      * @param {function} sendResponse 
      */
     messageHandler(request, sender, sendResponse) {
