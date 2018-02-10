@@ -46,7 +46,7 @@ describe('backgroundController.js', function () {
             bk.init(installReason, defaultSettings, refreshSuccess, resolve))
             .then(resolve => { // do it again, but pretend that subjects refresh failed
 
-                chrome.storage.local.set.reset();
+                chrome.storage.local.set.resetHistory();
                 let refreshFail = sinon.stub().returns(new Promise((resolve, reject) => reject()));
                 bk.init(installReason, defaultSettings, refreshFail, resolve);
             });
@@ -66,7 +66,7 @@ describe('backgroundController.js', function () {
 
     it('should regulate the question singleton page lock', function () {
 
-        chrome.tabs.remove.reset();
+        chrome.tabs.remove.resetHistory();
 
         let responseSpy = sinon.spy();
         let websites = ['url.com'];
@@ -78,8 +78,8 @@ describe('backgroundController.js', function () {
         expect(background.siteQueue).to.eql(websites);
         expect(responseSpy).to.have.been.calledWith({ siteQueue: websites });
         expect(chrome.tabs.remove).to.have.not.been.called;
-        responseSpy.reset();
-        chrome.tabs.remove.reset();
+        responseSpy.resetHistory();
+        chrome.tabs.remove.resetHistory();
         // a second tab opens
         websites.push('second.com');
         chrome.runtime.onMessage.trigger({ trigger: websites[1] }, { tab: { id: 5 } }, responseSpy);
@@ -87,8 +87,8 @@ describe('backgroundController.js', function () {
         expect(background.siteQueue).to.eql(websites);
         expect(responseSpy).to.have.not.been.called;
         expect(chrome.tabs.remove).to.have.been.called;
-        responseSpy.reset();
-        chrome.tabs.remove.reset();
+        responseSpy.resetHistory();
+        chrome.tabs.remove.resetHistory();
         // pretend that question page was refreshed
         chrome.runtime.onMessage.trigger({ trigger: 'refresh' }, { tab: { id: firstTab } }, responseSpy);
         expect(background.questionSingleton).to.deep.equal(firstTab);
@@ -105,29 +105,22 @@ describe('backgroundController.js', function () {
     // for the sake of coverage
     it('should handle updates with attachCooldownHandler and chrome.runtime.onSuspend.addListener', function () {
 
-        let spy = sinon.spy(background, 'attachRefreshHandler');
-        try {
-            background.attachRefreshHandler();
-        } catch (e) {
-            expect(spy).to.have.thrown(e);
-        }
-
-        spy = sinon.spy();
+        let spy = sinon.spy();
         let interval = 6.048e8;
         var clock = sinon.useFakeTimers(new Date());
         background.attachRefreshHandler(spy, interval);
-        chrome.runtime.onStartup.trigger(spy);
+        chrome.runtime.onStartup.trigger(spy, interval);
         clock.tick(interval);
         expect(spy).to.have.been.called;
 
-        chrome.storage.local.remove.reset();
+        chrome.storage.local.remove.resetHistory();
         chrome.runtime.onSuspend.trigger();
         expect(chrome.storage.local.remove).to.have.been.calledWith('cooldown_lock');
 
         clock.restore();
     });
     it('should remove cooldown_lock on .coolDone()', function () {
-        chrome.storage.local.remove.reset();
+        chrome.storage.local.remove.resetHistory();
         new bk.BackgroundModule().coolDone();
         expect(chrome.storage.local.remove).to.have.been.calledWith('cooldown_lock');
     });

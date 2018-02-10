@@ -66,19 +66,31 @@ function blacklistInflator() {
 
 function subjectsInflator() {
 
-    $('#vtoggle').click(function() {
+    const fillRaw = indexStructure => {
+        $('#subjects-block').text(JSON.stringify(indexStructure)
+            .replace(/{"enabled"/gi, '\n\n{"enabled"')
+            .replace(/{"chance"/gi, '\n{"chance"')
+            .replace(/],/gi, '],\n'));
+    };
+
+    $('#vtoggle').click(function () {
         $('#raw-subjects').css('display', 'block');
         $('#filler-text').css('display', 'none');
     });
 
-    chrome.storage.sync.get('indexStructure', items => {
-        if (!items.indexStructure)
-            return;
-        $('#subjects-block').append(JSON.stringify(items.indexStructure)
-            .replace(/{"enabled"/gi, '<br /><br />{"enabled"')
-            .replace(/{"chance"/gi, '<br />{"chance"')
-            .replace(/],/gi, '],<br />'));
+    let refreshBtn = $('#refresh');
+    refreshBtn.click(function () {
+        import('./util/subjects.js').then(subjectModule => {
+            subjectModule.default().then(freshSubjects => {
+                fillRaw(freshSubjects);
+                refreshBtn.text('Success.');
+            }).catch(() => {
+                refreshBtn.text('Failed.');
+            });
+        });
     });
+
+    chrome.storage.sync.get('indexStructure', items => fillRaw(items.indexStructure));
     $('footer').css('display', 'none');
 }
 

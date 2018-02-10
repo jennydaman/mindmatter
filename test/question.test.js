@@ -21,7 +21,7 @@ describe('question.js', function () {
 
     it('should connectWithBackground', function () {
         let correctQueue = ['url.com', 'website.com'];
-        chrome.runtime.sendMessage.reset();
+        chrome.runtime.sendMessage.resetHistory();
         chrome.runtime.sendMessage.callsArgWith(1, { siteQueue: correctQueue });
 
         return question.connectWithBackground().then(() => {
@@ -31,8 +31,8 @@ describe('question.js', function () {
     });
 
     it('should getTrigger', function () {
-        chrome.storage.local.get.reset();
-        chrome.storage.local.remove.reset();
+        chrome.storage.local.get.resetHistory();
+        chrome.storage.local.remove.resetHistory();
 
         let correctURL = 'url.com';
 
@@ -55,7 +55,7 @@ describe('question.js', function () {
         let correctQueue = ['url.com', 'website.com'];
         let anotherWebsite = 'sad.com';
         chrome.tabs.getCurrent.callsArgWith(0, { index: 1, windowId: 2 });
-        chrome.tabs.highlight.reset();
+        chrome.tabs.highlight.resetHistory();
 
         question.siteQueue = correctQueue.slice(); //pretend we've connectWithBackground
         question.attachTabListener(spy);
@@ -68,7 +68,7 @@ describe('question.js', function () {
 
     it('should bumpScore', function () {
 
-        chrome.storage.sync.set.reset();
+        chrome.storage.sync.set.resetHistory();
         chrome.storage.sync.set.callsArg(1);
         let correctConsistency = [true, true, false, true, true, false, true, false, true];
         chrome.storage.sync.get.callsArgWith(1, { consistency: correctConsistency.slice() });
@@ -84,7 +84,7 @@ describe('question.js', function () {
     });
 
     it('should openOtherTabs', function () {
-        chrome.tabs.create.reset();
+        chrome.tabs.create.resetHistory();
         question.siteQueue = ['hello.com', 'nice.com', 'ok.com'];
         question.openOtherTabs();
         expect(chrome.tabs.create).to.have.been.calledWithMatch({ url: 'nice.com', active: false });
