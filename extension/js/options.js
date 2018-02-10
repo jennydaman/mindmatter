@@ -65,7 +65,13 @@ function blacklistInflator() {
 }
 
 function subjectsInflator() {
-    chrome.storage.sync.get('indexStructure', function (items) {
+
+    $('#vtoggle').click(function() {
+        $('#raw-subjects').css('display', 'block');
+        $('#filler-text').css('display', 'none');
+    });
+
+    chrome.storage.sync.get('indexStructure', items => {
         if (!items.indexStructure)
             return;
         $('#subjects-block').append(JSON.stringify(items.indexStructure)

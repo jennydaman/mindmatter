@@ -71,7 +71,7 @@ export class BackgroundModule {
     attachRefreshHandler(refresher, interval = 6.048e8) {
         if (typeof refresher !== 'function')
             throw new TypeError('Questions index refresher must be a function.');
-        chrome.runtime.onStartup.addListener(refresher => {
+        chrome.runtime.onStartup.addListener(function() {
             this.refreshTimer = setInterval(refresher, interval); //refresh once a week
         });
     }
