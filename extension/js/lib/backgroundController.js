@@ -116,16 +116,16 @@ export class BackgroundModule {
             return;
 
         switch (this.questionSingleton) {
-            case null:                                   // MessageSender is first instance of question page
-                this.questionSingleton = sender.tab.id;  // create lock
-                this.siteQueue = [request.trigger];
+        case null:                                   // MessageSender is first instance of question page
+            this.questionSingleton = sender.tab.id;  // create lock
+            this.siteQueue = [request.trigger];
             // falls through
-            case sender.tab.id:                          // MessageSender is the singleton, user might have refreshed page
-                sendResponse({ siteQueue: this.siteQueue });
-                break;
-            default: // is an additional tab
-                this.siteQueue.push(request.trigger);    // add site to cache
-                chrome.tabs.remove(sender.tab.id);       // close the MessageSender
+        case sender.tab.id:                          // MessageSender is the singleton, user might have refreshed page
+            sendResponse({ siteQueue: this.siteQueue });
+            break;
+        default: // is an additional tab
+            this.siteQueue.push(request.trigger);    // add site to cache
+            chrome.tabs.remove(sender.tab.id);       // close the MessageSender
         }
     }
 }

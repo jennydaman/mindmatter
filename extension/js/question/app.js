@@ -148,7 +148,7 @@ function tryToGetQuestionAgain() {
         subjectsModule.default().then(freshSubjects => {
             // after question index is updated,
             pick(freshSubjects).then(url => {
-                fetch(url).then(question => handleQuestionType(url))
+                fetch(url).then(question => handleQuestionType(question))
                     .catch(secondError =>
                         fail('Missed two attempts to retrieve a question.'
                             + '\nPausing myself and giving up...'
