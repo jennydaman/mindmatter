@@ -1,6 +1,6 @@
 {
   "name": "mindmatter",
-  "version": "0.5.4",
+  "version": "0.5.5",
   "description": "Blocks distracting sites, granting access only if a trivia question is answered correctly.",
   "author": {
     "name": "Jennings Zhang",

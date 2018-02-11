@@ -51,7 +51,6 @@ export class BackgroundModule {
 
         chrome.runtime.onSuspend.addListener(() => {
             clearInterval(this.refreshTimer);
-            chrome.storage.local.remove('cooldown_lock');
         });
 
         chrome.storage.onChanged.addListener(changes => this.cooldownHandler(changes));
@@ -72,6 +71,7 @@ export class BackgroundModule {
         if (typeof refresher !== 'function')
             throw new TypeError('Questions index refresher must be a function.');
         chrome.runtime.onStartup.addListener(() => {
+            chrome.storage.local.remove('cooldown_lock'); // TODO restore cooldown state on startup
             this.refreshTimer = setInterval(refresher, interval); //refresh once a week
         });
     }
