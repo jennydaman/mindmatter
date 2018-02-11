@@ -1,5 +1,5 @@
 answer:
 - nlogn
-- nlog(n)
+- nlog(n
 question: What is the algorithmic complexity of Merge Sort?
 type: blank
