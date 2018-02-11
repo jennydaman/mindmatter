@@ -1,6 +1,6 @@
 {
   "name": "mindmatter",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "description": "Blocks distracting sites, granting access only if a trivia question is answered correctly.",
   "author": {
     "name": "Jennings Zhang",
@@ -26,7 +26,8 @@
     "test": "nyc mocha --require babel-preset-env --require babel-register --require babel-polyfill",
     "lint": "eslint extension",
     "lit": "eslint --fix extension",
-    "postinstall": "cp node_modules/jquery/dist/jquery.min.js extension/vendor/"
+    "postinstall": "cp node_modules/jquery/dist/jquery.min.js extension/vendor/",
+    "bundle": "zip -r mindmatter.zip extension"
   },
   "repository": {
     "type": "git",

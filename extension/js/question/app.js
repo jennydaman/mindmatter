@@ -62,7 +62,7 @@ function setup() {
         triggerDisp.replaceWith(function () {
             let dispList = $('<ul id="trigger-list"></ul>');
             siteQueue.forEach(url => {
-                dispList.append($('li></li>').text(url));
+                dispList.append($('<li></li>').text(url));
             });
             return dispList;
         });
@@ -179,8 +179,7 @@ function fillInTheBlank(retrieved) {
     /**
      * Compares the response against an array of possible answers.
      * If the response is incorrect, wrongTries is incremented by one.
-     * @param {string} response 
-     * @param {string} correct 
+     * @param {string} user_response
      * @returns true if the response contains
      * any of the key words in the correct array.
      */
@@ -196,9 +195,18 @@ function fillInTheBlank(retrieved) {
         }
         // next, see if numerical ans fits in specified range
         else if (this.ans_range) {
-            let num = Number(user_response);
+            let unitsPos = user_response.indexOf(' ');
+            let num = Number(unitsPos === -1 ? user_response : user_response.substring(0, unitsPos));
             if (num >= this.ans_range.min && num <= this.ans_range.max)
                 return true;
+            if (this.ans_range.std && this.ansKeyWord) {
+                let correct = this.ansKeyWord.find(possibleAns => {
+                    return Math.abs(num - possibleAns) <= this.ans_range.std;
+                });
+                if (correct)
+                    return true;
+            }
+            return true;
         }
         // finally, compare against possible answers
         else if (this.ansKeyWord) {
@@ -259,7 +267,7 @@ function handleResponse(inputElement, question) {
     if (correct)
         Question.setCooldown().then(openAllTabs);
     else {
-        $(this).removeAttr('disabled'); //Enable the textbox again
+        inputElement.removeAttr('disabled'); //Enable the textbox again
         modal.show(`Incorrect. Wrong tries: ${q.wrongTries}`);
     }
 }
