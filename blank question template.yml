@@ -18,7 +18,7 @@ answer:
 ans_range:
   min: 0
   max: 10
-  error: 5 # alternatively, specify error, meaning the answer can be plus of minus error from the actual answer.
+  std: 5 # alternatively, specify error, meaning the answer can be plus of minus error from the actual answer.
 
 # Use 'ans_exact' to specify a correct answer that must be matched exactly, letter-by-letter. 
 # answer is case-sensitive, use the '===' JS operator, whitespace is still trimmed

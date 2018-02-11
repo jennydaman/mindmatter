@@ -4,5 +4,5 @@ For someone who's eyes are 1.7 meters above the ground, how far could they theor
 Ignore atmospheric diffraction.
 answer: 4.65
 ans_range:
-  error: .1
+  std: .1
 # todo: picture hint
