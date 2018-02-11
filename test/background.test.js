@@ -5,19 +5,12 @@ const sinon = require('sinon');
 
 describe('backgroundController.js', function () {
     
-    before(function () {
-        global.chrome = require('sinon-chrome/extensions');
-    });
-
     const bk = require('../extension/js/lib/backgroundController.js');
     var background;
 
-    beforeEach(function() {
+    before(function () {
+        global.chrome = require('sinon-chrome/extensions');
         background = new bk.BackgroundModule();
-    });
-
-    afterEach(function() {
-        background = undefined;
     });
 
     it('should complete init (attached with onInstalled.addListener)', function () {
@@ -64,61 +57,69 @@ describe('backgroundController.js', function () {
         chrome.storage.onChanged.trigger({ cooldown_lock: { newValue: null } });
     });
 
-    it('should regulate the question singleton page lock', function () {
-
-        chrome.tabs.remove.resetHistory();
+    describe('question page singleton lock regulation', function() {
 
         let responseSpy = sinon.spy();
         let websites = ['url.com'];
         let firstTab = 2;
 
-        // first website to attach
-        chrome.runtime.onMessage.trigger({ trigger: websites[0] }, { tab: { id: firstTab } }, responseSpy);
-        expect(background.questionSingleton).to.equal(firstTab);
-        expect(background.siteQueue).to.eql(websites);
-        expect(responseSpy).to.have.been.calledWith({ siteQueue: websites });
-        expect(chrome.tabs.remove).to.have.not.been.called;
-        responseSpy.resetHistory();
-        chrome.tabs.remove.resetHistory();
-        // a second tab opens
-        websites.push('second.com');
-        chrome.runtime.onMessage.trigger({ trigger: websites[1] }, { tab: { id: 5 } }, responseSpy);
-        expect(background.questionSingleton).to.equal(firstTab);
-        expect(background.siteQueue).to.eql(websites);
-        expect(responseSpy).to.have.not.been.called;
-        expect(chrome.tabs.remove).to.have.been.called;
-        responseSpy.resetHistory();
-        chrome.tabs.remove.resetHistory();
-        // pretend that question page was refreshed
-        chrome.runtime.onMessage.trigger({ trigger: 'refresh' }, { tab: { id: firstTab } }, responseSpy);
-        expect(background.questionSingleton).to.deep.equal(firstTab);
-        expect(background.siteQueue).eql(websites);
-        expect(responseSpy).to.have.been.calledWith({ siteQueue: websites });
-        expect(chrome.tabs.remove).to.have.not.been.called;
-
-        // questions page closed
-        chrome.tabs.onRemoved.trigger(firstTab);
-        expect(background.questionSingleton).to.be.a('null');
-        expect(background.siteQueue).to.be.a('null');
+        beforeEach(function() {
+            chrome.tabs.remove.resetHistory();
+            responseSpy.resetHistory();
+        });
+        it('should declare the first tab as the single question page', function() {
+            chrome.runtime.onMessage.trigger({ trigger: websites[0] }, { tab: { id: firstTab } }, responseSpy);
+            expect(background.questionSingleton).to.equal(firstTab);
+            expect(background.siteQueue).to.eql(websites);
+            expect(responseSpy).to.have.been.calledWith({ siteQueue: websites });
+            expect(chrome.tabs.remove).to.have.not.been.called;
+        });
+        it('should handle multiple blacklisted sites being opened', function() {
+            websites.push('second.com');
+            chrome.runtime.onMessage.trigger({ trigger: websites[1] }, { tab: { id: 5 } }, responseSpy);            
+            expect(background.questionSingleton).to.equal(firstTab);
+            expect(background.siteQueue).to.eql(websites);
+            expect(responseSpy).to.have.not.been.called;
+            expect(chrome.tabs.remove).to.have.been.called;
+        });
+        it('should respond to message when the question page is refreshed', function() {
+            chrome.runtime.onMessage.trigger({ trigger: 'refresh' }, { tab: { id: firstTab } }, responseSpy);
+            expect(background.questionSingleton).to.equal(firstTab);
+            expect(background.siteQueue).eql(websites);
+            expect(responseSpy).to.have.been.calledWith({ siteQueue: websites });
+            expect(chrome.tabs.remove).to.have.not.been.called;
+        });
+        it('should clear page lock if the question page is closed', function() {
+            chrome.tabs.onRemoved.trigger(firstTab);
+            expect(background.questionSingleton).to.be.a('null');
+            expect(background.siteQueue).to.be.a('null');
+        });
     });
 
     // for the sake of coverage
-    it('should handle updates with attachCooldownHandler and chrome.runtime.onSuspend.addListener', function () {
+    it('should update the subjects index every week', function () {
 
         let spy = sinon.spy();
         let interval = 6.048e8;
         var clock = sinon.useFakeTimers(new Date());
+
         background.attachRefreshHandler(spy, interval);
-        chrome.runtime.onStartup.trigger(spy, interval);
+        chrome.runtime.onStartup.trigger();
+
         clock.tick(interval);
         expect(spy).to.have.been.called;
 
-        chrome.storage.local.remove.resetHistory();
         chrome.runtime.onSuspend.trigger();
-        expect(chrome.storage.local.remove).to.have.been.calledWith('cooldown_lock');
-
         clock.restore();
     });
+
+    it('should restore the state of cooldown_lock on start', function() {
+        chrome.storage.local.remove.resetHistory();
+        chrome.runtime.onStartup.trigger();
+        expect(chrome.storage.local.remove).to.have.been.calledWith('cooldown_lock');
+        chrome.runtime.onSuspend.trigger();
+    });
+
     it('should remove cooldown_lock on .coolDone()', function () {
         chrome.storage.local.remove.resetHistory();
         new bk.BackgroundModule().coolDone();
