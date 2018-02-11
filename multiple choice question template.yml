@@ -1,7 +1,7 @@
 type: choice
 
 question: This is an AMAZING multiple-choice question in YAML?
-moreInfo: A longer explination to the question.
+moreInfo: A longer explanation to the question.
 
 image:
   src: https://jennydaman.github.io/mindmatter/image.jpg
