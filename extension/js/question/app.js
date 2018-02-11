@@ -29,17 +29,11 @@ const modal = {
  * @param {String} message 
  */
 function fail(message) {
-    modal.onClose(openAllTabs);
+    modal.onClose(openAllTabs); 
     chrome.storage.local.set({ pause: true }, function () {
         modal.show(message);
     });
 }
-
-// close activity if pause is toggled
-chrome.storage.onChanged.addListener(changes => {
-    if (changes.pause && changes.pause.newValue === true)
-        openAllTabs();
-});
 
 const q = new Question();
 Question.getTrigger().then(triggerURL => {
@@ -138,13 +132,14 @@ function fetch(questionURL) {
  * Updates subject indexStructure before trying to pick a fresh question.
  */
 function tryToGetQuestionAgain() {
+
     /*
      * https://developers.google.com/web/updates/2017/11/dynamic-import
      * 
      * to whoever is reading this, I'm really sorry...
      * I'll refactor it some day, I *Promise*
      */
-    import('./util/subjects.js').then(subjectsModule => {
+    import('../util/subjects.js').then(subjectsModule => {
         subjectsModule.default().then(freshSubjects => {
             // after question index is updated,
             pick(freshSubjects).then(url => {
@@ -164,11 +159,19 @@ function tryToGetQuestionAgain() {
 }
 
 function handleQuestionType(question) {
+
     if (question.type === 'blank')
         fillInTheBlank(question);
     else
         fail(`question.type=${question.type}` +
             '\nQuestion type not yet supported. This is a bug.');
+
+    // close activity if pause is toggled
+    // attach this listener only after we know that fail() isn't called
+    chrome.storage.onChanged.addListener(changes => {
+        if (changes.pause && changes.pause.newValue === true)
+            openAllTabs();
+    });
 }
 
 /**
