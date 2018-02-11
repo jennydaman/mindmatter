@@ -108,8 +108,15 @@ for currentSubject in subjectStructure['subjects']:
             args.errorAction()
             healthy = False
         if 'ans_range' in questionData:
-            if not 'min' in questionData['ans_range'] or not 'max' in questionData['ans_range']:
+            hasMin = 'min' in questionData['ans_range']
+            hasMax = 'max' in questionData['ans_range']
+            if (hasMax and not hasMax) or (hasMax and not hasMin):
                 print('E [ans_range missing min or max] ' +
+                      questionLocation, file=sys.stderr)
+                args.errorAction()
+                healthy = False
+            if 'std' in questionData['ans_range'] and not 'answer' in questionData:
+                print('E [ans_range.std specified, but not answer] ' +
                       questionLocation, file=sys.stderr)
                 args.errorAction()
                 healthy = False
