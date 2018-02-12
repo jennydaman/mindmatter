@@ -1,10 +1,10 @@
 import notif from '../util/notif.js';
 
 /**
- * @param {*} details 
- * @param {*} defaultSettings 
- * @param {function} getSubjects 
- * @param {function} callback 
+ * @param {*} details
+ * @param {*} defaultSettings
+ * @param {function} getSubjects
+ * @param {function} callback
  */
 export function init(details, defaultSettings, getSubjects, callback = chrome.runtime.openOptionsPage) {
 
@@ -55,7 +55,7 @@ export class BackgroundModule {
 
         chrome.storage.onChanged.addListener(changes => this.cooldownHandler(changes));
 
-        // clear singleton lock if question page is closed 
+        // clear singleton lock if question page is closed
         chrome.tabs.onRemoved.addListener(tabID => {
             if (tabID === this.questionSingleton) {
                 this.questionSingleton = null;
@@ -106,9 +106,9 @@ export class BackgroundModule {
     /**
      * Determines if the sender is or is not in control of the question page singleton lock.
      * Tabs besides the original will be closed.
-     * @param {*} request 
+     * @param {*} request
      * @param {MessageSender} sender
-     * @param {function} sendResponse 
+     * @param {function} sendResponse
      */
     messageHandler(request, sender, sendResponse) {
 

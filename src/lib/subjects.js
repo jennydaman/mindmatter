@@ -29,7 +29,7 @@ function pull(url = 'https://jennydaman.github.io/mindmatter/subjects.json') {
 /**
  * Saves questions to chrome.storage.sync.
  * Checks for if the subject has been disabled originally.
- * 
+ *
  * @param fresh
  * @returns {Promise}
  */

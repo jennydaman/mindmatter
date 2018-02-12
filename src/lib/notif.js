@@ -1,8 +1,8 @@
 /**
  * Checks for rich notifications permission before
  * dispatching a type=basic notification with the brain-in-pot icon.
- * @param {string} title 
- * @param {string} message 
+ * @param {string} title
+ * @param {string} message
  */
 export default function notif(title, message) {
     return new Promise((resolve, reject) => {

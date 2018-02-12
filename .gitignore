@@ -51,10 +51,6 @@ typings/
 # Output of 'npm pack'
 *.tgz
 
-# chrome extension
-*.zip
-
-
 # Yarn Integrity file
 .yarn-integrity
 
@@ -63,6 +59,14 @@ typings/
 
 # next.js build output
 .next
+
+#####
+
+# chrome extension
+*.zip
+
+# webpack bundle
+/dist
 
 ## Code Climate
 cc-test-reporter
