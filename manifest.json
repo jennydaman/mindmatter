@@ -6,6 +6,10 @@
   "version_name": "1.0.0 alpha",
   "minimum_chrome_version": "63",
   "author": "Jennings Zhang",
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": false
+  },
   "homepage_url": "https://github.com/jennydaman/mindmatter",
   "icons": {
     "16": "icons/brain-in-pot16.png",

@@ -2,7 +2,7 @@
  * TODO
  * development vs production config
  * https://webpack.js.org/guides/production/
- * uglifyjs
+ * https://github.com/babel/minify
  * 
  */
 const path = require('path');
@@ -39,6 +39,10 @@ module.exports = {
             ['transform-react-jsx', { pragma: 'h' }]
           ]
         }
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
       }
     ]
   },

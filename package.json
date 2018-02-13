@@ -1,13 +1,14 @@
 {
   "name": "mindmatter",
-  "version": "0.5.5",
+  "version": "1.0.0",
   "description": "Blocks distracting sites, granting access only if a trivia question is answered correctly.",
   "author": {
     "name": "Jennings Zhang",
     "email": "jenni_zh@protonmail.com"
   },
   "dependencies": {
-    "preact": "^8.2.7"
+    "preact": "^8.2.7",
+    "preact-router": "^2.6.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -16,16 +17,17 @@
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-preset-env": "^1.6.1",
     "copy-webpack-plugin": "^4.4.1",
+    "css-loader": "^0.28.9",
     "eslint": "^3.19.0",
     "eslint-plugin-react": "^7.6.1",
+    "style-loader": "^0.20.1",
     "webpack": "^3.11.0"
   },
   "scripts": {
     "build": "webpack",
-    "test": "nyc mocha --require babel-preset-env --require babel-register --require babel-polyfill",
     "lint": "eslint src",
     "lit": "eslint --fix src",
-    "zip": "zip -r mindmatter.zip dist"
+    "zip": "# gotta webpack with production settings, then zip -r mindmatter.zip dist"
   },
   "repository": {
     "type": "git",
