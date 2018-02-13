@@ -7,6 +7,7 @@
  */
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const NyanProgressPlugin = require('nyan-progress-webpack-plugin');
 
 module.exports = {
   // entry file - starting point for the app
@@ -27,22 +28,30 @@ module.exports = {
         test: /\.jsx?/i,
         loader: 'babel-loader',
         options: {
-          'presets': [
+          presets: [
             ['env', {
-              'targets': {
-                'browsers': ['Chrome >= 63'],
+              targets: {
+                browsers: ['Chrome >= 63'],
               },
-              'modules': false
-            }],
+              // modules: false
+            }], 'react'
           ],
           plugins: [
+            'babel-plugin-transform-class-properties',
             ['transform-react-jsx', { pragma: 'h' }]
           ]
         }
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        loader: 'style-loader'
+      }, {
+        test: /\.css$/,
+        loader: 'css-loader',
+        query: {
+          modules: true,
+          localIdentName: '[name]__[local]___[hash:base64:5]'
+        }
       }
     ]
   },
@@ -50,7 +59,8 @@ module.exports = {
     new CopyWebpackPlugin([
       'manifest.json',
       'LICENSE',
-      { context: path.join(__dirname, 'src/extension'), from: `**` }])
+      { context: path.join(__dirname, 'src/extension'), from: `**` }]),
+    new NyanProgressPlugin()
   ],
   // enable Source Maps
   devtool: 'source-map'
