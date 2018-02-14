@@ -6,8 +6,11 @@
  * 
  */
 const path = require('path');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const NyanProgressPlugin = require('nyan-progress-webpack-plugin');
+
+const webpack = require('webpack');
+
 
 module.exports = {
   // entry file - starting point for the app
@@ -49,8 +52,8 @@ module.exports = {
         test: /\.css$/,
         loader: 'css-loader',
         query: {
-          modules: true,
-          localIdentName: '[name]__[local]___[hash:base64:5]'
+          modules: true
+          //localIdentName: '[name]__[local]___[hash:base64:5]'
         }
       }
     ]
@@ -60,7 +63,9 @@ module.exports = {
       'manifest.json',
       'LICENSE',
       { context: path.join(__dirname, 'src/extension'), from: `**` }]),
-    new NyanProgressPlugin()
+
+    new CleanWebpackPlugin(['dist']),
+    new webpack.NoEmitOnErrorsPlugin()
   ],
   // enable Source Maps
   devtool: 'source-map'
