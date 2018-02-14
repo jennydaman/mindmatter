@@ -197,7 +197,7 @@ function fillInTheBlank(retrieved) {
                 return true;
         }
         // next, see if numerical ans fits in specified range
-        else if (this.ans_range) {
+        if (this.ans_range) {
             let unitsPos = user_response.indexOf(' ');
             let num = Number(unitsPos === -1 ? user_response : user_response.substring(0, unitsPos));
             if (num >= this.ans_range.min && num <= this.ans_range.max)
@@ -212,7 +212,7 @@ function fillInTheBlank(retrieved) {
             return true;
         }
         // finally, compare against possible answers
-        else if (this.ansKeyWord) {
+        if (this.ansKeyWord) {
             user_response = user_response.trim().toLowerCase();
             let correct = this.ansKeyWord.find(possibleAns => {
                 return typeof possibleAns === 'string' ?
