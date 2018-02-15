@@ -9,35 +9,32 @@ import { h, Component } from 'preact';
 
 var routerInstance;
 
-function assign(obj, props) {
-    // eslint-disable-next-line guard-for-in
-    for (let i in props) {
-        obj[i] = props[i];
+const Link = (props) => {
+    if (props.onClick) {
+        let originalFunction = props.onClick;
+        props.onClick = (e) => {
+            originalFunction(e);
+            return handleLinkClick(e);
+        }
     }
-    return obj;
-}
-
-const Link = (props) => (
-    h('a', assign({ onClick: handleLinkClick }, props))
-);
+    else
+        props.onClick = handleLinkClick;
+    return h('a', props);
+};
 
 function handleLinkClick(e) {
     if (e.button == 0) {
-
         let node = e.currentTarget || e.target || this;
         if (!node || !node.getAttribute) return;
-
         routerInstance.routeTo(node.getAttribute('href'));
         return prevent(e);
     }
 }
 
 function prevent(e) {
-    if (e) {
-        if (e.stopImmediatePropagation) e.stopImmediatePropagation();
-        if (e.stopPropagation) e.stopPropagation();
-        e.preventDefault();
-    }
+    if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+    if (e.stopPropagation) e.stopPropagation();
+    e.preventDefault();
     return false;
 }
 
@@ -54,7 +51,7 @@ class FakeRouter extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        return nextState !== this.state.page;
+        return nextState.page !== this.state.page;
     }
 
     routeTo(page) {
@@ -77,4 +74,4 @@ class FakeRouter extends Component {
     }
 }
 
-export {FakeRouter, Link};
+export { FakeRouter, Link };

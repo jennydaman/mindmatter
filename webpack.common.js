@@ -66,7 +66,5 @@ module.exports = {
 
     new CleanWebpackPlugin(['dist']),
     new webpack.NoEmitOnErrorsPlugin()
-  ],
-  // enable Source Maps
-  devtool: 'source-map'
+  ]
 };

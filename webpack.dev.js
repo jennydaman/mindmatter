@@ -10,5 +10,7 @@ module.exports = merge(common, {
     new FriendlyErrorsWebpackPlugin(),
     new NyanProgressPlugin(),
     new CleanTerminalPlugin()
-  ]
+  ],
+    // enable Source Maps
+    devtool: 'source-map'
 });
