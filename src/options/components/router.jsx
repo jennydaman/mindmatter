@@ -26,7 +26,7 @@ function handleLinkClick(e) {
     if (e.button == 0) {
         let node = e.currentTarget || e.target || this;
         if (!node || !node.getAttribute) return;
-        routerInstance.routeTo(node.getAttribute('href'));
+        routerInstance && routerInstance.routeTo(node.getAttribute('href'));
         return prevent(e);
     }
 }
@@ -66,7 +66,7 @@ class FakeRouter extends Component {
         }
     }
 
-    render({ children, onChange }, { page }) {
+    render({ children, onChange }, {page}) {
         let active = this.getMatchingChild(children, page);
         if (typeof onChange === 'function')
             onChange(page);

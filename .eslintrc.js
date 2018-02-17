@@ -80,6 +80,7 @@ module.exports = {
     "no-useless-concat": 2,
     "object-shorthand": "off",
     "no-inner-declarations": "off",
-    "react/no-unknown-property": [2, { ignore: ['class'] }]
+    "react/no-unknown-property": [2, { ignore: ['class'] }],
+    "quote-props": [2, "as-needed"]
   }
 }

@@ -1,10 +1,3 @@
-/*
- * TODO
- * development vs production config
- * https://webpack.js.org/guides/production/
- * https://github.com/babel/minify
- * 
- */
 const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -31,6 +24,7 @@ module.exports = {
         test: /\.jsx?/i,
         loader: 'babel-loader',
         options: {
+          babelrc: false,
           presets: [
             ['env', {
               targets: {

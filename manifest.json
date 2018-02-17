@@ -19,7 +19,7 @@
   },
   "permissions": [
     "storage",
-    "<all_urls>"
+    "https://jennydaman.github.io/"
   ],
   "optional_permissions": [
     "notifications",

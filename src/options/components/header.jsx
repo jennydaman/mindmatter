@@ -1,7 +1,6 @@
 import { h, Component } from 'preact';
 import { Link } from './router.jsx';
 import style from '../styles/header.css';
-// TODO activeClass doesn't work with my stupid router
 export default class Header extends Component {
 
 	constructor(props) {
@@ -16,7 +15,7 @@ export default class Header extends Component {
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
-		return nextState.pageTitle !== this.state.pageTitle;
+		return nextState.pageTitle && nextState.pageTitle !== this.state.pageTitle;
 	}
 
 	changeHeader = (e) => {
@@ -25,9 +24,9 @@ export default class Header extends Component {
 	}
 
 	render() {
-
-		let links = this.tabs.map(tab => {
+		let links = this.tabs.map((tab, index) => {
 			return (<Link onClick={this.changeHeader}
+				id={'options-tab' + index}
 				href={tab.href}
 				class={tab.pageTitle === this.state.pageTitle ? style.active : ''}>
 				{tab.pageTitle}</Link>);
