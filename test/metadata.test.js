@@ -7,8 +7,7 @@ describe('Metadata', function () {
 
     it('should be consistent in both manifest.json and package.json', function () {
 
-        expect(manifestFile.author.name).to.equal(packageFile.author.name);
-        expect(manifestFile.author.email).to.equal(packageFile.author.email);
+        expect(manifestFile.author).to.equal(packageFile.author.name);
 
         expect(manifestFile.description).to.equal(packageFile.description);
         expect(manifestFile.homepage_url).to.equal(packageFile.homepage);

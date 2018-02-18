@@ -2,13 +2,10 @@
   "manifest_version": 2,
   "name": "Mind Matter",
   "description": "Blocks distracting sites, granting access only if a trivia question is answered correctly.",
-  "version": "0.5.6",
-  "version_name": "0.5.6 alpha",
+  "version": "0.5.7",
+  "version_name": "0.5.7 alpha",
   "minimum_chrome_version": "63",
-  "author": {
-    "name": "Jennings Zhang",
-    "email": "jenni_zh@protonmail.com"
-  },
+  "author": "Jennings Zhang",
   "homepage_url": "https://github.com/jennydaman/mindmatter",
   "background": {
     "page": "background.html"

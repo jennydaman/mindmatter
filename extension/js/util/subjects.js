@@ -45,12 +45,16 @@ function store(fresh) {
 
         chrome.storage.sync.get('indexStructure', items => {
 
-            items.indexStructure.subjects.forEach(oldSubject => {
-                // points to a single subject in allSubjects
-                let freshSubject = allSubjects.get(oldSubject.folder);
-                if (freshSubject)
-                    freshSubject.enabled = oldSubject.enabled;
-            });
+            // merge with current indexStructure, if it exists
+            if (items.indexStructure.subjects) {
+                items.indexStructure.subjects.forEach(oldSubject => {
+                    // points to a single subject in allSubjects
+                    let freshSubject = allSubjects.get(oldSubject.folder);
+                    if (freshSubject)
+                        freshSubject.enabled = oldSubject.enabled;
+                });
+            }
+
             chrome.storage.sync.set({ indexStructure: fresh }, resolve);
         });
     });
