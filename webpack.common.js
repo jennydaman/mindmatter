@@ -9,7 +9,8 @@ module.exports = {
   // entry file - starting point for the app
   // https://webpack.js.org/concepts/entry-points/#multi-page-application
   entry: {
-    options: './src/options/index.jsx'
+    options: './src/options/index.jsx',
+    background: './src/background.js'
   },
 
   // where to dump the output of a production build

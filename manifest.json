@@ -17,6 +17,9 @@
     "64": "icons/brain-in-pot64.png",
     "128": "icons/brain-in-pot128.png"
   },
+  "background": {
+    "page": "background.html"
+  },
   "permissions": [
     "storage",
     "https://jennydaman.github.io/"
