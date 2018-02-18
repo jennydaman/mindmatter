@@ -1,41 +1,47 @@
+* {
+	--headerHeight: 2.5rem;
+}
+
 .header {
+	display: flex;
+	align-items: center;
+	text-align: center;
 	position: fixed;
 	left: 0;
 	top: 0;
 	width: 100%;
-	height: 56px;
+	height: var(--headerHeight);
 	padding: 0;
-	background: #673AB7;
+	background: #A9A9A9;
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 	z-index: 50;
+	border-left: thick solid rgba(0,0,0,0.2);
 }
 
 .header h1 {
-	float: left;
+	padding-left: 1rem;
+	font-size: 200%;
+	font-weight: bold;
+	color: white;
 	margin: 0;
-	padding: 0 15px;
-	font-size: 24px;
-	line-height: 56px;
-	font-weight: 400;
-	color: #FFF;
 }
 
 .header nav {
-	float: right;
-	font-size: 100%;
+	margin-left: auto;
+	height: 100%;
 }
 
 .header nav a {
+	line-height: var(--headerHeight);
+	font-size: 125%;
+	font-weight: 500;
 	display: inline-block;
-	height: 56px;
-	line-height: 56px;
 	padding: 0 15px;
-	min-width: 50px;
-	text-align: center;
 	background: rgba(255,255,255,0);
 	text-decoration: none;
-	color: #FFF;
+	color: white;
 	will-change: background-color;
+	transition: 0.1s;
 }
 
 .header nav a:hover,

@@ -9,15 +9,11 @@ import Profile from './routes/profile.jsx';
 
 class App extends Component {
 
-    routeChanged = page => {
-        // TODO replace header text
-    }
-
     render() {
         return (
             <div class={style.window}>
                 <Header />
-                <Router firstPage="home" onChange={this.routeChanged}>
+                <Router firstPage="home" onChange={this.routeChanged} class={style.body}>
                     <Home path="home" />
                     <Profile path="me" user="me" />
                 </Router>

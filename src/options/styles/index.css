@@ -2,6 +2,9 @@
 .window {
     width: 48.5rem;
 	height: 30rem;
-	font-size: 100%;
-	padding: 56px 20px 0px 20px;
+	padding: var(--headerHeight) 1rem 0px 1rem;
+}
+
+.body {
+	font-size: 120%;
 }
