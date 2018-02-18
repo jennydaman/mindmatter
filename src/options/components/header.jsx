@@ -1,5 +1,6 @@
 import { h, Component } from 'preact';
 import { Link } from './router.jsx';
+import Pause from '../../components/pause.jsx'
 import style from '../styles/header.css';
 export default class Header extends Component {
 
@@ -9,7 +10,7 @@ export default class Header extends Component {
 			pageTitle: 'Settings'
 		}
 		this.tabs = [
-			{ href: 'home', pageTitle: 'Home' },
+			{ href: 'settings', pageTitle: 'Settings' },
 			{ href: 'me', pageTitle: 'Me' }
 		]
 	}
@@ -34,6 +35,8 @@ export default class Header extends Component {
 		
 		return (
 			<header class={style.header}>
+			<div class={style.space}></div>
+				<Pause />
 				<h1>{this.state.pageTitle}</h1>
 				<nav>{links}</nav>
 			</header>

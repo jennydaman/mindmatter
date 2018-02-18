@@ -1,0 +1,66 @@
+
+/*https://proto.io/freebies/onoff/*/
+.switch {
+    --w: 7.375rem;
+    --h: 1.875rem;
+    --b: 0.125rem;
+    position: relative;
+    width: var(--w);
+    user-select: none;
+}
+.checkbox {
+    display: none;
+}
+.switchWidget {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 0.125rem solid #E3E3E3; border-radius: var(--h);
+}
+.inner {
+    display: block; width: 200%; margin-left: -100%;
+    transition: margin 0.1s ease-out 0s;
+}
+.inner:before, .inner:after {
+    text-align: start;
+    display: block;
+    float: left;
+    width: 50%;
+    height: 1.875rem;
+    line-height: 1.875rem;
+    padding: 0;
+    font-size: 120%; color: white;
+    font-family: inherit;
+    font-weight: bold;
+    box-sizing: border-box;
+}
+.inner:before {
+    content: "active";
+    padding-left: 0.625rem;
+    background-color: #2196F3; color: #FFFFFF;
+}
+.inner:after {
+    content: "inactive";
+    padding-right: 0.625rem;
+    background-color: #CCCCCC; color: #666666;
+    text-align: right;
+}
+.onCooldown:after {
+    content: "cooldown";
+}
+.switchCircle {
+    --m: 0.1875rem;
+    display: block; width: var(--h); margin: var(--m);
+    background: #FFFFFF;
+    position: absolute;
+    top: 0; 
+    bottom: 0;
+    right: calc(100% - 1.2 * var(--h));
+    border: var(--b) solid #E3E3E3;
+    border-radius: calc(var(--h) - var(--m));
+    transition: all 0.1s ease-out 0s; 
+}
+.checkbox:checked + .switchWidget .inner {
+    margin-left: 0;
+}
+.checkbox:checked + .switchWidget .switchCircle {
+    right: 0; 
+}
