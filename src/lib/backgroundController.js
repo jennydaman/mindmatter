@@ -1,10 +1,10 @@
 import notif from '../util/notif.js';
 
 /**
- * @param {string} message 
- * @param {*} defaultSettings 
- * @param {function} getSubjects 
- * @param {function} callback 
+ * @param {string} message
+ * @param {*} defaultSettings
+ * @param {function} getSubjects
+ * @param {function} callback
  */
 export function init(message, defaultSettings, getSubjects, callback = chrome.runtime.openOptionsPage) {
 
@@ -50,7 +50,7 @@ export class BackgroundModule {
 
         chrome.storage.onChanged.addListener(changes => this.cooldownHandler(changes));
 
-        // clear singleton lock if question page is closed 
+        // clear singleton lock if question page is closed
         chrome.tabs.onRemoved.addListener(tabID => {
             if (tabID === this.questionSingleton)
                 this.questionSingleton = null;
@@ -100,9 +100,9 @@ export class BackgroundModule {
     /**
      * Determines if the sender is or is not in control of the question page singleton lock.
      * Tabs besides the original will be closed.
-     * @param {*} request 
+     * @param {*} request
      * @param {MessageSender} sender
-     * @param {function} sendResponse 
+     * @param {function} sendResponse
      */
     messageHandler(request, sender, sendResponse) {
 
@@ -110,16 +110,16 @@ export class BackgroundModule {
             return;
 
         switch (this.questionSingleton) {
-            case null:                                   // MessageSender is first instance of question page
-                this.questionSingleton = sender.tab.id;  // create lock
-                this.siteQueue = [request.trigger];
+        case null:                                   // MessageSender is first instance of question page
+            this.questionSingleton = sender.tab.id;  // create lock
+            this.siteQueue = [request.trigger];
             // falls through
-            case sender.tab.id:                          // MessageSender is the singleton, user might have refreshed page
-                sendResponse({ siteQueue: this.siteQueue });
-                break;
-            default: // is an additional tab
-                this.siteQueue.push(request.trigger);    // add site to cache
-                chrome.tabs.remove(sender.tab.id);       // close the MessageSender
+        case sender.tab.id:                          // MessageSender is the singleton, user might have refreshed page
+            sendResponse({ siteQueue: this.siteQueue });
+            break;
+        default: // is an additional tab
+            this.siteQueue.push(request.trigger);    // add site to cache
+            chrome.tabs.remove(sender.tab.id);       // close the MessageSender
         }
     }
 }

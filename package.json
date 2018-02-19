@@ -37,8 +37,8 @@
   "scripts": {
     "build": "webpack --config webpack.prod.js && zip -rq mindmatter.zip dist && echo Created mindmatter.zip.",
     "start": "webpack --config webpack.dev.js --watch",
-    "lint": "eslint src",
-    "lit": "eslint --fix src",
+    "lint": "eslint src test",
+    "lit": "eslint --fix src test",
     "mocha": "mocha --require babel-register test/**/*.test.js",
     "test": "jest"
   },
