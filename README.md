@@ -9,7 +9,7 @@
 [![codecov](https://codecov.io/gh/jennydaman/mindmatter/branch/master/graph/badge.svg)](https://codecov.io/gh/jennydaman/mindmatter)
 [![Maintainability](https://api.codeclimate.com/v1/badges/82e119c8634ba4101a73/maintainability)](https://codeclimate.com/github/jennydaman/mindmatter/maintainability)
 
-Mind Matter is an educational Chrome extension that blocks blacklisted sites, granting access only if a trivia question is answered correctly. It deters excessive use of distracting websites while helping users to reinforce their knowledge.
+Mind Matter is an educational Chrome extension that blocks blacklisted pages, granting access only if a trivia question is answered correctly. It aims to deter excessive usage of distracting websites and to help users learn or reinforce their knowledge about academic subjects.
 
 ## Installation
 
