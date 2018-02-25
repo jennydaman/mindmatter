@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Mind Matter",
-  "description": "Blocks distracting sites, granting access only if a trivia question is answered correctly.",
+  "description": "A Chrome extension that blocks distracting sites, granting access only if a question is answered.",
   "version": "1.0.0",
   "version_name": "1.0.0 alpha",
   "minimum_chrome_version": "63",

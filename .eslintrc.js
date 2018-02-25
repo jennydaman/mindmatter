@@ -82,6 +82,7 @@ module.exports = {
     "object-shorthand": "off",
     "no-inner-declarations": "off",
     "react/no-unknown-property": [2, { ignore: ['class'] }],
-    "quote-props": [2, "as-needed"]
+    "quote-props": [2, "as-needed"],
+    "eqeqeq": "off"
   }
 }

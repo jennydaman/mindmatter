@@ -40,6 +40,10 @@ The psychologist Daniel Kahneman describes two systems of thinking. According to
 
 Surfing the Internet tends to be unproductive. The objective of *Mind Matter* is to disrupt cognitive ease and force users to perform system 2 thinking.
 
+### Development
+
+webpack@4.0.0 is not supported, because `webpack --mode development` generates a bundle that uses `eval`.
+
 #### Acknowledgements
 
 Thanks to Sally Zhao for the "brain in pot" logo.
