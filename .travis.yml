@@ -5,7 +5,11 @@ language: node_js
 node_js:
   - "node"
 
+install: yarn install
+script: yarn test
+
 cache:
+  yarn: true
   directories:
     - "node_modules"
 
@@ -16,3 +20,5 @@ after_script:
   - codecov
   - cat ./coverage/lcov.info | codacy-coverage -f lcov -t $CODACY_PROJECT_TOKEN
   - ./cc-test-reporter after-build -t lcov --exit-code $TRAVIS_TEST_RESULT --debug || echo 'Skipping cc-test-reporter after-build...'
+
+sudo: false
