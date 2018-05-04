@@ -1,0 +1,10 @@
+type: choice
+question: What type of cryptographic algorithm can be used to ensure the integrity of a file's contents?
+choices:
+  correct: hashing
+  wrong:
+    blocking
+    encrypting
+    cloning
+    diffing
+    checking

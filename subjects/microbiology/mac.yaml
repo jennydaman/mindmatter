@@ -1,0 +1,12 @@
+type: choice
+question: Pink or red growth on MacConkey agar suggests bacteria is... (select all that apply)
+choices:
+  correct:
+    - coliform
+    - tolerant of bile-salts
+  wrong:
+    - gram positive
+    - of the Escherichia genus
+    - tolerant of NaCl.
+    - hydrolyzes urea
+

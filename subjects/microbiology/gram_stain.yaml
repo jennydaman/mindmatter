@@ -1,0 +1,9 @@
+type: choice
+question: What role does iodine play in gram staining?
+choices:
+  correct: mordant
+  wrong:
+    - primary stain
+    - decolorizing agent
+    - counterstain
+    - simple stain

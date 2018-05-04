@@ -1,0 +1,11 @@
+type: choice
+question: What protocol, developed by Netscape in 1994, is designed to create an encrypted data path between a client and server that could be used on any platform or operating system?
+choices:
+  correct: SSL
+  wrong:
+    - TLS
+    - HTTPS
+    - SSH
+    - PEAP
+    - EAP
+  

@@ -1,0 +1,9 @@
+type: choice
+question: The **streak plate** method is used to...
+choices:
+  correct: isolate colonies
+  wrong:
+    - grow excess bacteria
+    - select for gram-negative bacteria
+    - select for gram-positive bacteria
+    - test cell wall's resistance to abrasion

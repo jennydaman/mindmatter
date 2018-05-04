@@ -1,0 +1,6 @@
+type: blank
+question: The capybara (Hydrochoerus hydrochaeris) is a large South African rodent species.
+  Its diet is mostly grass, which has little caloric value. How does the capybara fulfill its energy needs?
+hint: they eat their own poop
+answer:
+  contains: coprophag
