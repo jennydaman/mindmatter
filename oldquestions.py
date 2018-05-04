@@ -1,5 +1,5 @@
 #!/usr/bin/env python3.6
-
+# REWRITE ALL OF THIS AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA DEPRECATED OKKKK?????
 import os
 import shutil
 import json

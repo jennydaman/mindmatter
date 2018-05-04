@@ -1,9 +1,10 @@
 type: blank
 question: Which body part is moved by the flexor pollicis longus?
 answer:
-  - thumb
-  - first digit
-  - 1st digit
-  - digit 1
-  - poll # pollex, pollical
+  contains:
+    - thumb
+    - first digit
+    - 1st digit
+    - digit 1
+    - poll # pollex, pollical
   

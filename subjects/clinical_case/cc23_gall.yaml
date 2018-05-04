@@ -1,0 +1,9 @@
+type: blank
+question: An obese 49 year old man suffers from pain in the right upper quadrant
+  of his abdominal region. He complains of yellowish skin, dark urine, loss of appetite,
+  and "oily, gray-colored diarrhea." Which surgical technique should be performed?
+answer:
+  contains: cholecystectomy
+image:
+  src: ./cc23.jpg
+  title: ultrasound

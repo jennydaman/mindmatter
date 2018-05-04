@@ -1,3 +1,14 @@
-answer: tidal
-question: The volume of air from a normal breath is referred to as _____ volume.
-type: blank
+type: choice
+
+question: "The amount of air in a normal breath is referred to as:"
+
+choices:
+  correct: tidal volume
+  wrong:
+    - inspiratory reserve volume
+    - expiratory reserve volume
+    - residual volume
+    - lung volume
+    - expansion volume
+    - VO2MAX
+

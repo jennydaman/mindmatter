@@ -1,9 +1,9 @@
 type: choice
 
-question: This is an AMAZING multiple-choice question in YAML?
+question: This is a multiple choice question.
 moreInfo: A longer explanation to the question.
 
-image:
+image:    #optional
   src: https://jennydaman.github.io/mindmatter/image.jpg
   author: A great artist that deserves credit
   link: https://artistprofile.com/wearegoodpeoplebecausewecite
@@ -15,4 +15,11 @@ choices:
   wrong:
     - this ain't right
     - neither is this
-    - have at least four total choices
+    - 
+      text: have at least four total choices
+      explain: text that appears after choosing this wrong answer
+
+
+props:
+  - markdown
+  - mathjax

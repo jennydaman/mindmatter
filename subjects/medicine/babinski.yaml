@@ -1,4 +1,5 @@
-answer: Babinski
+answer:
+  contains: Babinski
 hint: big toe moves up
 question: The ________ reflex is a neonatal reflex, which causes extension of the
   hallux.

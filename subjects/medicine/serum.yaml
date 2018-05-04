@@ -1,4 +1,5 @@
-answer: serum
+answer: 
+  contains: serum
 question: Blood plasma becomes _____ after proteins such as fibrinogen have been released
   from coagulation.
 type: blank

@@ -1,0 +1,27 @@
+type: blank
+
+question: This is a fill-in-the-blank question. 
+moreInfo: This is a longer explanation to the question.
+image:
+  src: https://jennydaman.github.io/mindmatter/image.jpg
+  author: A great artist that deserves credit
+  link: https://artistprofile.com/wearegoodpeoplebecausewecite
+  title: text to show on hover
+
+hint: Your first choice was wrong, this message will appear now.
+  pic: https://picture.which/might_help_physics
+
+answer: # if no specific answer type key is specified, contains is assumed.
+  contains: # The response will have the whitespace trimmed, is not case-sensitive, and must contain this string to be correct
+    - key word
+    - also correct
+  strict: picky # answer must match this key exactly to be correct
+  range: # numerical answer acceptred range
+    min: 1
+    max: 11
+    exact: 6 # alternatively, provide the exact answer, and accept plus/minus dev of that answer.
+    dev: 5
+
+props:
+  - mathjax
+  - markdown

@@ -1,3 +1,4 @@
-answer: Langerhans
+answer:
+  contains: Langerhans
 question: Which kind of pancreatic cell produces insulin?
 type: blank

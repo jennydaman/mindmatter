@@ -1,4 +1,5 @@
-answer: Gout
+answer:
+  contains: Gout
 question: Elevated levels of uric acid in the blood can cause ____ arthritis when
   crystals deposit in joints.
 type: blank

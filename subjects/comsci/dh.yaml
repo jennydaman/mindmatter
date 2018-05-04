@@ -1,6 +1,7 @@
 answer:
-- Diffie-Hellman
-- diffie hellman
-- dh
+  contains:
+    - Diffie-Hellman
+    - diffie hellman
+    - dh
 question: Which algorithm is commonly used for secure key exchange over public channels?
 type: blank

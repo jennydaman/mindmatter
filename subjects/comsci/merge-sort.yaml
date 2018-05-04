@@ -1,5 +1,6 @@
 answer:
-- nlogn
-- nlog(n
+  contains:
+    - nlogn
+    - nlog(n
 question: What is the algorithmic complexity of Merge Sort?
 type: blank

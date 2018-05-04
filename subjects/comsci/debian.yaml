@@ -1,3 +1,4 @@
-answer: Debian
+answer:
+  contains: Debian
 question: Which Linux distribution is Ubuntu based on?
 type: blank

@@ -3,4 +3,5 @@ question: Spring A has been stretched to double the displacement length as sprin
   Spring A has four times the kinetic energy as spring B.
   What is the ratio of spring constants of spring A to spring B?
 hint: Hooke's Law
-answer: 1
+answer: 
+  exact: 1

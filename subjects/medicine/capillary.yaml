@@ -1,4 +1,5 @@
-answer: capillar
+answer:
+  contains: capillar
 hint: The vessel walls are only one cell thick.
 question: What kind of blood vessel is the smallest, and allows diffusion of nutrients?
 type: blank

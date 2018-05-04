@@ -1,4 +1,5 @@
-answer: band gap
+answer:
+  contains: band gap
 hint: The answer is what makes semiconductors unique and useful for electronics.
 question: Phosphorene is a monolayer of phosphorous. Unlike graphene, phosphorene
   has a tunable ____ ___.

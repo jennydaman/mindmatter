@@ -1,6 +1,7 @@
 answer:
-- london
-- dispersion
-- ldf
+  contains:
+    - london
+    - dispersion
+    - ldf
 question: What is the weakest intermolecular force?
 type: blank

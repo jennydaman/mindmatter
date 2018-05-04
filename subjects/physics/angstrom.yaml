@@ -1,3 +1,5 @@
-answer: 100
 question: "An \xC5ngstr\xF6m is equivalent to how many picometres?"
+answer:
+  range:
+    exact: 100
 type: blank

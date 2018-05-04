@@ -1,5 +1,6 @@
 answer:
-- electroencephalogram
-- EEG
+  contains:
+    - electroencephalogram
+    - EEG
 question: Which test is used to study the electrical signals of the brain?
 type: blank

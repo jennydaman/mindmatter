@@ -1,5 +1,6 @@
-answer: serotonin
+answer:
+  contains: serotonin
 hint: What kinds of medication and antidepressants are used to control OCD?
-question: Obsessive compulsive disorder (OCD) is associated with a depression of the
+question: Obsessive compulsive disorder (OCD) is associated with reduced levels of the
   neurotransmitter _________.
 type: blank

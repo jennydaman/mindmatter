@@ -1,5 +1,8 @@
 type: blank
 question: In 1942, a new antibiotic was formulated and put to extensive use in World War II. 
-  The substance was so valuable, the traces remaining of it in human urine were purified and reused. What is the name of this drug?
-hint: In 1928, Alexander Fleming discovered a mold in his contaminated laboratory which would suppress the growth infectious bacteria, such as staphylococci and streptococci.
-answer: penicillin
+  The substance was so valuable, the traces remaining of it in human urine were purified and reused. 
+  What is the name of this drug?
+hint: In 1928, Alexander Fleming discovered a mold in his contaminated laboratory 
+  which would suppress the growth infectious bacteria, such as staphylococci and streptococci.
+answer:
+  contains: penicillin

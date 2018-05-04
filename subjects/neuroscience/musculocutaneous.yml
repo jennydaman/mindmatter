@@ -1,3 +1,4 @@
 type: blank
 question: What innervates the biceps brachii?
-answer: musculocutaneous
+answer:
+  contains: musculocutaneous

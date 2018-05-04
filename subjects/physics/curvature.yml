@@ -2,7 +2,8 @@ type: blank
 question: Assume the earth is a perfect sphere with a diameter of 12,742 km. 
   For someone who's eyes are 1.7 meters above the ground, how far could they theoretically see, in kilometers?
   Ignore atmospheric diffraction.
-answer: 4.65
-ans_range:
-  std: .1
+answer:
+  range:
+    exact: 4.65
+    std: .1
 # todo: picture hint

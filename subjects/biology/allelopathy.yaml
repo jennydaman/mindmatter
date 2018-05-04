@@ -1,4 +1,5 @@
-answer: allelopath
+answer:
+  contains: allelopath
 prop: markdown
 question: The Australian pine tree (*casuarina equisetifolia*) is an invasive species
   in Florida. Its roots excrete biochemicals, which suppresses germination of understory
