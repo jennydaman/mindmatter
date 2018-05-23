@@ -1,0 +1,12 @@
+type: choice
+question: Acidosis is said to occur when arterial pH falls below 7.35. Symptoms include headaches and tiredness.
+  An excess of which chemical **is not** a sign of acidosis?
+choices:
+  correct: Na+
+  wrong:
+    - lactic acid
+    - carbon dioxide
+    - urea
+    - creatinine
+
+props: markdown

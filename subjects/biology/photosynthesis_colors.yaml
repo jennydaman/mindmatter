@@ -1,0 +1,12 @@
+type: choice
+question: Which colors are most useful for photosynthesis?
+choices:
+  correct:
+    - red, blue, and violet
+  wrong:
+    - white
+    - yellow
+    - green
+    - yellow and green
+    - magenta
+

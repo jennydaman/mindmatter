@@ -1,0 +1,8 @@
+type: blank
+question: The Renin-angiotensin-aldosterone system (RAAS) responds to a decrease in blood volume caused by fluid loss.
+  This is accomplished by stimulating Na+ reabsorption. Which hormone is released to oppose RAAS?
+answer:
+  contains: atrial natriuretic
+  strict:
+    - ANF
+    - ANP

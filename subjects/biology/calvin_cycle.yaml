@@ -1,0 +1,7 @@
+type: blank
+question: The final product of the Calvin cycle is
+answer:
+  contains:
+    - glucose
+    - Glyceraldehyde 3-phosphate
+  strict: G3P

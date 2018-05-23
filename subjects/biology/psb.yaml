@@ -1,0 +1,14 @@
+type: blank
+question: Purple sulfur bacteria are photosyntetic microaerophiles.
+  They can reduce air pollution through remediation of which of these two gases?>
+choices:
+  correct: 
+    - methane
+    - hydrogen sulfide
+  wrong:
+    - carbon dioxide
+    - sulfur oxides
+    - nitrogen oxides
+    - ammonia
+    - chlorofluorocarbons
+
